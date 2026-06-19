@@ -29,9 +29,20 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0          # full history so the push-retry rebase has a merge base
 
-      - uses: actions/setup-python@v5
+      - name: Sync working tree to latest origin/main
+        # The checkout pins the SHA that triggered the run; the remote may have
+        # advanced since (a concurrent web/human edit). Rebase onto the current
+        # tip so we fetch + append onto the live DB, not a stale one.
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash origin main
+
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -50,16 +61,67 @@ jobs:
           cp output/dashboard.html output/index.html   # Pages root -> dashboard
 
       - name: Commit accumulated data + report
+        # Resilient to the remote having advanced mid-run: retry the push, and on
+        # rejection rebase our snapshot onto the new tip. data/poe2_signal.db is
+        # binary, so a rebase that touches it can't auto-merge — in that case we
+        # abort, reset to the live tip, and re-run fetch so rows append onto the
+        # current DB instead of clobbering anyone's snapshots.
         run: |
+          set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ output/
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
+
+          stage_and_commit() {
+            git add data/ output/
+            if git diff --cached --quiet; then
+              echo "No changes to commit."
+              return 1            # nothing staged
+            fi
             git commit -m "data: snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
-            git push
+            return 0
+          }
+
+          if ! stage_and_commit; then
+            exit 0                # keep the existing no-churn guard
           fi
+
+          attempts=5
+          refetch_budget=2
+          for i in $(seq 1 "$attempts"); do
+            if git push; then
+              echo "Pushed on attempt $i."
+              exit 0
+            fi
+            echo "Push rejected on attempt $i; syncing with origin/main."
+            git fetch origin main
+            if git rebase --autostash origin/main; then
+              echo "Rebased cleanly; will retry push."
+              sleep $(( i * 3 ))
+              continue
+            fi
+            # Rebase conflict — almost always the binary DB (or its derived output).
+            conflicted=$(git diff --name-only --diff-filter=U || true)
+            echo "Rebase conflict in: ${conflicted:-<none>}"
+            git rebase --abort || true
+            if [ "$refetch_budget" -gt 0 ]; then
+              refetch_budget=$(( refetch_budget - 1 ))
+              echo "Resetting to origin/main and re-running fetch so rows append onto the live DB."
+              git reset --hard origin/main
+              python cli.py fetch
+              python cli.py report
+              cp output/dashboard.html output/index.html
+              if ! stage_and_commit; then
+                exit 0            # nothing new after re-fetch
+              fi
+              sleep $(( i * 3 ))
+              continue
+            fi
+            echo "::error::Rebase conflict could not be resolved and the re-fetch budget is exhausted."
+            exit 1
+          done
+
+          echo "::error::Failed to push after $attempts attempts."
+          exit 1
 
       - name: Upload dashboard as Pages artifact
         uses: actions/upload-pages-artifact@v3

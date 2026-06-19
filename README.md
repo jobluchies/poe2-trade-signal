@@ -30,6 +30,15 @@ python cli.py report                       # -> output/signal-brief.md + output/
 dark dashboard; `output/signal-brief.md` is a Dataview-ready Obsidian note.
 
 ## Status
-Phases 1 (currency), 3 (unique items), and 5 (output: dashboard + brief) are live and verified.
-See `BUILD_STATUS.md` for the full roadmap and `API_NOTES.md` for the verified endpoint surface.
-Builds (Phase 2), community scrape, and scheduling (Phase 6) are upcoming.
+Phases 1 (currency), 3 (unique items), 5 (output: dashboard + brief), and 6 (scheduling) are
+live and verified. See `BUILD_STATUS.md` for the full roadmap and `API_NOTES.md` for the verified
+endpoint surface. Builds (Phase 2) and community scrape are upcoming.
+
+## Scheduling
+`.github/workflows/fetch.yml` runs on a cron, fetches a snapshot, regenerates the report, commits
+`data/` + `output/` back to `main`, and deploys the dashboard to Pages — your machine stays off.
+The commit step rebases onto the live tip and retries the push, so a concurrent edit no longer
+fails the run; a conflict on the binary DB triggers a re-fetch onto the current DB rather than
+discarding snapshots. The DB is versioned in git on purpose (full history); the durable way to
+avoid push contention entirely is to stop committing the binary — see the deployment note in
+`BUILD_STATUS.md`.

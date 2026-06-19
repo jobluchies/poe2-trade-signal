@@ -4,7 +4,8 @@ Resume doc. A fresh session should read this + `API_NOTES.md` + `poe2_signal_bui
 
 ## Locked decisions
 - **Target league:** `HC Runes of Aldur` (Hardcore). Has full data on all 3 layers. Query param is the **display name**, not the url slug. (`indexed:false` does NOT mean no data.)
-- **Deployment:** GitHub Actions cron + **commit the SQLite DB back to the repo** (NOT artifact storage — 90-day retention would truncate history). Dashboard via GitHub Pages. (Phase 6, not built yet.)
+- **Deployment:** GitHub Actions cron + **commit the SQLite DB back to the repo** (NOT artifact storage — 90-day retention would truncate history). Dashboard via GitHub Pages.
+  - **Durable alternative (not implemented):** committing a binary DB to git is the root cause of the push contention — every run rewrites it, so any concurrent edit forces a rebase. The robust fix is to stop versioning the DB in git: hold it in a persistent **Actions cache** (keyed/restored each run), publish it as a build **artifact**, keep it on a **dedicated `data` branch** the workflow force-updates (no rebase needed since it's the only writer), or move history to an **external store** (e.g. a hosted SQLite/Postgres or object storage). Each removes git rebase from the hot path. Deferred — the retry/rebase loop is enough for a single-writer cron; revisit if contention persists.
 - **Scope:** Core first = Layers A-C + output. Layer D (community scrape) deferred to a later bolt-on.
 - **Base currency is Exalted, not Chaos** (prompt's chaos model is wrong for PoE2 0.5). Store raw `primary_value` + `max_volume_currency`.
 - **Transport:** poe.ninja is behind Cloudflare; raw HTTP gets 404. Use **headless Playwright** (works locally AND in GitHub Actions). Hard dependency.
@@ -16,7 +17,7 @@ Resume doc. A fresh session should read this + `API_NOTES.md` + `poe2_signal_bui
 - [x] **Phase 3 — Unique items.** Done + verified live (574 HC rows across 6 types, momentum from run #1). Endpoint: `economy/stash/current/item/overview?league=...&type=...`. Live-valid types: `UniqueWeapons`(129), `UniqueArmours`(328), `UniqueAccessories`(85), `UniqueFlasks`(6), `UniqueJewels`(14), `UniqueCharms`(12). Dead types (0 lines): UniqueArmour, UniqueAccessory, UniqueJewel, UniqueWaystones. `sparkLine` (capital L), `primaryValue`, `listingCount`, `corrupted` stored. z-score momentum + confidence gate on `listing_count` (min 3 — suppresses thin price-fixer traps like Temporalis @ n=1).
 - [ ] **Phase 4 — Community scrape (Layer D).** Deferred. Reddit/YouTube official APIs first.
 - [x] **Phase 5 — Output.** Done + verified. `report/` package: `collect.py` (one dict, single source of thresholds) -> `markdown.py` (YAML-frontmatter brief, Dataview-ready) + `html.py` (self-contained dark dashboard, inline CSS, no JS — Pages-ready for Phase 6). `python cli.py report` writes `output/signal-brief.md` + `output/dashboard.html`. Builds (Phase 2) will slot new sections into the same collect dict.
-- [ ] **Phase 6 — Scheduling.** GitHub Actions cron, commit DB back, Pages.
+- [x] **Phase 6 — Scheduling.** GitHub Actions cron (`.github/workflows/fetch.yml`) fetches, regenerates the report, commits `data/` + `output/` back to `main`, and deploys the dashboard to Pages. The commit step is resilient to the remote advancing mid-run: it pulls/rebases onto the live tip before fetching, then pushes in a retry loop (5 attempts) that rebases onto `origin/main` on rejection. A rebase conflict on the binary DB is handled by aborting, resetting to the live tip, and re-running `fetch` so rows append onto the current DB (capped re-fetch budget) — never picking a side, so no snapshots are lost.
 
 ## What exists now
 ```
