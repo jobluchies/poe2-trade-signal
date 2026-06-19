@@ -1,0 +1,77 @@
+name: fetch-and-report
+
+# Hourly snapshot of poe.ninja into the committed SQLite DB, then regenerate the
+# report and publish the dashboard to GitHub Pages. Runs entirely in GitHub's
+# cloud — your machine can be off.
+#
+# poe.ninja is behind Cloudflare, so the fetcher drives headless Chromium
+# (Playwright). Cloudflare MAY challenge GitHub's datacenter IPs even though it
+# passes from a home IP — use the manual "Run workflow" button (workflow_dispatch)
+# to test before trusting the schedule.
+
+on:
+  schedule:
+    - cron: "0 * * * *"      # top of every hour (UTC); GitHub cron is best-effort
+  workflow_dispatch: {}        # manual trigger for testing
+
+# Let the committed-DB job and the Pages deploy job both have what they need.
+permissions:
+  contents: write              # commit the updated DB + report back to the repo
+  pages: write                 # publish the dashboard
+  id-token: write              # required by deploy-pages
+
+# Never let two scheduled runs commit on top of each other.
+concurrency:
+  group: fetch-and-report
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies + Chromium
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Fetch snapshot (currency + uniques)
+        run: python cli.py fetch
+
+      - name: Regenerate report + dashboard
+        run: |
+          python cli.py report
+          cp output/dashboard.html output/index.html   # Pages root -> dashboard
+
+      - name: Commit accumulated data + report
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ output/
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "data: snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
+
+      - name: Upload dashboard as Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+
+  deploy:
+    needs: fetch
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

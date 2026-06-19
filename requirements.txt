@@ -1,0 +1,4 @@
+# PoE2 Market Signal System — dependencies
+# Fetch transport: poe.ninja sits behind Cloudflare; raw urllib/requests get 404.
+# A real browser engine is required, so Playwright is a hard dependency (not optional).
+playwright>=1.60.0

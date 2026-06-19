@@ -1,0 +1,17 @@
+# secrets
+.env
+
+# fetch cache (transient)
+.cache/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# NOTE: data/poe2_signal.db is intentionally NOT ignored.
+# The time-series IS the product — the DB is committed back to the repo each run.
+
+# Local Claude Code config
+.claude/
