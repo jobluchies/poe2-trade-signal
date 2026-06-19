@@ -2,7 +2,7 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 20
-generated: 2026-06-19T13:21:09Z
+generated: 2026-06-19T13:22:50Z
 snapshots: 4
 currency_signals: 2
 unique_signals: 19
@@ -11,7 +11,7 @@ tags: [poe2, market-signal]
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 20 · generated 2026-06-19T13:21:09Z · 4 snapshot(s) · 45 currencies / 583 uniques tracked
+> Day 20 · generated 2026-06-19T13:22:50Z · 4 snapshot(s) · 45 currencies / 583 uniques tracked
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history.
 
