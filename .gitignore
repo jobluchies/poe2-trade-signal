@@ -10,8 +10,11 @@ __pycache__/
 .venv/
 venv/
 
-# NOTE: data/poe2_signal.db is intentionally NOT ignored.
-# The time-series IS the product — the DB is committed back to the repo each run.
+# Data + generated report live on the `data` branch, NOT main — main is code-only.
+# The CI (fetch.yml) commits the accumulating DB + report there each run, so these
+# are ignored here to keep main clean and prevent push collisions.
+data/
+output/
 
 # Local Claude Code config
 .claude/

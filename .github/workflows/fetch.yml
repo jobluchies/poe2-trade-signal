@@ -1,8 +1,9 @@
 name: fetch-and-report
 
-# Hourly snapshot of poe.ninja into the committed SQLite DB, then regenerate the
-# report and publish the dashboard to GitHub Pages. Runs entirely in GitHub's
-# cloud — your machine can be off.
+# Hourly snapshot of poe.ninja. The accumulating SQLite DB + generated report live
+# on the `data` branch, NOT on main — main stays code-only so human code pushes
+# never collide with the bot's hourly snapshot commits. The dashboard is published
+# to GitHub Pages from the artifact this job uploads (not from a branch).
 #
 # poe.ninja is behind Cloudflare, so the fetcher drives headless Chromium
 # (Playwright). Cloudflare MAY challenge GitHub's datacenter IPs even though it
@@ -14,16 +15,18 @@ on:
     - cron: "0 * * * *"      # top of every hour (UTC); GitHub cron is best-effort
   workflow_dispatch: {}        # manual trigger for testing
 
-# Let the committed-DB job and the Pages deploy job both have what they need.
 permissions:
-  contents: write              # commit the updated DB + report back to the repo
+  contents: write              # commit the updated DB + report to the data branch
   pages: write                 # publish the dashboard
   id-token: write              # required by deploy-pages
 
-# Never let two scheduled runs commit on top of each other.
+# Never let two scheduled runs publish on top of each other.
 concurrency:
   group: fetch-and-report
   cancel-in-progress: false
+
+env:
+  DATA_BRANCH: data
 
 jobs:
   fetch:
@@ -31,16 +34,19 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 0          # full history so the push-retry rebase has a merge base
+          fetch-depth: 0          # full history so worktree/rebase have a merge base
 
-      - name: Sync working tree to latest origin/main
-        # The checkout pins the SHA that triggered the run; the remote may have
-        # advanced since (a concurrent web/human edit). Rebase onto the current
-        # tip so we fetch + append onto the live DB, not a stale one.
+      - name: Restore accumulated DB from the data branch
+        # The time-series DB accumulates across runs and lives on `data`. Pull just
+        # the DB into this code checkout so `cli.py fetch` appends onto real history
+        # instead of a blank DB. (output/ is fully regenerated, so it needn't restore.)
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase --autostash origin main
+          git fetch origin "$DATA_BRANCH" || true
+          if git rev-parse --verify "origin/$DATA_BRANCH" >/dev/null 2>&1; then
+            git checkout "origin/$DATA_BRANCH" -- data/poe2_signal.db || true
+          fi
 
       - uses: actions/setup-python@v6
         with:
@@ -60,67 +66,59 @@ jobs:
           python cli.py report
           cp output/dashboard.html output/index.html   # Pages root -> dashboard
 
-      - name: Commit accumulated data + report
-        # Resilient to the remote having advanced mid-run: retry the push, and on
-        # rejection rebase our snapshot onto the new tip. data/poe2_signal.db is
-        # binary, so a rebase that touches it can't auto-merge — in that case we
-        # abort, reset to the live tip, and re-run fetch so rows append onto the
-        # current DB instead of clobbering anyone's snapshots.
+      - name: Publish DB + report to the data branch
+        # Commit the artifacts to `data` via a dedicated worktree pinned to the live
+        # data-branch tip — main is never touched. On a rejected push (the data
+        # branch advanced, e.g. a queued run) re-sync to the new tip and re-run fetch
+        # so rows append onto the live DB instead of clobbering another snapshot;
+        # the binary DB can't auto-merge, so we rebuild rather than rebase.
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          stage_and_commit() {
-            git add data/ output/
-            if git diff --cached --quiet; then
-              echo "No changes to commit."
-              return 1            # nothing staged
+          publish() {
+            # (Re)create a worktree at the latest data-branch tip, copy the freshly
+            # built artifacts in, and commit there. Returns 1 if nothing changed.
+            rm -rf ../data-branch
+            git worktree prune
+            git fetch origin "$DATA_BRANCH" || true
+            if git rev-parse --verify "origin/$DATA_BRANCH" >/dev/null 2>&1; then
+              git worktree add -B "$DATA_BRANCH" ../data-branch "origin/$DATA_BRANCH"
+            else
+              git worktree add --orphan -B "$DATA_BRANCH" ../data-branch
             fi
-            git commit -m "data: snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
+            mkdir -p ../data-branch/data ../data-branch/output
+            cp data/poe2_signal.db ../data-branch/data/
+            rm -rf ../data-branch/output/*
+            cp -r output/. ../data-branch/output/
+            git -C ../data-branch add data/ output/
+            if git -C ../data-branch diff --cached --quiet; then
+              echo "No data changes to publish."
+              return 1
+            fi
+            git -C ../data-branch commit -m "data: snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
             return 0
           }
 
-          if ! stage_and_commit; then
-            exit 0                # keep the existing no-churn guard
-          fi
-
-          attempts=5
-          refetch_budget=2
+          attempts=3
           for i in $(seq 1 "$attempts"); do
-            if git push; then
-              echo "Pushed on attempt $i."
+            if ! publish; then
+              exit 0                # nothing new to push
+            fi
+            if git -C ../data-branch push origin "$DATA_BRANCH"; then
+              echo "Published to $DATA_BRANCH on attempt $i."
               exit 0
             fi
-            echo "Push rejected on attempt $i; syncing with origin/main."
-            git fetch origin main
-            if git rebase --autostash origin/main; then
-              echo "Rebased cleanly; will retry push."
-              sleep $(( i * 3 ))
-              continue
-            fi
-            # Rebase conflict — almost always the binary DB (or its derived output).
-            conflicted=$(git diff --name-only --diff-filter=U || true)
-            echo "Rebase conflict in: ${conflicted:-<none>}"
-            git rebase --abort || true
-            if [ "$refetch_budget" -gt 0 ]; then
-              refetch_budget=$(( refetch_budget - 1 ))
-              echo "Resetting to origin/main and re-running fetch so rows append onto the live DB."
-              git reset --hard origin/main
-              python cli.py fetch
-              python cli.py report
-              cp output/dashboard.html output/index.html
-              if ! stage_and_commit; then
-                exit 0            # nothing new after re-fetch
-              fi
-              sleep $(( i * 3 ))
-              continue
-            fi
-            echo "::error::Rebase conflict could not be resolved and the re-fetch budget is exhausted."
-            exit 1
+            echo "Push rejected on attempt $i; data branch advanced. Re-syncing + re-fetching."
+            git checkout "origin/$DATA_BRANCH" -- data/poe2_signal.db || true
+            python cli.py fetch
+            python cli.py report
+            cp output/dashboard.html output/index.html
+            sleep $(( i * 3 ))
           done
 
-          echo "::error::Failed to push after $attempts attempts."
+          echo "::error::Failed to publish to $DATA_BRANCH after $attempts attempts."
           exit 1
 
       - name: Upload dashboard as Pages artifact
