@@ -1,9 +1,10 @@
 """Layer C — unique item fetcher. Normalizes stash item overviews into rows.
 
 One overview call per item type (config.UNIQUE_TYPES); fail-soft per type so a
-single bad/empty type never aborts the run. Economy base is EXALTED — store raw
-primary_value. Items ship `sparkLine` (capital L); currency uses `sparkline` —
-handle both. listingCount feeds the confidence gate (thin listings = suppress).
+single bad/empty type never aborts the run. Canonical unit is DIVINE — store raw
+primary_value; any Exalt conversion is re-derived live at the boundary (never here).
+Items ship `sparkLine` (capital L); currency uses `sparkline` — handle both.
+listingCount feeds the confidence gate (thin listings = suppress).
 """
 from __future__ import annotations
 import json

@@ -81,7 +81,7 @@ Top keys: `core`, `lines`, `items`.
 }
 ```
 - **Currency DOES ship a `sparkline`** (7 points + `totalChange`). The prompt's "no sparkline/no history" is OUTDATED.
-- **Base currency is Exalted, not Chaos** (`maxVolumeCurrency: "exalted"`). The prompt's `chaos_equiv` model is wrong for PoE2 0.5. Store `primary_value` + `max_volume_currency` + `max_volume_rate` raw; derive any conversion later.
+- **Canonical unit is Divine.** Nearly every line is quoted against `divine` (`maxVolumeCurrency: "divine"`); the Divine Orb line itself is `primaryValue: 1.0`. The early "base is Exalted, ~90.9 ex/div" read (and the prompt's `chaos_equiv` model) is wrong/stale for PoE2 0.5. Store `primary_value` + `max_volume_currency` + `max_volume_rate` raw and **derive the Exalt:Divine rate live per run** from the Divine Orb line (`exalt_per_divine = 1 / max_volume_rate`, the line still quoted against `exalted`). The rate moves continuously — never hardcode it.
 
 `items[]` (49) — metadata join: `{ id, name, image, category, detailsId }`. Join to `lines[]` on `id`.
 

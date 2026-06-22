@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS currency_snapshot (
   ts                  INTEGER NOT NULL,   -- actual poll time (UTC unix seconds)
   league_day          INTEGER,
   name                TEXT,
-  primary_value       REAL,               -- raw; base currency is Exalted
+  primary_value       REAL,               -- raw; canonical unit is Divine
   volume              REAL,
   max_volume_currency TEXT,
   max_volume_rate     REAL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS unique_snapshot (
   name               TEXT,
   base_type          TEXT,
   category           TEXT,
-  primary_value      REAL,             -- raw; base currency is Exalted
+  primary_value      REAL,             -- raw; canonical unit is Divine
   listing_count      INTEGER,          -- confidence gate (thin = suppress)
   spark_total_change REAL,
   sparkline_json     TEXT,
@@ -49,6 +49,14 @@ CREATE TABLE IF NOT EXISTS unique_snapshot (
 );
 CREATE INDEX IF NOT EXISTS idx_uniq_league_ts
   ON unique_snapshot(league, item_type, details_id, corrupted, ts);
+
+CREATE TABLE IF NOT EXISTS rate_state (
+  league TEXT NOT NULL,
+  key    TEXT NOT NULL,        -- e.g. 'exalt_per_divine'
+  value  REAL NOT NULL,        -- last-known-good value
+  ts     INTEGER NOT NULL,     -- when it was derived (UTC unix seconds)
+  PRIMARY KEY (league, key)
+);
 """
 
 
@@ -67,6 +75,24 @@ def set_league_meta(con, league: str, start_ts: int, status: str = "active") -> 
     con.execute(
         "INSERT OR REPLACE INTO league_meta(league, start_ts, status) VALUES (?,?,?)",
         (league, start_ts, status),
+    )
+    con.commit()
+
+
+def get_last_rate(con, league: str, key: str = "exalt_per_divine") -> float | None:
+    """Last-known-good rate for a league, or None if never persisted."""
+    row = con.execute(
+        "SELECT value FROM rate_state WHERE league = ? AND key = ?", (league, key)
+    ).fetchone()
+    return row["value"] if row else None
+
+
+def set_last_rate(con, league: str, value: float, ts: int,
+                  key: str = "exalt_per_divine") -> None:
+    """Persist a last-known-good rate so a later bad fetch can fall back to it."""
+    con.execute(
+        "INSERT OR REPLACE INTO rate_state(league, key, value, ts) VALUES (?,?,?,?)",
+        (league, key, value, ts),
     )
     con.commit()
 

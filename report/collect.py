@@ -8,10 +8,15 @@ from datetime import datetime, timezone
 
 import config
 from store import db
+from fetchers.currency import derive_exalt_per_divine
 from signals.momentum import currency_momentum
 from signals.movers import currency_movers
 from signals.items import unique_momentum, unique_movers
 from signals.sparkline import trace_stats
+
+# Value floor authored in EXALT. Converted to a Divine threshold at compare time
+# via the live Exalt:Divine rate — never compared against Divine values directly.
+EXALT_FLOOR = 5.0
 
 
 def _snapshot_count(con, league: str) -> int:
@@ -37,10 +42,10 @@ def _spread_pct(t: dict) -> float:
     return (hi - lo) / lo * 100.0 if lo else 0.0
 
 
-def _currency_traces(con, league: str) -> list[dict]:
+def _currency_traces(rows) -> list[dict]:
     """Decoded 7-bucket price trace + range stats for every currency's latest snapshot."""
     out: list[dict] = []
-    for r in db.latest_currency(con, league):
+    for r in rows:
         st = trace_stats(r)
         if st is None:
             continue
@@ -61,8 +66,14 @@ def _unique_traces(con, league: str) -> list[dict]:
     return out
 
 
-def _above_value(rows: list[dict], value_key: str, min_value: float) -> list[dict]:
-    """Drop rows whose price (in exalted orbs) is below min_value."""
+def _above_value(rows: list[dict], value_key: str, min_value: float | None) -> list[dict]:
+    """Drop rows whose price (Divine) is below min_value (a Divine threshold).
+
+    `min_value is None` disables the floor entirely — used when no Exalt:Divine rate
+    is available, so we keep everything and warn rather than filter on a garbage cut.
+    """
+    if min_value is None:
+        return rows
     return [r for r in rows if (r.get(value_key) or 0) >= min_value]
 
 
@@ -95,23 +106,42 @@ def collect(con, league: str = config.LEAGUE, *,
             cur_z: float = 2.0, cur_min_volume: float = 1.0,
             uniq_z: float = 2.0, uniq_min_listings: int = 5,
             window_sec: int = 86400, top: int = 25,
-            min_spread_pct: float = 5.0, min_value: float = 5.0) -> dict:
+            min_spread_pct: float = 5.0, min_value: float = EXALT_FLOOR) -> dict:
     now = config.now_ts()
-    # Price floor (exalted orbs): hide low-value noise from every section. The
-    # value field differs per signal — `current` for traces, `primary_value` for
-    # momentum, `to` (latest price) for movers — so filter each by its own key.
-    cur_traces = _above_value(_currency_traces(con, league), "current", min_value)
-    uniq_traces = _above_value(_unique_traces(con, league), "current", min_value)
+
+    # Live Exalt:Divine rate from the Divine Orb line. Fallback chain: live line ->
+    # DB last-known-good -> skip the floor (+ warn). Never a hardcoded constant.
+    cur_rows = db.latest_currency(con, league)
+    last_rate = db.get_last_rate(con, league)
+    exalt_per_divine = derive_exalt_per_divine(cur_rows, last_known=last_rate)
+    if exalt_per_divine is not None:
+        db.set_last_rate(con, league, exalt_per_divine, now)
+
+    # The floor is authored in EXALT (`min_value`); convert to a Divine threshold so
+    # it can be compared against our Divine-denominated values. With no usable rate
+    # we keep everything (min_value_divine=None) and surface a warning rather than
+    # filter on a garbage cut. Per-signal value field: `current` for traces,
+    # `primary_value` for momentum, `to` (latest price) for movers.
+    rate_warning = None
+    if exalt_per_divine:
+        min_value_divine = min_value / exalt_per_divine
+    else:
+        min_value_divine = None
+        rate_warning = ("No Exalt:Divine rate available (Divine Orb line missing/out "
+                        "of band and no last-known-good) — value floor skipped this run.")
+
+    cur_traces = _above_value(_currency_traces(cur_rows), "current", min_value_divine)
+    uniq_traces = _above_value(_unique_traces(con, league), "current", min_value_divine)
     cur_low, cur_high = _extremes(cur_traces, "volume", cur_min_volume, min_spread_pct, top)
     uniq_low, uniq_high = _extremes(uniq_traces, "listing_count", uniq_min_listings, min_spread_pct, top)
     cur_momentum = _above_value(currency_momentum(
-        con, league, z_threshold=cur_z, min_volume=cur_min_volume), "primary_value", min_value)
+        con, league, z_threshold=cur_z, min_volume=cur_min_volume), "primary_value", min_value_divine)
     uniq_momentum = _above_value(unique_momentum(
-        con, league, z_threshold=uniq_z, min_listings=uniq_min_listings), "primary_value", min_value)
+        con, league, z_threshold=uniq_z, min_listings=uniq_min_listings), "primary_value", min_value_divine)
     cur_movers = _above_value(currency_movers(
-        con, league, window_sec=window_sec, top=top), "to", min_value)
+        con, league, window_sec=window_sec, top=top), "to", min_value_divine)
     uniq_movers = _above_value(unique_movers(
-        con, league, window_sec=window_sec, top=top, min_listings=uniq_min_listings), "to", min_value)
+        con, league, window_sec=window_sec, top=top, min_listings=uniq_min_listings), "to", min_value_divine)
     return {
         "league": league,
         "league_day": config.league_day(now),
@@ -121,11 +151,17 @@ def collect(con, league: str = config.LEAGUE, *,
         "snapshot_count": _snapshot_count(con, league),
         "currency_entities": _entity_count(con, "currency_snapshot", league),
         "unique_entities": _entity_count(con, "unique_snapshot", league),
+        # Live display/floor context: Exalt per 1 Divine (None if unavailable), the
+        # Exalt-authored floor, and a warning when the floor had to be skipped.
+        "exalt_per_divine": exalt_per_divine,
+        "floor_exalt": min_value,
+        "rate_warning": rate_warning,
         "params": {
             "currency_z": cur_z, "currency_min_volume": cur_min_volume,
             "unique_z": uniq_z, "unique_min_listings": uniq_min_listings,
             "window_sec": window_sec, "top": top,
-            "min_spread_pct": min_spread_pct, "min_value": min_value,
+            "min_spread_pct": min_spread_pct,
+            "min_value": min_value,  # authored in Exalt; see floor_exalt / exalt_per_divine
         },
         "currency_momentum": _by_direction(cur_momentum[:top], "total_change_pct"),
         "currency_movers": _by_direction(cur_movers, "pct"),

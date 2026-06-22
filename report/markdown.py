@@ -42,6 +42,9 @@ def _sparkbar(prices) -> str:
 def render_markdown(d: dict) -> str:
     p = d["params"]
     lines: list[str] = []
+    rate = d.get("exalt_per_divine")
+    rate_note = (f"values in Divine · 1 div = {rate:,.0f} ex (live)"
+                 if rate else "values in Divine · Exalt:Divine rate unavailable")
 
     # YAML frontmatter — Dataview reads these as page fields.
     lines += [
@@ -60,7 +63,8 @@ def render_markdown(d: dict) -> str:
         "",
         f"> Day {d['league_day']} · generated {d['generated_iso']} · "
         f"{d['snapshot_count']} snapshot(s) · "
-        f"{d['currency_entities']} currencies / {d['unique_entities']} uniques tracked",
+        f"{d['currency_entities']} currencies / {d['unique_entities']} uniques tracked · "
+        f"{rate_note}",
         "",
         "Decision-support only. Momentum is run-#1 sparkline z-score; movers are "
         "absolute %-change from our own snapshot history.",
@@ -71,7 +75,7 @@ def render_markdown(d: dict) -> str:
     lines += [f"## Currency momentum (|z| ≥ {p['currency_z']}, vol ≥ {p['currency_min_volume']})", ""]
     cm = d["currency_momentum"]
     if cm:
-        lines += ["| Currency | z | 7d % | value (ex) | volume |",
+        lines += ["| Currency | z | 7d % | value (div) | volume |",
                   "|---|--:|--:|--:|--:|"]
         for h in cm:
             lines.append(
@@ -85,7 +89,7 @@ def render_markdown(d: dict) -> str:
     lines += [f"## Unique momentum (|z| ≥ {p['unique_z']}, listings ≥ {p['unique_min_listings']})", ""]
     um = d["unique_momentum"]
     if um:
-        lines += ["| Item | Type | z | 7d % | value (ex) | listings |",
+        lines += ["| Item | Type | z | 7d % | value (div) | listings |",
                   "|---|---|--:|--:|--:|--:|"]
         for h in um:
             typ = h["item_type"].replace("Unique", "")
@@ -129,7 +133,7 @@ def render_markdown(d: dict) -> str:
     ):
         lines += [f"### {title}", ""]
         if rows:
-            lines += ["| Item | pos | now (ex) | low | high | trace |",
+            lines += ["| Item | pos | now (div) | low | high | trace |",
                       "|---|--:|--:|--:|--:|---|"]
             for t in rows:
                 pos = "-" if t["range_pos"] is None else f"{t['range_pos'] * 100:.0f}%"
