@@ -66,6 +66,15 @@ def _above_value(rows: list[dict], value_key: str, min_value: float) -> list[dic
     return [r for r in rows if (r.get(value_key) or 0) >= min_value]
 
 
+def _by_direction(rows: list[dict], pct_key: str) -> list[dict]:
+    """Order for display: biggest risers first, biggest fallers last.
+
+    Signed descending sort. Selection (which rows survive `top`) still happens by
+    absolute magnitude upstream, so both ends stay visible — this only reorders.
+    """
+    return sorted(rows, key=lambda r: (r.get(pct_key) or 0), reverse=True)
+
+
 def _extremes(traces: list[dict], gate_key: str, gate_min: float,
               min_spread_pct: float, top: int) -> tuple[list[dict], list[dict]]:
     """Split traces into near-7d-low (buy candidates) and near-7d-high (running hot).
@@ -118,10 +127,10 @@ def collect(con, league: str = config.LEAGUE, *,
             "window_sec": window_sec, "top": top,
             "min_spread_pct": min_spread_pct, "min_value": min_value,
         },
-        "currency_momentum": cur_momentum[:top],
-        "currency_movers": cur_movers,
-        "unique_momentum": uniq_momentum[:top],
-        "unique_movers": uniq_movers,
+        "currency_momentum": _by_direction(cur_momentum[:top], "total_change_pct"),
+        "currency_movers": _by_direction(cur_movers, "pct"),
+        "unique_momentum": _by_direction(uniq_momentum[:top], "total_change_pct"),
+        "unique_movers": _by_direction(uniq_movers, "pct"),
         # Sparkline-decoded absolute price traces — full set for every entity, plus
         # range-position extremes (where today sits in its own 7-bucket window).
         "currency_traces": cur_traces,
