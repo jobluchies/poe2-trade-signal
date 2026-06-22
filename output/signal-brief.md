@@ -2,8 +2,8 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 23
-generated: 2026-06-22T18:45:36Z
-snapshots: 5
+generated: 2026-06-22T19:14:54Z
+snapshots: 30
 currency_signals: 2
 unique_signals: 1
 tags: [poe2, market-signal]
@@ -11,7 +11,7 @@ tags: [poe2, market-signal]
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 23 · generated 2026-06-22T18:45:36Z · 5 snapshot(s) · 45 currencies / 602 uniques tracked
+> Day 23 · generated 2026-06-22T19:14:54Z · 30 snapshot(s) · 47 currencies / 607 uniques tracked
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history.
 
@@ -30,11 +30,16 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 ## Currency movers (24h)
 
-_Needs ≥2 snapshots spanning the window — momentum covers the cold-start._
+| Item | % | from | to |
+|---|--:|--:|--:|
+| Fracturing Orb | 🟢 +35.17 | 6.88 | 9.3 |
+| Hinekora's Lock | 🟢 +22.41 | 320 | 391.7 |
 
 ## Unique movers (24h)
 
-_Needs ≥2 snapshots spanning the window — momentum covers the cold-start._
+| Item | % | from | to |
+|---|--:|--:|--:|
+| Loreweave | 🟢 +82.00 | 5 | 9.1 |
 
 ## 7-bucket range position (spread ≥ 5.0%)
 
@@ -44,6 +49,7 @@ Where today's price sits inside its own decoded ~7-day window. `pos` = 0% at the
 
 | Item | pos | now (ex) | low | high | trace |
 |---|--:|--:|--:|--:|---|
+| Mirror of Kalandra | 62% | 1100 | 859.98 | 1249.98 | `▁▄█   ▅` |
 | Fracturing Orb | 100% | 9.3 | 5.62958 | 9.3 | `▃▃▂▁▂▅█` |
 | Hinekora's Lock | 100% | 391.7 | 185.823 | 391.7 | `▃▁▂▂▄ █` |
 
@@ -53,6 +59,7 @@ Where today's price sits inside its own decoded ~7-day window. `pos` = 0% at the
 |---|--:|--:|--:|--:|---|
 | Fracturing Orb | 100% | 9.3 | 5.62958 | 9.3 | `▃▃▂▁▂▅█` |
 | Hinekora's Lock | 100% | 391.7 | 185.823 | 391.7 | `▃▁▂▂▄ █` |
+| Mirror of Kalandra | 62% | 1100 | 859.98 | 1249.98 | `▁▄█   ▅` |
 
 ### Unique — near 7d low (buy candidates)
 
