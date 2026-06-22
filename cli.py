@@ -130,7 +130,7 @@ def cmd_report(args) -> int:
         con, config.LEAGUE,
         cur_z=args.cur_z, cur_min_volume=args.cur_min_volume,
         uniq_z=args.uniq_z, uniq_min_listings=args.uniq_min_listings,
-        window_sec=window, top=args.top,
+        window_sec=window, top=args.top, min_value=args.min_value,
     )
     data = paths["data"]
     log.info("Wrote brief -> %s", paths["markdown"])
@@ -181,6 +181,8 @@ def main(argv=None) -> int:
     pr.add_argument("--uniq-min-listings", type=int, default=5)
     pr.add_argument("--window", choices=list(_WINDOWS), default="1d")
     pr.add_argument("--top", type=int, default=25)
+    pr.add_argument("--min-value", type=float, default=5.0,
+                    help="hide anything priced below this many exalted orbs")
     pr.set_defaults(func=cmd_report)
 
     args = p.parse_args(argv)

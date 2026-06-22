@@ -61,6 +61,11 @@ def _unique_traces(con, league: str) -> list[dict]:
     return out
 
 
+def _above_value(rows: list[dict], value_key: str, min_value: float) -> list[dict]:
+    """Drop rows whose price (in exalted orbs) is below min_value."""
+    return [r for r in rows if (r.get(value_key) or 0) >= min_value]
+
+
 def _extremes(traces: list[dict], gate_key: str, gate_min: float,
               min_spread_pct: float, top: int) -> tuple[list[dict], list[dict]]:
     """Split traces into near-7d-low (buy candidates) and near-7d-high (running hot).
@@ -81,12 +86,23 @@ def collect(con, league: str = config.LEAGUE, *,
             cur_z: float = 2.0, cur_min_volume: float = 1.0,
             uniq_z: float = 2.0, uniq_min_listings: int = 5,
             window_sec: int = 86400, top: int = 25,
-            min_spread_pct: float = 5.0) -> dict:
+            min_spread_pct: float = 5.0, min_value: float = 5.0) -> dict:
     now = config.now_ts()
-    cur_traces = _currency_traces(con, league)
-    uniq_traces = _unique_traces(con, league)
+    # Price floor (exalted orbs): hide low-value noise from every section. The
+    # value field differs per signal — `current` for traces, `primary_value` for
+    # momentum, `to` (latest price) for movers — so filter each by its own key.
+    cur_traces = _above_value(_currency_traces(con, league), "current", min_value)
+    uniq_traces = _above_value(_unique_traces(con, league), "current", min_value)
     cur_low, cur_high = _extremes(cur_traces, "volume", cur_min_volume, min_spread_pct, top)
     uniq_low, uniq_high = _extremes(uniq_traces, "listing_count", uniq_min_listings, min_spread_pct, top)
+    cur_momentum = _above_value(currency_momentum(
+        con, league, z_threshold=cur_z, min_volume=cur_min_volume), "primary_value", min_value)
+    uniq_momentum = _above_value(unique_momentum(
+        con, league, z_threshold=uniq_z, min_listings=uniq_min_listings), "primary_value", min_value)
+    cur_movers = _above_value(currency_movers(
+        con, league, window_sec=window_sec, top=top), "to", min_value)
+    uniq_movers = _above_value(unique_movers(
+        con, league, window_sec=window_sec, top=top, min_listings=uniq_min_listings), "to", min_value)
     return {
         "league": league,
         "league_day": config.league_day(now),
@@ -100,16 +116,12 @@ def collect(con, league: str = config.LEAGUE, *,
             "currency_z": cur_z, "currency_min_volume": cur_min_volume,
             "unique_z": uniq_z, "unique_min_listings": uniq_min_listings,
             "window_sec": window_sec, "top": top,
-            "min_spread_pct": min_spread_pct,
+            "min_spread_pct": min_spread_pct, "min_value": min_value,
         },
-        "currency_momentum": currency_momentum(
-            con, league, z_threshold=cur_z, min_volume=cur_min_volume)[:top],
-        "currency_movers": currency_movers(
-            con, league, window_sec=window_sec, top=top),
-        "unique_momentum": unique_momentum(
-            con, league, z_threshold=uniq_z, min_listings=uniq_min_listings)[:top],
-        "unique_movers": unique_movers(
-            con, league, window_sec=window_sec, top=top, min_listings=uniq_min_listings),
+        "currency_momentum": cur_momentum[:top],
+        "currency_movers": cur_movers,
+        "unique_momentum": uniq_momentum[:top],
+        "unique_movers": uniq_movers,
         # Sparkline-decoded absolute price traces — full set for every entity, plus
         # range-position extremes (where today sits in its own 7-bucket window).
         "currency_traces": cur_traces,
