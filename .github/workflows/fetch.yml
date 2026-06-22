@@ -12,7 +12,10 @@ name: fetch-and-report
 
 on:
   schedule:
-    - cron: "0 * * * *"      # top of every hour (UTC); GitHub cron is best-effort
+    - cron: "5 * * * *"      # :05 past the hour (UTC) — off the contended :00 slot,
+                             # where GitHub drops far more scheduled runs. Any cron
+                             # delay should still land within the same hour, so the
+                             # hour-floored bucket still fills.
   workflow_dispatch: {}        # manual trigger for testing
 
 permissions:
