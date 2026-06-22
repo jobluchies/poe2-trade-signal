@@ -2,16 +2,16 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 23
-generated: 2026-06-22T10:38:12Z
-snapshots: 27
-currency_signals: 3
-unique_signals: 9
+generated: 2026-06-22T15:52:19Z
+snapshots: 28
+currency_signals: 1
+unique_signals: 14
 tags: [poe2, market-signal]
 ---
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 23 · generated 2026-06-22T10:38:12Z · 27 snapshot(s) · 47 currencies / 606 uniques tracked
+> Day 23 · generated 2026-06-22T15:52:19Z · 28 snapshot(s) · 47 currencies / 607 uniques tracked
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history.
 
@@ -19,83 +19,86 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 | Currency | z | 7d % | value (ex) | volume |
 |---|--:|--:|--:|--:|
-| Blacksmith's Whetstone | +2.21 | 🟢 86.98 | 0.004034 | 1.09 |
-| Fracturing Orb | +2.19 | 🟢 24.18 | 8.33 | 148.5 |
-| Hinekora's Lock | +2.19 | 🟢 95.37 | 380 | 63.33 |
+| Fracturing Orb | +2.19 | 🟢 33.76 | 9.1 | 254.7 |
 
 ## Unique momentum (|z| ≥ 2.0, listings ≥ 5)
 
 | Item | Type | z | 7d % | value (ex) | listings |
 |---|---|--:|--:|--:|--:|
-| Heroic Tragedy | Jewels | +2.45 | 🟢 50 | 3 | 103 |
-| Yriel's Fostering | Armours | +2.44 | 🟢 163.4 | 0.1014 | 100 |
-| Crown of the Pale King | Armours | +2.41 | 🟢 51.21 | 0.1106 | 79 |
-| Rearguard | Armours | -2.37 | 🔴 -89.7 | 0.01067 | 235 |
-| Sanguine Diviner | Weapons | -2.35 | 🔴 -80.43 | 0.02027 | 228 |
-| Jarngreipr | Armours | +2.26 | 🟢 207.1 | 0.1182 | 84 |
-| Shankgonne | Armours | -2.22 | 🔴 -74.27 | 0.02666 | 175 |
-| Chernobog's Pillar | Armours | +2.10 | 🟢 83.4 | 0.57 | 49 |
-| Font of Power | Weapons | -2.10 | 🔴 -51.27 | 0.05048 | 392 |
+| Flesh Crucible | Jewels | -2.45 | 🔴 -11.28 | 0.8872 | 116 |
+| Heroic Tragedy | Jewels | +2.45 | 🟢 50 | 3 | 104 |
+| Yriel's Fostering | Armours | +2.44 | 🟢 188.1 | 0.1109 | 103 |
+| Calgyra's Arc | Armours | +2.40 | 🟢 58.85 | 0.02038 | 57 |
+| Radiant Grief | Armours | +2.40 | 🟢 58.85 | 0.02038 | 89 |
+| Sanguine Diviner | Weapons | -2.37 | 🔴 -95.18 | 0.00499 | 228 |
+| Reverie | Armours | +2.32 | 🟢 161.3 | 0.5002 | 49 |
+| The Hammer of Faith | Weapons | +2.28 | 🟢 293.4 | 2.04 | 20 |
+| Shankgonne | Armours | -2.22 | 🔴 -75.56 | 0.02532 | 176 |
+| Jarngreipr | Armours | +2.21 | 🟢 188.1 | 0.1109 | 86 |
+| Cornathaum | Armours | +2.16 | 🟢 75.03 | 0.1123 | 37 |
+| Font of Power | Weapons | -2.14 | 🔴 -56.34 | 0.04523 | 403 |
+| Skysliver | Weapons | -2.04 | 🔴 -23.54 | 0.4436 | 306 |
+| Brain Rattler | Weapons | +2.02 | 🟢 132.2 | 0.0566 | 45 |
 
 ## Currency movers (24h)
 
 | Item | % | from | to |
 |---|--:|--:|--:|
-| Greater Regal Orb | 🔴 -66.71 | 0.0319 | 0.01062 |
-| Orb of Augmentation | 🟢 +61.42 | 0.0006091 | 0.0009832 |
-| Scroll of Wisdom | 🔴 -61.37 | 0.0001464 | 5.656e-05 |
-| Vaal Armourer's Infuser | 🟢 +57.30 | 0.3747 | 0.5894 |
-| Ancient Infuser | 🔴 -48.71 | 0.1198 | 0.06145 |
-| Perfect Orb of Augmentation | 🔴 -41.10 | 0.2005 | 0.1181 |
-| Vaal Arcanist's Infuser | 🔴 -36.50 | 0.01781 | 0.01131 |
-| Vaal Blacksmith's Infuser | 🟢 +35.97 | 0.05997 | 0.08154 |
-| Chance Shard | 🟢 +34.59 | 0.008403 | 0.01131 |
-| Cryptic Key | 🔴 -34.02 | 0.4115 | 0.2715 |
-| Blacksmith's Whetstone | 🟢 +32.26 | 0.00305 | 0.004034 |
-| Fracturing Orb | 🟢 +29.75 | 6.42 | 8.33 |
-| Lesser Jeweller's Orb | 🟢 +25.25 | 0.001806 | 0.002262 |
-| Greater Orb of Augmentation | 🔴 -25.10 | 0.007344 | 0.005501 |
-| Orb of Alchemy | 🔴 -25.06 | 0.006681 | 0.005007 |
-| Crystallised Corruption | 🔴 -24.50 | 1.24 | 0.9362 |
-| Architect's Orb | 🟢 +24.14 | 1.45 | 1.8 |
-| Artificer's Orb | 🔴 -22.27 | 0.01926 | 0.01497 |
-| Perfect Orb of Transmutation | 🔴 -19.00 | 0.1034 | 0.08375 |
-| Hinekora's Lock | 🟢 +18.75 | 320 | 380 |
-| Greater Exalted Orb | 🔴 -18.50 | 0.09859 | 0.08035 |
-| Armourer's Scrap | 🔴 -18.48 | 0.00932 | 0.007598 |
-| Vaal Catalysing Infuser | 🔴 -16.30 | 0.4938 | 0.4133 |
-| Orb of Chance | 🔴 -12.86 | 0.119 | 0.1037 |
-| Perfect Jeweller's Orb | 🔴 -11.70 | 1.88 | 1.66 |
+| Vaal Siphoner | 🔴 -98.89 | 1 | 0.01111 |
+| Greater Regal Orb | 🔴 -68.00 | 0.04841 | 0.01549 |
+| Vaal Blacksmith's Infuser | 🟢 +66.38 | 0.05062 | 0.08422 |
+| Perfect Orb of Augmentation | 🔴 -54.89 | 0.1898 | 0.08562 |
+| Cryptic Key | 🔴 -49.16 | 0.3879 | 0.1972 |
+| Scroll of Wisdom | 🟢 +45.99 | 5.79e-05 | 8.453e-05 |
+| Artificer's Orb | 🔴 -44.97 | 0.01242 | 0.006835 |
+| Fracturing Orb | 🟢 +40.87 | 6.46 | 9.1 |
+| Vaal Arcanist's Infuser | 🔴 -36.88 | 0.0176 | 0.01111 |
+| Vaal Armourer's Infuser | 🟢 +36.56 | 0.3982 | 0.5438 |
+| Core Destabiliser | 🔴 -35.35 | 0.4382 | 0.2833 |
+| Perfect Chaos Orb | 🟢 +35.31 | 3.2 | 4.33 |
+| Regal Orb | 🔴 -32.36 | 0.002423 | 0.001639 |
+| Vaal Catalysing Infuser | 🔴 -31.72 | 0.6475 | 0.4421 |
+| Blacksmith's Whetstone | 🔴 -30.25 | 0.003121 | 0.002177 |
+| Greater Jeweller's Orb | 🔴 -29.05 | 0.05728 | 0.04064 |
+| Architect's Orb | 🔴 -28.57 | 2.17 | 1.55 |
+| Vaal Cultivation Orb | 🔴 -27.15 | 1.51 | 1.1 |
+| Ancient Infuser | 🔴 -26.33 | 0.1152 | 0.08487 |
+| Arcanist's Etcher | 🔴 -23.99 | 0.007475 | 0.005682 |
+| Glassblower's Bauble | 🟢 +22.68 | 0.01195 | 0.01466 |
+| Hinekora's Lock | 🟢 +22.41 | 320 | 391.7 |
+| Chance Shard | 🟢 +21.97 | 0.009232 | 0.01126 |
+| Greater Exalted Orb | 🔴 -20.31 | 0.09804 | 0.07813 |
+| Perfect Orb of Transmutation | 🔴 -20.17 | 0.1174 | 0.09372 |
 
 ## Unique movers (24h)
 
 | Item | % | from | to |
 |---|--:|--:|--:|
-| Alkem Eira | 🟢 +889.95 | 0.01194 | 0.1182 |
-| Blueflame Bracers | 🟢 +889.95 | 0.01194 | 0.1182 |
-| The Knight-errant | 🟢 +889.95 | 0.01194 | 0.1182 |
-| Font of Power | 🟢 +644.54 | 0.00678 | 0.05048 |
-| Icetomb | 🟢 +621.61 | 0.01194 | 0.08616 |
-| Atziri's Step | 🟢 +211.87 | 0.1137 | 0.3546 |
-| Yriel's Fostering | 🟢 +183.08 | 0.03582 | 0.1014 |
-| Blackflame | 🟢 +154.33 | 0.1743 | 0.4433 |
-| Chernobog's Pillar | 🟢 +150.66 | 0.2274 | 0.57 |
-| Rathpith Globe | 🟢 +145.38 | 1.3 | 3.19 |
-| Wings of Caelyn | 🟢 +119.60 | 0.02388 | 0.05244 |
-| Decree of Acuity | 🟢 +107.92 | 0.1137 | 0.2364 |
-| Horror's Flight | 🟢 +107.92 | 0.2274 | 0.4728 |
-| Xoph's Blood | 🟢 +98.26 | 0.0921 | 0.1826 |
-| Call of the Brotherhood | 🟢 +97.99 | 0.0597 | 0.1182 |
-| Thief's Torment | 🟢 +97.99 | 0.0597 | 0.1182 |
-| Jarngreipr | 🟢 +97.99 | 0.0597 | 0.1182 |
-| Rearguard | 🔴 -90.62 | 0.1137 | 0.01067 |
-| Grip of Winter | 🔴 -88.87 | 0.1434 | 0.01596 |
-| The Sunken Vessel | 🔴 -87.72 | 0.04341 | 0.00533 |
-| Sanguine Diviner | 🔴 -82.17 | 0.1137 | 0.02027 |
-| Loreweave | 🟢 +82.00 | 5 | 9.1 |
-| The Hammer of Faith | 🟢 +79.92 | 0.4093 | 0.7364 |
-| The Wicked Quill | 🔴 -77.62 | 0.09774 | 0.02187 |
-| Shankgonne | 🔴 -76.55 | 0.1137 | 0.02666 |
+| Alkem Eira | 🟢 +828.81 | 0.01194 | 0.1109 |
+| Blueflame Bracers | 🟢 +828.81 | 0.01194 | 0.1109 |
+| Icetomb | 🟢 +791.96 | 0.01194 | 0.1065 |
+| The Knight-errant | 🟢 +328.39 | 0.01194 | 0.05115 |
+| Wings of Caelyn | 🟢 +305.95 | 0.02388 | 0.09694 |
+| Yriel's Fostering | 🟢 +209.60 | 0.03582 | 0.1109 |
+| Rathpith Globe | 🟢 +196.92 | 1.3 | 3.86 |
+| Atziri's Step | 🟢 +192.61 | 0.1137 | 0.3327 |
+| Vestige of Darkness | 🟢 +192.61 | 0.1137 | 0.3327 |
+| Defiance of Destiny | 🟢 +143.84 | 0.2274 | 0.5545 |
+| The Hammer of Faith | 🟢 +137.43 | 0.8592 | 2.04 |
+| Twisted Empyrean | 🟢 +133.90 | 1.18 | 2.76 |
+| Blackflame | 🟢 +130.64 | 0.1743 | 0.402 |
+| Xoph's Blood | 🟢 +104.99 | 0.0921 | 0.1888 |
+| Brain Rattler | 🟢 +99.51 | 0.02837 | 0.0566 |
+| Chernobog's Pillar | 🟢 +99.12 | 0.2274 | 0.4528 |
+| Decree of Acuity | 🟢 +95.07 | 0.1137 | 0.2218 |
+| Horror's Flight | 🟢 +95.07 | 0.2274 | 0.4436 |
+| The Sunken Vessel | 🔴 -88.34 | 0.04341 | 0.00506 |
+| Cornathaum | 🟢 +88.11 | 0.0597 | 0.1123 |
+| Blackgleam | 🟢 +86.73 | 0.00678 | 0.01266 |
+| Call of the Brotherhood | 🟢 +85.76 | 0.0597 | 0.1109 |
+| Jarngreipr | 🟢 +85.76 | 0.0597 | 0.1109 |
+| Beetlebite | 🟢 +84.36 | 0.02149 | 0.03962 |
+| Enfolding Dawn | 🟢 +83.18 | 0.4548 | 0.8331 |
 
 ## 7-bucket range position (spread ≥ 5.0%)
 
@@ -105,118 +108,118 @@ Where today's price sits inside its own decoded ~7-day window. `pos` = 0% at the
 
 | Item | pos | now (ex) | low | high | trace |
 |---|--:|--:|--:|--:|---|
-| Orb of Alchemy | 0% | 0.005007 | 0.005007 | 0.0107019 | `▅█▃▂▂▂▁` |
-| Orb of Chance | 0% | 0.1037 | 0.1037 | 0.132724 | `▅▅█▄▃▃▁` |
-| Exalted Orb | 0% | 0.01131 | 0.01131 | 0.0133246 | `▆██▅▃▂▁` |
-| Greater Exalted Orb | 0% | 0.08035 | 0.08035 | 0.150337 | `██▅▃▁▂▁` |
-| Perfect Orb of Transmutation | 0% | 0.08375 | 0.08375 | 0.130827 | `▇█▆▃▆▅▁` |
-| Armourer's Scrap | 0% | 0.007598 | 0.007598 | 0.0105511 | `█▅▃▅▄▄▁` |
-| Vaal Orb | 0% | 0.02239 | 0.02239 | 0.0496878 | `▄▇▇█▄▁▁` |
-| Vaal Catalysing Infuser | 0% | 0.4133 | 0.4133 | 0.959201 | `██▇▅▆▃▁` |
-| Greater Orb of Transmutation | 15% | 0.007847 | 0.00677645 | 0.0138138 | `▂█▂▃▁▂▂` |
-| Perfect Orb of Augmentation | 28% | 0.1181 | 0.0967953 | 0.17223 | `▄▂▁▂▇█▃` |
-| Chaos Orb | 32% | 0.1096 | 0.0976254 | 0.13547 | `▁▅██▅▃▃` |
-| Perfect Exalted Orb | 45% | 3.88 | 3.31784 | 4.55548 | `▁▆▅█▃▃▄` |
-| Perfect Chaos Orb | 50% | 3.71 | 2.98567 | 4.43153 | `▁▃█▅▅▅▅` |
-| Gemcutter's Prism | 51% | 0.03299 | 0.029658 | 0.0361958 | `▃▆▁▁▁█▅` |
-| Crystallised Corruption | 59% | 0.9362 | 0.560271 | 1.20114 | `▁▁▂▂▅█▅` |
+| Orb of Alchemy | 0% | 0.004736 | 0.004736 | 0.0098529 | `▇█▃▃▂▂▁` |
+| Exalted Orb | 0% | 0.01111 | 0.01111 | 0.0133264 | `▇█▇▅▃▃▁` |
+| Greater Exalted Orb | 0% | 0.07813 | 0.07813 | 0.146804 | `█▇▅▁▂▂▁` |
+| Greater Regal Orb | 0% | 0.01549 | 0.01549 | 0.0360273 | `▇▆█▂▆▇▁` |
+| Perfect Orb of Augmentation | 0% | 0.08562 | 0.08562 | 0.166975 | `▃▂▂▅▇█▁` |
+| Perfect Orb of Transmutation | 0% | 0.09372 | 0.09372 | 0.134428 | `▆█▃▃▄▂▁` |
+| Vaal Catalysing Infuser | 0% | 0.4421 | 0.4421 | 0.977557 | `█▇▅▆▅▃▁` |
+| Blacksmith's Whetstone | 0% | 0.002177 | 0.002177 | 0.00302529 | `▆▄█▃█▆▁` |
+| Greater Orb of Transmutation | 0% | 0.00714 | 0.007139 | 0.0104697 | `█▇▁▂▁▂▁` |
+| Armourer's Scrap | 9% | 0.008045 | 0.00783457 | 0.0102952 | `█▁▃▄▄▃▂` |
+| Perfect Exalted Orb | 12% | 3.64 | 3.55305 | 4.30403 | `▂▅█▆▁▃▂` |
+| Vaal Orb | 15% | 0.02495 | 0.0213365 | 0.0452618 | `▅███▄▁▂` |
+| Vaal Blacksmith's Infuser | 27% | 0.08422 | 0.051637 | 0.172617 | `█▆▄▅▃▁▃` |
+| Orb of Chance | 27% | 0.1146 | 0.106436 | 0.136497 | `▄▁█▂▁▃▃` |
+| Greater Jeweller's Orb | 36% | 0.04064 | 0.0346611 | 0.0512811 | `▇▆▁▂▃█▄` |
+| Arcanist's Etcher | 39% | 0.005682 | 0.00441141 | 0.00767267 | `▄█▁▅▄▅▄` |
+| Chaos Orb | 43% | 0.1176 | 0.101728 | 0.1388 | `▁▅█▇▄▃▄` |
 | Mirror of Kalandra | 62% | 1100 | 859.98 | 1249.98 | `▁▄█   ▅` |
-| Perfect Regal Orb | 69% | 0.3763 | 0.258711 | 0.42829 | `█▅▂▁▄▄▆` |
-| Greater Jeweller's Orb | 75% | 0.04575 | 0.0376227 | 0.0484729 | `██▂▁▃▆▆` |
-| Orb of Annulment | 76% | 0.611 | 0.424819 | 0.669175 | `▁▇█▆▅▇▆` |
-| Greater Chaos Orb | 91% | 0.2851 | 0.197343 | 0.293947 | `▁▅▇█▇▆▇` |
-| Vaal Cultivation Orb | 99% | 1.1 | 0.525286 | 1.10649 | `▃▂▁▃▄██` |
-| Architect's Orb | 100% | 1.8 | 0.732957 | 1.8 | `▂▁▁▂▅▆█` |
-| Artificer's Orb | 100% | 0.01497 | 0.00450114 | 0.01497 | `▁▃▃▅▅▇█` |
-| Core Destabiliser | 100% | 0.4135 | 0.0731389 | 0.4135 | `▁▁▃▄▅▇█` |
-| Divine Orb | 100% | 1 | 0.848876 | 1 | `▃▁▁▃▆▆█` |
+| Perfect Regal Orb | 62% | 0.3745 | 0.261463 | 0.444592 | `█▂▁▁▄▂▅` |
+| Orb of Annulment | 62% | 0.5861 | 0.446649 | 0.671668 | `▁█▇▅▅▆▅` |
+| Greater Orb of Augmentation | 63% | 0.004976 | 0.00375583 | 0.00568916 | `▅▁▂█▄█▅` |
+| Core Destabiliser | 66% | 0.2833 | 0.0773903 | 0.390065 | `▁▂▃▄▆█▆` |
+| Vaal Cultivation Orb | 75% | 1.1 | 0.531184 | 1.29058 | `▂▁▁▃▃█▆` |
+| Gemcutter's Prism | 82% | 0.0334 | 0.0279497 | 0.0345587 | `▄█▁▂▅▇▇` |
+| Architect's Orb | 88% | 1.55 | 0.698596 | 1.66332 | `▂▁▁▃▆█▇` |
 
 ### Currency — near 7d high (running hot)
 
 | Item | pos | now (ex) | low | high | trace |
 |---|--:|--:|--:|--:|---|
-| Architect's Orb | 100% | 1.8 | 0.732957 | 1.8 | `▂▁▁▂▅▆█` |
-| Artificer's Orb | 100% | 0.01497 | 0.00450114 | 0.01497 | `▁▃▃▅▅▇█` |
-| Core Destabiliser | 100% | 0.4135 | 0.0731389 | 0.4135 | `▁▁▃▄▅▇█` |
-| Divine Orb | 100% | 1 | 0.848876 | 1 | `▃▁▁▃▆▆█` |
-| Fracturing Orb | 100% | 8.33 | 5.65015 | 8.33 | `▄▄▂▁▁▃█` |
-| Hinekora's Lock | 100% | 380 | 194.503 | 380 | `▁▂▁▂▂▄█` |
-| Perfect Jeweller's Orb | 100% | 1.66 | 1.2935 | 1.66 | `▁▁▂▃▄▅█` |
-| Vaal Armourer's Infuser | 100% | 0.5894 | 0.251409 | 0.5894 | `▁▁▂▇▄▃█` |
-| Blacksmith's Whetstone | 100% | 0.004034 | 0.00245626 | 0.004034 | `▂▁▄▂▃▃█` |
-| Vaal Cultivation Orb | 99% | 1.1 | 0.525286 | 1.10649 | `▃▂▁▃▄██` |
-| Greater Chaos Orb | 91% | 0.2851 | 0.197343 | 0.293947 | `▁▅▇█▇▆▇` |
-| Orb of Annulment | 76% | 0.611 | 0.424819 | 0.669175 | `▁▇█▆▅▇▆` |
-| Greater Jeweller's Orb | 75% | 0.04575 | 0.0376227 | 0.0484729 | `██▂▁▃▆▆` |
-| Perfect Regal Orb | 69% | 0.3763 | 0.258711 | 0.42829 | `█▅▂▁▄▄▆` |
+| Crystallised Corruption | 100% | 1.27 | 0.553027 | 1.27 | `▁▁▁▃▅▇█` |
+| Divine Orb | 100% | 1 | 0.833743 | 1 | `▂▁▂▄▅▆█` |
+| Fracturing Orb | 100% | 9.1 | 5.62559 | 9.1 | `▃▃▂▁▂▄█` |
+| Greater Chaos Orb | 100% | 0.2923 | 0.201185 | 0.2923 | `▁▅▇▇▇▆█` |
+| Hinekora's Lock | 100% | 391.7 | 199.117 | 391.7 | `▃▁▁▂▃▆█` |
+| Perfect Jeweller's Orb | 100% | 1.6 | 1.26321 | 1.6 | `▁▂▂▃▄▇█` |
+| Vaal Armourer's Infuser | 100% | 0.5438 | 0.24493 | 0.5438 | `▁▂▂█▄▆█` |
+| Perfect Chaos Orb | 94% | 4.33 | 3.15599 | 4.4051 | `▁▃█▅▆▃█` |
+| Architect's Orb | 88% | 1.55 | 0.698596 | 1.66332 | `▂▁▁▃▆█▇` |
+| Gemcutter's Prism | 82% | 0.0334 | 0.0279497 | 0.0345587 | `▄█▁▂▅▇▇` |
+| Vaal Cultivation Orb | 75% | 1.1 | 0.531184 | 1.29058 | `▂▁▁▃▃█▆` |
+| Core Destabiliser | 66% | 0.2833 | 0.0773903 | 0.390065 | `▁▂▃▄▆█▆` |
+| Greater Orb of Augmentation | 63% | 0.004976 | 0.00375583 | 0.00568916 | `▅▁▂█▄█▅` |
+| Orb of Annulment | 62% | 0.5861 | 0.446649 | 0.671668 | `▁█▇▅▅▆▅` |
+| Perfect Regal Orb | 62% | 0.3745 | 0.261463 | 0.444592 | `█▂▁▁▄▂▅` |
 | Mirror of Kalandra | 62% | 1100 | 859.98 | 1249.98 | `▁▄█   ▅` |
-| Crystallised Corruption | 59% | 0.9362 | 0.560271 | 1.20114 | `▁▁▂▂▅█▅` |
-| Gemcutter's Prism | 51% | 0.03299 | 0.029658 | 0.0361958 | `▃▆▁▁▁█▅` |
-| Perfect Chaos Orb | 50% | 3.71 | 2.98567 | 4.43153 | `▁▃█▅▅▅▅` |
-| Perfect Exalted Orb | 45% | 3.88 | 3.31784 | 4.55548 | `▁▆▅█▃▃▄` |
-| Chaos Orb | 32% | 0.1096 | 0.0976254 | 0.13547 | `▁▅██▅▃▃` |
-| Perfect Orb of Augmentation | 28% | 0.1181 | 0.0967953 | 0.17223 | `▄▂▁▂▇█▃` |
-| Greater Orb of Transmutation | 15% | 0.007847 | 0.00677645 | 0.0138138 | `▂█▂▃▁▂▂` |
-| Orb of Alchemy | 0% | 0.005007 | 0.005007 | 0.0107019 | `▅█▃▂▂▂▁` |
-| Orb of Chance | 0% | 0.1037 | 0.1037 | 0.132724 | `▅▅█▄▃▃▁` |
-| Exalted Orb | 0% | 0.01131 | 0.01131 | 0.0133246 | `▆██▅▃▂▁` |
+| Chaos Orb | 43% | 0.1176 | 0.101728 | 0.1388 | `▁▅█▇▄▃▄` |
+| Arcanist's Etcher | 39% | 0.005682 | 0.00441141 | 0.00767267 | `▄█▁▅▄▅▄` |
+| Greater Jeweller's Orb | 36% | 0.04064 | 0.0346611 | 0.0512811 | `▇▆▁▂▃█▄` |
+| Orb of Chance | 27% | 0.1146 | 0.106436 | 0.136497 | `▄▁█▂▁▃▃` |
+| Vaal Blacksmith's Infuser | 27% | 0.08422 | 0.051637 | 0.172617 | `█▆▄▅▃▁▃` |
+| Vaal Orb | 15% | 0.02495 | 0.0213365 | 0.0452618 | `▅███▄▁▂` |
+| Perfect Exalted Orb | 12% | 3.64 | 3.55305 | 4.30403 | `▂▅█▆▁▃▂` |
+| Armourer's Scrap | 9% | 0.008045 | 0.00783457 | 0.0102952 | `█▁▃▄▄▃▂` |
+| Greater Orb of Transmutation | 0% | 0.00714 | 0.007139 | 0.0104697 | `█▇▁▂▁▂▁` |
 
 ### Unique — near 7d low (buy candidates)
 
 | Item | pos | now (ex) | low | high | trace |
 |---|--:|--:|--:|--:|---|
-| Berek's Respite | 0% | 2 | 2 | 2.385 | `▁▁██▃▁▁` |
+| Berek's Grip | 0% | 2.11 | 2.11 | 3.00408 | `▆██▆▃▄▁` |
+| Berek's Respite | 0% | 1.77 | 1.77 | 2.37909 | `▄▄██▅▄▁` |
+| Birthright Buckle | 0% | 0.00506 | 0.00506 | 0.154124 | `▇▆█▇▆▁▁` |
+| Blackheart | 0% | 0.1109 | 0.1109 | 0.236616 | `▆█▂▂▁▁▁` |
 | Bursting Decay | 0% | 9 | 9 | 15.4004 | `█▃▃▄▁▁▁` |
-| Eventide Petals | 0% | 0.5192 | 0.5192 | 1 | `█▆▅▇▃▂▁` |
-| Eye of Chayula | 0% | 0.0114 | 0.0114 | 0.0131706 | `▇█▇▄▂▂▁` |
-| Hinekora's Sight | 0% | 0.0114 | 0.0114 | 0.023711 | `▂█▂▂▁▁▁` |
-| Snakepit | 0% | 0.3546 | 0.3546 | 0.525207 | `▃▆▃█▄▅▁` |
-| The Anvil | 0% | 0.0456 | 0.0456 | 0.124454 | `█▅▃▂▂▂▁` |
-| The Pandemonius | 0% | 0.03078 | 0.03078 | 0.0628676 | `███▇▆▁▁` |
-| The Taming | 0% | 11 | 11 | 13.9997 | `▁▁▃▆█▂▁` |
-| Vigilant View | 0% | 0.057 | 0.057 | 0.0658531 | `▇█▇▄▂▂▁` |
-| Zerphi's Genesis | 0% | 0.057 | 0.057 | 0.0658531 | `▇█▇▄▂▂▁` |
-| Arvil's Wheel | 0% | 0.0114 | 0.0114 | 0.0131706 | `▇█▇▄▂▂▁` |
-| Aurseize | 0% | 0.0342 | 0.0342 | 0.0395119 | `▇█▇▄▂▂▁` |
-| Blood Price | 0% | 0.0114 | 0.0114 | 0.0171212 | `▃█▃▂▁▁▁` |
-| Cadiro's Gambit | 0% | 1.77 | 1.77 | 3.70361 | `▆▇█▄▃▂▁` |
-| Calgyra's Arc | 0% | 0.0114 | 0.0114 | 0.0131706 | `▇█▇▄▂▂▁` |
-| Carrion Call | 0% | 0.0114 | 0.0114 | 0.026059 | `▂▂█▆▇▁▁` |
-| Doryani's Prototype | 0% | 0.0114 | 0.0114 | 0.0131706 | `▇█▇▄▂▂▁` |
-| Drillneck | 0% | 0.04788 | 0.04788 | 0.103592 | `█▃▂▅▄▁▁` |
-| Grip of Winter | 0% | 0.01596 | 0.01596 | 0.192339 | `▅█▅▅▅▂▁` |
-| Hyrri's Ire | 0% | 0.4373 | 0.4373 | 0.946945 | `▆▆██▄▁▁` |
-| Ironride | 0% | 0.03762 | 0.03762 | 0.132514 | `▆▇█▇▃▁▁` |
-| Luminous Pace | 0% | 0.057 | 0.057 | 0.100086 | `██▃▂▁▁▁` |
-| Mahuxotl's Machination | 0% | 0.1951 | 0.1951 | 0.281893 | `▂█▇▅▅▁▁` |
-| Mask of the Stitched Demon | 0% | 0.0228 | 0.0228 | 0.0590215 | `█▆▄▁▃▁▁` |
+| Carnage Heart | 0% | 0.1109 | 0.1109 | 0.264985 | `▃▇█▂▁▁▁` |
+| Eventide Petals | 0% | 0.5773 | 0.5773 | 1 | `█▆▅▇▃▁▁` |
+| Eventide Petals | 0% | 0.4214 | 0.4214 | 1 | `███▄▃▁▁` |
+| Eye of Chayula | 0% | 0.01132 | 0.01132 | 0.0131701 | `▇█▇▅▂▂▁` |
+| Hinekora's Sight | 0% | 0.01132 | 0.01132 | 0.02371 | `▂█▂▂▁▁▁` |
+| Keelhaul | 0% | 0.00506 | 0.00506 | 0.0157982 | `▅█▄▇▁▁▁` |
+| Midnight Braid | 0% | 0.1065 | 0.1065 | 0.154308 | `▆▁█▄▁▃▁` |
+| Snakepit | 0% | 0.3327 | 0.3327 | 0.525242 | `▄▆▃█▄▅▁` |
+| Strugglescream | 0% | 0.1109 | 0.1109 | 0.174866 | `█▂▃▅▂▁▁` |
+| The Anvil | 0% | 0.04528 | 0.04528 | 0.124464 | `█▅▃▂▂▂▁` |
+| The Pandemonius | 0% | 0.03056 | 0.03056 | 0.0628677 | `███▇▆▁▁` |
+| Umbilicus Immortalis | 0% | 0.00506 | 0.00506 | 0.013411 | `▅▆▃▃█▁▁` |
+| Vigilant View | 0% | 0.0566 | 0.0566 | 0.0658505 | `▇█▇▅▂▂▁` |
+| Zerphi's Genesis | 0% | 0.0566 | 0.0566 | 0.0658505 | `▇█▇▅▂▂▁` |
+| Arvil's Wheel | 0% | 0.01132 | 0.01132 | 0.0131701 | `▇█▇▅▂▂▁` |
+| Aurseize | 0% | 0.03396 | 0.03396 | 0.0395103 | `▇█▇▅▂▂▁` |
+| Blood Price | 0% | 0.01132 | 0.01132 | 0.0171205 | `▃█▃▂▁▁▁` |
+| Bloodbarrier | 0% | 0.1116 | 0.1116 | 0.262639 | `▅▁▂█▁▁▁` |
+| Cadiro's Gambit | 0% | 1.66 | 1.66 | 3.70249 | `▆▇█▅▃▃▁` |
+| Carrion Call | 0% | 0.01132 | 0.01132 | 0.0260579 | `▂▂█▆▇▁▁` |
 
 ### Unique — near 7d high (running hot)
 
 | Item | pos | now (ex) | low | high | trace |
 |---|--:|--:|--:|--:|---|
-| Fixation of Yix | 100% | 0.1182 | 0.0641485 | 0.1182 | `▁▁▁▅█▇█` |
-| Idol of Uldurn | 100% | 0.1003 | 0.039501 | 0.1003 | `▂▁▂▂▃▇█` |
-| Igniferis | 100% | 0.1182 | 0.00754226 | 0.1182 | `▇▁▁▅▇██` |
-| Thief's Torment | 100% | 0.1182 | 0.0585483 | 0.1182 | `▂▂▂▁▁▇█` |
-| Ungil's Harmony | 100% | 0.1182 | 0.0385608 | 0.1182 | `▇▂▁▂█▇█` |
-| Xoph's Blood | 100% | 0.1826 | 0.058559 | 0.1826 | `▁▁▁▁▁██` |
-| Yoke of Suffering | 100% | 0.7092 | 0.397517 | 0.7092 | `▄▅▁▄█▇█` |
-| Aerisvane's Wings | 100% | 0.1182 | 0.0513244 | 0.1182 | `▁▂▅▅▅▇█` |
-| Alkem Eira | 100% | 0.1182 | 0.0117097 | 0.1182 | `▁▁▁▁▁██` |
-| Apep's Supremacy | 100% | 0.02736 | 0.0122825 | 0.02736 | `▁▄▂▁▂▆█` |
-| Apron of Emiran | 100% | 0.1182 | 0.0117097 | 0.1182 | `▁▁▁▁▁██` |
-| Atsak's Sight | 100% | 0.1182 | 0.0128297 | 0.1182 | `▁▂▂▂▂██` |
-| Atziri's Step | 100% | 0.3546 | 0.0920841 | 0.3546 | `▁▂▁▂▂██` |
-| Blackbraid | 100% | 0.591 | 0.34816 | 0.591 | `▃▂▄▅▁▇█` |
-| Blueflame Bracers | 100% | 0.1182 | 0.0117097 | 0.1182 | `▁▁▁▁▁██` |
-| Briarpatch | 100% | 0.1182 | 0.0491172 | 0.1182 | `▆▇▁▁█▆█` |
-| Chernobog's Pillar | 100% | 0.57 | 0.231605 | 0.57 | `▃▄▅▂▁▃█` |
-| Cornathaum | 100% | 0.0969 | 0.0585506 | 0.0969 | `▂▂▂▂▁▆█` |
-| Couture of Crimson | 100% | 0.1182 | 0.0351277 | 0.1182 | `▃▁▁▇▁██` |
-| Crown of the Pale King | 100% | 0.1106 | 0.0651634 | 0.1106 | `▂▁▁▂▂▂█` |
-| Decree of Acuity | 100% | 0.2364 | 0.0763923 | 0.2364 | `▄▁▄▃█▃█` |
-| Dionadair | 100% | 0.1182 | 0.0122793 | 0.1182 | `▁▁▁▁▇██` |
-| Ghostmarch | 100% | 0.228 | 0.0964114 | 0.228 | `▁▃▁▃▂██` |
-| Goldrim | 100% | 0.5792 | 0.354913 | 0.5792 | `▃▁▂▆▄▆█` |
-| Icetomb | 100% | 0.08616 | 0.0117091 | 0.08616 | `▁▁▁▁▁██` |
+| Andvarius | 100% | 0.3327 | 0.103613 | 0.3327 | `▁▅▆▃▅▅█` |
+| Idol of Uldurn | 100% | 0.09962 | 0.039502 | 0.09962 | `▂▁▂▂▃▇█` |
+| Xoph's Blood | 100% | 0.1888 | 0.0585716 | 0.1888 | `▁▁▁▁▁▇█` |
+| Apep's Supremacy | 100% | 0.0283 | 0.0122783 | 0.0283 | `▁▄▂▁▂▆█` |
+| Assailum | 100% | 0.08557 | 0.0638616 | 0.08557 | `▁▂▁▁▆▇█` |
+| Bones of Ullr | 100% | 0.4436 | 0.310797 | 0.4436 | `▁▃▆▂▃▂█` |
+| Calgyra's Arc | 100% | 0.02038 | 0.0115301 | 0.02038 | `▂▂▂▂▁▁█` |
+| Chernobog's Pillar | 100% | 0.4528 | 0.231606 | 0.4528 | `▄▅▇▂▁▄█` |
+| Cornathaum | 100% | 0.1123 | 0.0585592 | 0.1123 | `▂▂▂▁▁▅█` |
+| Crown of the Pale King | 100% | 0.07924 | 0.0651545 | 0.07924 | `▅▁▁▄▄▃█` |
+| Enfolding Dawn | 100% | 0.8331 | 0.451633 | 0.8331 | `▂▄█▃▁▆█` |
+| Hand of Wisdom and Action | 100% | 0.8539 | 0.517986 | 0.8539 | `▁▃▃▇▅▇█` |
+| Icetomb | 100% | 0.1065 | 0.0117097 | 0.1065 | `▁▁▁▁▁▆█` |
+| Jarngreipr | 100% | 0.1109 | 0.0384936 | 0.1109 | `▁▃▄▃▃▄█` |
+| Loreweave | 100% | 9.1 | 3.00033 | 9.1 | `▁▂▃▂▁▇█` |
+| Morior Invictus | 100% | 2 | 0.936367 | 2 | `▃▃▅▁███` |
+| Radiant Grief | 100% | 0.02038 | 0.0115301 | 0.02038 | `▂▂▂▂▁▁█` |
+| Reverie | 100% | 0.5002 | 0.179119 | 0.5002 | `▁▁▃▂▂▃█` |
+| Sandstorm Visage | 100% | 1 | 0.6737 | 1 | `███▄▁██` |
+| Shackles of the Wretched | 100% | 0.1109 | 0.0122793 | 0.1109 | `▁▁▁▁▂██` |
+| Vestige of Darkness | 100% | 0.3327 | 0.112302 | 0.3327 | `▄▅▂▂▁▁█` |
+| Yriel's Fostering | 100% | 0.1109 | 0.0345942 | 0.1109 | `▁▁▁▁▁▁█` |
+| Zerphi's Serape | 100% | 0.0566 | 0.0384903 | 0.0566 | `▁▄▄▇▄▇█` |
+| Against the Darkness | 100% | 4 | 2 | 4 | `▁▅▅▅▅▅█` |
+| Heroic Tragedy | 100% | 3 | 2 | 3 | `▁▁▁▁▁▁█` |
