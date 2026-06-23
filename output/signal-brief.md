@@ -2,24 +2,22 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 24
-generated: 2026-06-23T04:16:44Z
-snapshots: 33
-currency_signals: 1
+generated: 2026-06-23T08:36:39Z
+snapshots: 34
+currency_signals: 0
 unique_signals: 3
 tags: [poe2, market-signal]
 ---
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 24 · generated 2026-06-23T04:16:44Z · 33 snapshot(s) · 47 currencies / 612 uniques tracked · values in Divine · 1 div = 93 ex (live)
+> Day 24 · generated 2026-06-23T08:36:39Z · 34 snapshot(s) · 47 currencies / 612 uniques tracked · values in Divine · 1 div = 94 ex (live)
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history.
 
 ## Currency momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
-| Currency | z | 7d % | value (div) | volume |
-|---|--:|--:|--:|--:|
-| Core Destabiliser | +2.07 | 🟢 806.2 | 0.6 | 3.1 |
+_No signals above threshold._
 
 ## Unique momentum (|z| ≥ 2.0, listings ≥ 5)
 
@@ -33,18 +31,18 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 | Item | % | from | to |
 |---|--:|--:|--:|
-| Core Destabiliser | 🟢 +121.57 | 0.2708 | 0.6 |
-| Ancient Infuser | 🟢 +76.86 | 0.1076 | 0.1903 |
-| Cryptic Key | 🟢 +42.05 | 0.1679 | 0.2385 |
-| Vaal Catalysing Infuser | 🟢 +36.72 | 0.5795 | 0.7923 |
-| Vaal Blacksmith's Infuser | 🟢 +34.64 | 0.06805 | 0.09162 |
-| Perfect Regal Orb | 🟢 +24.48 | 0.2786 | 0.3468 |
-| Perfect Chaos Orb | 🟢 +21.11 | 3.41 | 4.13 |
-| Crystallised Corruption | 🟢 +19.13 | 1.15 | 1.37 |
-| Vaal Armourer's Infuser | 🔴 -20.52 | 0.6877 | 0.5466 |
-| Perfect Orb of Transmutation | 🔴 -22.85 | 0.09506 | 0.07334 |
-| Perfect Jeweller's Orb | 🔴 -24.19 | 1.86 | 1.41 |
-| Perfect Orb of Augmentation | 🔴 -29.92 | 0.1147 | 0.08038 |
+| Core Destabiliser | 🟢 +91.36 | 0.2708 | 0.5182 |
+| Ancient Infuser | 🟢 +53.72 | 0.1076 | 0.1654 |
+| Vaal Catalysing Infuser | 🟢 +35.70 | 0.5795 | 0.7864 |
+| Cryptic Key | 🟢 +25.79 | 0.1679 | 0.2112 |
+| Perfect Chaos Orb | 🟢 +20.53 | 3.41 | 4.11 |
+| Perfect Regal Orb | 🟢 +19.63 | 0.2786 | 0.3333 |
+| Vaal Blacksmith's Infuser | 🟢 +19.49 | 0.06805 | 0.08131 |
+| Orb of Chance | 🔴 -15.96 | 0.1234 | 0.1037 |
+| Orb of Extraction | 🔴 -17.44 | 0.1875 | 0.1548 |
+| Perfect Jeweller's Orb | 🔴 -19.89 | 1.86 | 1.49 |
+| Perfect Orb of Augmentation | 🔴 -22.92 | 0.1147 | 0.08841 |
+| Vaal Armourer's Infuser | 🔴 -33.82 | 0.6877 | 0.4551 |
 
 ## Unique movers (24h)
 
@@ -78,53 +76,55 @@ Where today's price sits inside its own decoded ~7-day window. `pos` = 0% at the
 
 | Item | pos | now (div) | low | high | trace |
 |---|--:|--:|--:|--:|---|
-| Perfect Orb of Augmentation | 0% | 0.08038 | 0.08038 | 0.159893 | `▃▃▃██▄▁` |
-| Perfect Orb of Transmutation | 0% | 0.07334 | 0.07334 | 0.13001 | `██▃▆▅▃▁` |
-| Perfect Exalted Orb | 16% | 3.73 | 3.57048 | 4.56522 | `▅▂█▁▁▃▂` |
-| Greater Exalted Orb | 25% | 0.09277 | 0.0753204 | 0.14481 | `█▆▃▁▂▂▃` |
-| Orb of Annulment | 46% | 0.5526 | 0.487479 | 0.627583 | `▄█▇▁▇▆▄` |
-| Chaos Orb | 47% | 0.1235 | 0.112392 | 0.135926 | `▁██▄▁▂▄` |
-| Orb of Chance | 51% | 0.113 | 0.101649 | 0.124088 | `▅▆█▅▁▄▅` |
-| Perfect Jeweller's Orb | 54% | 1.41 | 1.24977 | 1.54434 | `▂▁▂▃▆█▅` |
+| Perfect Orb of Augmentation | 0% | 0.08841 | 0.08841 | 0.156704 | `▃▂▃██▂▁` |
+| Perfect Orb of Transmutation | 3% | 0.0842 | 0.0829237 | 0.128762 | `█▆▃▆▄▁▁` |
+| Orb of Chance | 4% | 0.1037 | 0.102909 | 0.124536 | `▃█▆▄▁▃▁` |
+| Greater Exalted Orb | 16% | 0.08754 | 0.077251 | 0.142136 | `█▆▂▁▂▁▂` |
+| Vaal Blacksmith's Infuser | 18% | 0.08131 | 0.0665063 | 0.148795 | `█▃▅▃▁▂▂` |
+| Perfect Exalted Orb | 37% | 3.9 | 3.55627 | 4.48894 | `▆▃█▁▂▃▄` |
+| Chaos Orb | 41% | 0.1226 | 0.112387 | 0.137231 | `▃██▃▁▁▄` |
 | Mirror of Kalandra | 62% | 1100 | 859.98 | 1249.98 | `▁▄█   ▅` |
-| Hinekora's Lock | 68% | 321 | 194.801 | 379.999 | `▂▁▂▂▄█▆` |
-| Vaal Catalysing Infuser | 73% | 0.7923 | 0.487863 | 0.903881 | `█▇▅▇▃▁▆` |
-| Architect's Orb | 79% | 1.43 | 0.669269 | 1.63009 | `▂▁▂▄▇█▇` |
-| Perfect Regal Orb | 80% | 0.3468 | 0.23384 | 0.374534 | `█▄▁▆▅▃▇` |
-| Perfect Chaos Orb | 81% | 4.13 | 3.40847 | 4.29387 | `▁▇█▅▅▃▇` |
-| Vaal Armourer's Infuser | 86% | 0.5466 | 0.237442 | 0.598028 | `▁▁▅▄▃█▇` |
-| Vaal Cultivation Orb | 99% | 1.24 | 0.498392 | 1.24658 | `▂▁▂▃▅██` |
-| Core Destabiliser | 100% | 0.6 | 0.0856765 | 0.6 | `▁▂▂▃▄▄█` |
-| Crystallised Corruption | 100% | 1.37 | 0.542877 | 1.37 | `▁▁▂▂▆▅█` |
-| Divine Orb | 100% | 1 | 0.806809 | 1 | `▂▁▃▄▅▆█` |
-| Fracturing Orb | 100% | 9.36 | 5.66483 | 9.36 | `▃▂▁▁▂▇█` |
-| Greater Chaos Orb | 100% | 0.3072 | 0.223525 | 0.3072 | `▁▄▆▅▅▆█` |
+| Vaal Armourer's Infuser | 64% | 0.4551 | 0.243706 | 0.575746 | `▁▁▅▃▄█▅` |
+| Hinekora's Lock | 67% | 321 | 200.438 | 379.997 | `▁▁▂▂▄█▆` |
+| Perfect Chaos Orb | 74% | 4.11 | 3.46408 | 4.34122 | `▁█▇▆▄▃▆` |
+| Vaal Catalysing Infuser | 76% | 0.7864 | 0.467891 | 0.885555 | `█▇▆▇▂▁▆` |
+| Perfect Regal Orb | 79% | 0.3333 | 0.237183 | 0.359334 | `█▄▁▆▅▆▇` |
+| Perfect Jeweller's Orb | 81% | 1.49 | 1.21581 | 1.5555 | `▂▁▃▄▅█▇` |
+| Architect's Orb | 87% | 1.42 | 0.711809 | 1.5227 | `▂▁▂▆▇█▇` |
+| Orb of Annulment | 100% | 0.6417 | 0.485583 | 0.6417 | `▅█▅▁▆▅█` |
+| Core Destabiliser | 100% | 0.5182 | 0.0961526 | 0.5182 | `▁▂▂▃▅▄█` |
+| Crystallised Corruption | 100% | 1.27 | 0.538478 | 1.27 | `▁▁▂▃▇▆█` |
+| Divine Orb | 100% | 1 | 0.801744 | 1 | `▁▁▃▄▅▆█` |
+| Fracturing Orb | 100% | 9.52 | 5.61704 | 9.52 | `▃▂▁▁▃▆█` |
+| Greater Chaos Orb | 100% | 0.3143 | 0.226165 | 0.3143 | `▁▄▅▄▄▅█` |
+| Vaal Cultivation Orb | 100% | 1.29 | 0.501368 | 1.29 | `▂▁▂▃▆▆█` |
 
 ### Currency — near 7d high (running hot)
 
 | Item | pos | now (div) | low | high | trace |
 |---|--:|--:|--:|--:|---|
-| Core Destabiliser | 100% | 0.6 | 0.0856765 | 0.6 | `▁▂▂▃▄▄█` |
-| Crystallised Corruption | 100% | 1.37 | 0.542877 | 1.37 | `▁▁▂▂▆▅█` |
-| Divine Orb | 100% | 1 | 0.806809 | 1 | `▂▁▃▄▅▆█` |
-| Fracturing Orb | 100% | 9.36 | 5.66483 | 9.36 | `▃▂▁▁▂▇█` |
-| Greater Chaos Orb | 100% | 0.3072 | 0.223525 | 0.3072 | `▁▄▆▅▅▆█` |
-| Vaal Cultivation Orb | 99% | 1.24 | 0.498392 | 1.24658 | `▂▁▂▃▅██` |
-| Vaal Armourer's Infuser | 86% | 0.5466 | 0.237442 | 0.598028 | `▁▁▅▄▃█▇` |
-| Perfect Chaos Orb | 81% | 4.13 | 3.40847 | 4.29387 | `▁▇█▅▅▃▇` |
-| Perfect Regal Orb | 80% | 0.3468 | 0.23384 | 0.374534 | `█▄▁▆▅▃▇` |
-| Architect's Orb | 79% | 1.43 | 0.669269 | 1.63009 | `▂▁▂▄▇█▇` |
-| Vaal Catalysing Infuser | 73% | 0.7923 | 0.487863 | 0.903881 | `█▇▅▇▃▁▆` |
-| Hinekora's Lock | 68% | 321 | 194.801 | 379.999 | `▂▁▂▂▄█▆` |
+| Orb of Annulment | 100% | 0.6417 | 0.485583 | 0.6417 | `▅█▅▁▆▅█` |
+| Core Destabiliser | 100% | 0.5182 | 0.0961526 | 0.5182 | `▁▂▂▃▅▄█` |
+| Crystallised Corruption | 100% | 1.27 | 0.538478 | 1.27 | `▁▁▂▃▇▆█` |
+| Divine Orb | 100% | 1 | 0.801744 | 1 | `▁▁▃▄▅▆█` |
+| Fracturing Orb | 100% | 9.52 | 5.61704 | 9.52 | `▃▂▁▁▃▆█` |
+| Greater Chaos Orb | 100% | 0.3143 | 0.226165 | 0.3143 | `▁▄▅▄▄▅█` |
+| Vaal Cultivation Orb | 100% | 1.29 | 0.501368 | 1.29 | `▂▁▂▃▆▆█` |
+| Architect's Orb | 87% | 1.42 | 0.711809 | 1.5227 | `▂▁▂▆▇█▇` |
+| Perfect Jeweller's Orb | 81% | 1.49 | 1.21581 | 1.5555 | `▂▁▃▄▅█▇` |
+| Perfect Regal Orb | 79% | 0.3333 | 0.237183 | 0.359334 | `█▄▁▆▅▆▇` |
+| Vaal Catalysing Infuser | 76% | 0.7864 | 0.467891 | 0.885555 | `█▇▆▇▂▁▆` |
+| Perfect Chaos Orb | 74% | 4.11 | 3.46408 | 4.34122 | `▁█▇▆▄▃▆` |
+| Hinekora's Lock | 67% | 321 | 200.438 | 379.997 | `▁▁▂▂▄█▆` |
+| Vaal Armourer's Infuser | 64% | 0.4551 | 0.243706 | 0.575746 | `▁▁▅▃▄█▅` |
 | Mirror of Kalandra | 62% | 1100 | 859.98 | 1249.98 | `▁▄█   ▅` |
-| Perfect Jeweller's Orb | 54% | 1.41 | 1.24977 | 1.54434 | `▂▁▂▃▆█▅` |
-| Orb of Chance | 51% | 0.113 | 0.101649 | 0.124088 | `▅▆█▅▁▄▅` |
-| Chaos Orb | 47% | 0.1235 | 0.112392 | 0.135926 | `▁██▄▁▂▄` |
-| Orb of Annulment | 46% | 0.5526 | 0.487479 | 0.627583 | `▄█▇▁▇▆▄` |
-| Greater Exalted Orb | 25% | 0.09277 | 0.0753204 | 0.14481 | `█▆▃▁▂▂▃` |
-| Perfect Exalted Orb | 16% | 3.73 | 3.57048 | 4.56522 | `▅▂█▁▁▃▂` |
-| Perfect Orb of Augmentation | 0% | 0.08038 | 0.08038 | 0.159893 | `▃▃▃██▄▁` |
-| Perfect Orb of Transmutation | 0% | 0.07334 | 0.07334 | 0.13001 | `██▃▆▅▃▁` |
+| Chaos Orb | 41% | 0.1226 | 0.112387 | 0.137231 | `▃██▃▁▁▄` |
+| Perfect Exalted Orb | 37% | 3.9 | 3.55627 | 4.48894 | `▆▃█▁▂▃▄` |
+| Vaal Blacksmith's Infuser | 18% | 0.08131 | 0.0665063 | 0.148795 | `█▃▅▃▁▂▂` |
+| Greater Exalted Orb | 16% | 0.08754 | 0.077251 | 0.142136 | `█▆▂▁▂▁▂` |
+| Orb of Chance | 4% | 0.1037 | 0.102909 | 0.124536 | `▃█▆▄▁▃▁` |
+| Perfect Orb of Transmutation | 3% | 0.0842 | 0.0829237 | 0.128762 | `█▆▃▆▄▁▁` |
+| Perfect Orb of Augmentation | 0% | 0.08841 | 0.08841 | 0.156704 | `▃▂▃██▂▁` |
 
 ### Unique — near 7d low (buy candidates)
 
