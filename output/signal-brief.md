@@ -2,16 +2,16 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 25
-generated: 2026-06-24T15:37:05Z
-snapshots: 44
-currency_signals: 3
-unique_signals: 6
+generated: 2026-06-24T18:04:16Z
+snapshots: 45
+currency_signals: 4
+unique_signals: 13
 tags: [poe2, market-signal]
 ---
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 25 · generated 2026-06-24T15:37:05Z · 44 snapshot(s) · 47 currencies / 619 uniques tracked · values in Divine · 1 div = 119 ex (live)
+> Day 25 · generated 2026-06-24T18:04:16Z · 45 snapshot(s) · 47 currencies / 619 uniques tracked · values in Divine · 1 div = 119 ex (live)
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history.
 
@@ -19,64 +19,70 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 | Currency | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Greater Chaos Orb | +2.24 | 🟢 76.65 | 0.3255 | 56.58 |
-| Divine Orb | +2.16 | 🟢 58.55 | 1 | 625.8 |
-| Vaal Catalysing Infuser | +2.02 | 🟢 19.5 | 0.8373 | 6.28 |
+| Architect's Orb | +2.07 | 🟢 256.2 | 2.02 | 11.76 |
+| Greater Chaos Orb | +2.22 | 🟢 76.71 | 0.326 | 55.05 |
+| Divine Orb | +2.14 | 🟢 59.81 | 1 | 718.7 |
+| Vaal Catalysing Infuser | +2.04 | 🟢 26.69 | 0.9292 | 4.34 |
 
 ## Unique momentum (|z| ≥ 2.0, listings ≥ 5)
 
 | Item | Type | z | 7d % | value (div) | listings |
 |---|---|--:|--:|--:|--:|
-| Guiding Palm of the Eye | Weapons | +2.36 | 🟢 156 | 7.68 | 5 |
+| Guiding Palm of the Mind | Weapons | +2.41 | 🟢 400 | 15 | 11 |
+| Quill Rain | Weapons | +2.36 | 🟢 241.5 | 0.2203 | 9 |
+| Fury of the King | Weapons | +2.10 | 🟢 234.5 | 0.905 | 84 |
+| Guiding Palm of the Heart | Weapons | +2.17 | 🟢 152.2 | 5.73 | 12 |
 | For Utopia | Charms | +2.31 | 🟢 150.1 | 0.9109 | 29 |
+| Guiding Palm of the Eye | Weapons | +2.25 | 🟢 98.02 | 5.94 | 14 |
+| Saitha's Spear | Weapons | +2.26 | 🟢 84.77 | 1 | 68 |
+| Tidebreaker | Weapons | +2.05 | 🟢 79.04 | 0.06929 | 89 |
 | Olroth's Resolve | Flasks | +2.17 | 🟢 77.26 | 1.77 | 26 |
 | The Anvil | Accessories | +2.20 | 🟢 71.78 | 0.1231 | 102 |
 | The Pandemonius | Accessories | +2.06 | 🟢 66.66 | 0.1021 | 84 |
 | Maligaro's Virtuosity | Armours | -2.10 | 🔴 -3.83 | 4.62 | 83 |
+| Olrovasara | Weapons | -2.11 | 🔴 -67.74 | 1 | 5 |
 
 ## Currency movers (24h)
 
 | Item | % | from | to |
 |---|--:|--:|--:|
-| Vaal Siphoner | 🟢 +8990.91 | 0.011 | 1 |
-| Orb of Extraction | 🟢 +77.30 | 0.1304 | 0.2312 |
-| Cryptic Key | 🟢 +47.88 | 0.208 | 0.3076 |
-| Vaal Cultivation Orb | 🟢 +38.06 | 1.34 | 1.85 |
-| Crystallised Corruption | 🟢 +37.12 | 1.32 | 1.81 |
-| Architect's Orb | 🟢 +29.93 | 1.37 | 1.78 |
-| Vaal Catalysing Infuser | 🟢 +29.73 | 0.6454 | 0.8373 |
-| Perfect Jeweller's Orb | 🟢 +21.19 | 1.51 | 1.83 |
-| Perfect Regal Orb | 🔴 -25.24 | 0.3225 | 0.2411 |
-| Vaal Armourer's Infuser | 🔴 -25.60 | 0.4352 | 0.3238 |
-| Orb of Annulment | 🔴 -25.73 | 0.6379 | 0.4738 |
-| Perfect Orb of Transmutation | 🔴 -33.14 | 0.08905 | 0.05954 |
-| Ancient Infuser | 🔴 -45.73 | 0.162 | 0.08791 |
+| Vaal Siphoner | 🟢 +9840.36 | 0.01006 | 1 |
+| Vaal Blacksmith's Infuser | 🟢 +341.99 | 0.04258 | 0.1882 |
+| Orb of Extraction | 🟢 +86.44 | 0.1246 | 0.2323 |
+| Architect's Orb | 🟢 +44.29 | 1.4 | 2.02 |
+| Vaal Catalysing Infuser | 🟢 +38.73 | 0.6698 | 0.9292 |
+| Vaal Cultivation Orb | 🟢 +29.25 | 1.47 | 1.9 |
+| Mirror of Kalandra | 🟢 +27.62 | 1050 | 1340 |
+| Vaal Armourer's Infuser | 🔴 -20.85 | 0.4609 | 0.3648 |
+| Perfect Regal Orb | 🔴 -21.70 | 0.3092 | 0.2421 |
+| Ancient Infuser | 🔴 -51.74 | 0.1677 | 0.08093 |
 
 ## Unique movers (24h)
 
 | Item | % | from | to |
 |---|--:|--:|--:|
+| The Empty Roar | 🟢 +1087.85 | 0.0107 | 0.1271 |
 | Hinekora's Sight | 🟢 +1050.47 | 0.0107 | 0.1231 |
 | Icetomb | 🟢 +784.67 | 0.0107 | 0.09466 |
-| The Empty Roar | 🟢 +680.00 | 0.0107 | 0.08346 |
+| Guiding Palm of the Mind | 🟢 +650.00 | 2 | 15 |
 | Blackgleam | 🟢 +364.26 | 0.01175 | 0.05455 |
-| Guiding Palm of the Eye | 🟢 +255.56 | 2.16 | 7.68 |
 | The Pandemonius | 🟢 +240.79 | 0.02996 | 0.1021 |
+| Guiding Palm of the Eye | 🟢 +175.00 | 2.16 | 5.94 |
+| Fury of the King | 🟢 +146.26 | 0.3675 | 0.905 |
+| Quill Rain | 🟢 +142.22 | 0.09095 | 0.2203 |
+| Guiding Palm of the Heart | 🟢 +133.88 | 2.45 | 5.73 |
 | Jarngreipr | 🟢 +130.09 | 0.0535 | 0.1231 |
 | Xoph's Blood | 🟢 +126.49 | 0.1087 | 0.2462 |
 | For Utopia | 🟢 +109.79 | 0.4342 | 0.9109 |
-| Guiding Palm of the Mind | 🟢 +107.00 | 2 | 4.14 |
+| Quecholli | 🟢 +101.96 | 0.1225 | 0.2474 |
 | Trampletoe | 🟢 +100.98 | 0.1225 | 0.2462 |
+| Skysliver | 🟢 +100.00 | 1.5 | 3 |
 | Undying Hate | 🟢 +95.00 | 1 | 1.95 |
 | Redblade Banner | 🟢 +80.74 | 0.05671 | 0.1025 |
 | Olroth's Resolve | 🟢 +77.00 | 1 | 1.77 |
 | Dream Fragments | 🟢 +76.11 | 0.5635 | 0.9924 |
 | Tabula Rasa | 🟢 +74.55 | 11 | 19.2 |
-| Skysliver | 🟢 +73.33 | 1.5 | 2.6 |
-| Guiding Palm of the Heart | 🟢 +71.43 | 2.45 | 4.2 |
-| Andvarius | 🟢 +67.48 | 0.3675 | 0.6155 |
-| Hysseg's Claw | 🔴 -60.06 | 0.4735 | 0.1891 |
-| Atziri's Step | 🔴 -66.80 | 0.3675 | 0.122 |
+| Hysseg's Claw | 🔴 -69.61 | 0.4735 | 0.1439 |
 
 ## 7-bucket range position (spread ≥ 5.0%)
 
@@ -86,53 +92,51 @@ Where today's price sits inside its own decoded ~7-day window. `pos` = 0% at the
 
 | Item | pos | now (div) | low | high | trace |
 |---|--:|--:|--:|--:|---|
-| Perfect Orb of Transmutation | 0% | 0.05954 | 0.05954 | 0.0858584 | `▇▆█▅▃▃▁` |
-| Perfect Chaos Orb | 4% | 3.57 | 3.53789 | 4.39642 | `█▃▆▁▅▅▁` |
-| Orb of Chance | 20% | 0.08571 | 0.0815096 | 0.10304 | `█▁▁▃▂▃▂` |
-| Perfect Exalted Orb | 35% | 3.82 | 3.55917 | 4.31184 | `█▆▁▃▃▄▃` |
-| Vaal Armourer's Infuser | 45% | 0.3238 | 0.223946 | 0.443773 | `▁▇▂▅█▆▄` |
-| Greater Exalted Orb | 54% | 0.07505 | 0.0624341 | 0.085709 | `█▁▁▃▂▃▅` |
-| Perfect Orb of Augmentation | 54% | 0.1008 | 0.0709521 | 0.126012 | `▁▅▇█▁▃▅` |
-| Orb of Annulment | 59% | 0.4738 | 0.424131 | 0.507882 | `▆▁▁▄▃█▅` |
-| Perfect Regal Orb | 67% | 0.2411 | 0.197299 | 0.263155 | `▂▁█▃▇█▆` |
-| Fracturing Orb | 72% | 8.26 | 5.62467 | 9.3053 | `▂▁▂▄▇█▆` |
-| Chaos Orb | 75% | 0.1318 | 0.111105 | 0.138872 | `█▆▃▁▃▄▆` |
-| Hinekora's Lock | 75% | 340 | 203.046 | 385.827 | `▁▂▃▄█▅▆` |
-| Core Destabiliser | 92% | 0.2934 | 0.111175 | 0.309355 | `▁▃▅▇██▇` |
-| Crystallised Corruption | 96% | 1.81 | 0.824131 | 1.84995 | `▁▆▆▆█▅█` |
-| Architect's Orb | 100% | 1.78 | 0.570844 | 1.78 | `▁▂▄▅▅▅█` |
-| Cryptic Key | 100% | 0.3076 | 0.170973 | 0.3076 | `▆▄▇▅▁▂█` |
-| Divine Orb | 100% | 1 | 0.639294 | 1 | `▁▂▂▃▃▄█` |
-| Greater Chaos Orb | 100% | 0.3255 | 0.204495 | 0.3255 | `▂▁▁▁▂▄█` |
-| Mirror of Kalandra | 100% | 1340 | 1099.98 | 1340 | `   ▁ ▄█` |
-| Vaal Catalysing Infuser | 100% | 0.8373 | 0.413745 | 0.8373 | `▄▅▃▁▁▄█` |
-| Vaal Cultivation Orb | 100% | 1.85 | 0.810388 | 1.85 | `▁▄▃▆▆▆█` |
+| Orb of Chance | 0% | 0.1211 | 0.1211 | 0.179025 | `█▅▃▇▃▂▁` |
+| Perfect Orb of Transmutation | 0% | 0.06173 | 0.06173 | 0.08406 | `▇▇█▅▃▃▁` |
+| Perfect Exalted Orb | 25% | 3.75 | 3.56064 | 4.32572 | `█▅▁▃▃▄▃` |
+| Perfect Chaos Orb | 26% | 3.72 | 3.48125 | 4.3976 | `█▃▅▁▅▅▃` |
+| Hinekora's Lock | 46% | 290 | 214.531 | 379.995 | `▁▁▃█▇▅▄` |
+| Vaal Armourer's Infuser | 63% | 0.3648 | 0.246454 | 0.435149 | `▁▆▂▆█▆▅` |
+| Perfect Orb of Augmentation | 70% | 0.1026 | 0.0682919 | 0.117058 | `▁███▁▄▆` |
+| Fracturing Orb | 73% | 8.18 | 5.63948 | 9.11493 | `▂▁▂▅██▆` |
+| Perfect Regal Orb | 73% | 0.2421 | 0.200833 | 0.257112 | `▁▃█▁██▆` |
+| Chaos Orb | 74% | 0.1317 | 0.111721 | 0.138622 | `█▆▂▁▃▄▆` |
+| Orb of Annulment | 99% | 0.5081 | 0.415983 | 0.50894 | `▆▁▃▄▄██` |
+| Architect's Orb | 100% | 2.02 | 0.578893 | 2.02 | `▁▂▃▄▄▄█` |
+| Core Destabiliser | 100% | 0.311 | 0.111356 | 0.311 | `▁▃▅▇█▇█` |
+| Crystallised Corruption | 100% | 1.53 | 0.437628 | 1.53 | `▁▂▃▄▄▅█` |
+| Divine Orb | 100% | 1 | 0.643702 | 1 | `▁▂▂▃▃▅█` |
+| Greater Chaos Orb | 100% | 0.326 | 0.207599 | 0.326 | `▂▁▁▁▂▄█` |
+| Greater Exalted Orb | 100% | 0.08611 | 0.0599349 | 0.08611 | `▇▁▂▃▃▄█` |
+| Mirror of Kalandra | 100% | 1340 | 1099.98 | 1340 | `   ▁ ▃█` |
+| Vaal Catalysing Infuser | 100% | 0.9292 | 0.416009 | 0.9292 | `▃▅▃▁▁▃█` |
+| Vaal Cultivation Orb | 100% | 1.9 | 0.897291 | 1.9 | `▁▃▃▆▆▅█` |
 
 ### Currency — near 7d high (running hot)
 
 | Item | pos | now (div) | low | high | trace |
 |---|--:|--:|--:|--:|---|
-| Architect's Orb | 100% | 1.78 | 0.570844 | 1.78 | `▁▂▄▅▅▅█` |
-| Cryptic Key | 100% | 0.3076 | 0.170973 | 0.3076 | `▆▄▇▅▁▂█` |
-| Divine Orb | 100% | 1 | 0.639294 | 1 | `▁▂▂▃▃▄█` |
-| Greater Chaos Orb | 100% | 0.3255 | 0.204495 | 0.3255 | `▂▁▁▁▂▄█` |
-| Mirror of Kalandra | 100% | 1340 | 1099.98 | 1340 | `   ▁ ▄█` |
-| Vaal Catalysing Infuser | 100% | 0.8373 | 0.413745 | 0.8373 | `▄▅▃▁▁▄█` |
-| Vaal Cultivation Orb | 100% | 1.85 | 0.810388 | 1.85 | `▁▄▃▆▆▆█` |
-| Crystallised Corruption | 96% | 1.81 | 0.824131 | 1.84995 | `▁▆▆▆█▅█` |
-| Core Destabiliser | 92% | 0.2934 | 0.111175 | 0.309355 | `▁▃▅▇██▇` |
-| Hinekora's Lock | 75% | 340 | 203.046 | 385.827 | `▁▂▃▄█▅▆` |
-| Chaos Orb | 75% | 0.1318 | 0.111105 | 0.138872 | `█▆▃▁▃▄▆` |
-| Fracturing Orb | 72% | 8.26 | 5.62467 | 9.3053 | `▂▁▂▄▇█▆` |
-| Perfect Regal Orb | 67% | 0.2411 | 0.197299 | 0.263155 | `▂▁█▃▇█▆` |
-| Orb of Annulment | 59% | 0.4738 | 0.424131 | 0.507882 | `▆▁▁▄▃█▅` |
-| Perfect Orb of Augmentation | 54% | 0.1008 | 0.0709521 | 0.126012 | `▁▅▇█▁▃▅` |
-| Greater Exalted Orb | 54% | 0.07505 | 0.0624341 | 0.085709 | `█▁▁▃▂▃▅` |
-| Vaal Armourer's Infuser | 45% | 0.3238 | 0.223946 | 0.443773 | `▁▇▂▅█▆▄` |
-| Perfect Exalted Orb | 35% | 3.82 | 3.55917 | 4.31184 | `█▆▁▃▃▄▃` |
-| Orb of Chance | 20% | 0.08571 | 0.0815096 | 0.10304 | `█▁▁▃▂▃▂` |
-| Perfect Chaos Orb | 4% | 3.57 | 3.53789 | 4.39642 | `█▃▆▁▅▅▁` |
-| Perfect Orb of Transmutation | 0% | 0.05954 | 0.05954 | 0.0858584 | `▇▆█▅▃▃▁` |
+| Architect's Orb | 100% | 2.02 | 0.578893 | 2.02 | `▁▂▃▄▄▄█` |
+| Core Destabiliser | 100% | 0.311 | 0.111356 | 0.311 | `▁▃▅▇█▇█` |
+| Crystallised Corruption | 100% | 1.53 | 0.437628 | 1.53 | `▁▂▃▄▄▅█` |
+| Divine Orb | 100% | 1 | 0.643702 | 1 | `▁▂▂▃▃▅█` |
+| Greater Chaos Orb | 100% | 0.326 | 0.207599 | 0.326 | `▂▁▁▁▂▄█` |
+| Greater Exalted Orb | 100% | 0.08611 | 0.0599349 | 0.08611 | `▇▁▂▃▃▄█` |
+| Mirror of Kalandra | 100% | 1340 | 1099.98 | 1340 | `   ▁ ▃█` |
+| Vaal Catalysing Infuser | 100% | 0.9292 | 0.416009 | 0.9292 | `▃▅▃▁▁▃█` |
+| Vaal Cultivation Orb | 100% | 1.9 | 0.897291 | 1.9 | `▁▃▃▆▆▅█` |
+| Orb of Annulment | 99% | 0.5081 | 0.415983 | 0.50894 | `▆▁▃▄▄██` |
+| Chaos Orb | 74% | 0.1317 | 0.111721 | 0.138622 | `█▆▂▁▃▄▆` |
+| Perfect Regal Orb | 73% | 0.2421 | 0.200833 | 0.257112 | `▁▃█▁██▆` |
+| Fracturing Orb | 73% | 8.18 | 5.63948 | 9.11493 | `▂▁▂▅██▆` |
+| Perfect Orb of Augmentation | 70% | 0.1026 | 0.0682919 | 0.117058 | `▁███▁▄▆` |
+| Vaal Armourer's Infuser | 63% | 0.3648 | 0.246454 | 0.435149 | `▁▆▂▆█▆▅` |
+| Hinekora's Lock | 46% | 290 | 214.531 | 379.995 | `▁▁▃█▇▅▄` |
+| Perfect Chaos Orb | 26% | 3.72 | 3.48125 | 4.3976 | `█▃▅▁▅▅▃` |
+| Perfect Exalted Orb | 25% | 3.75 | 3.56064 | 4.32572 | `█▅▁▃▃▄▃` |
+| Orb of Chance | 0% | 0.1211 | 0.1211 | 0.179025 | `█▅▃▇▃▂▁` |
+| Perfect Orb of Transmutation | 0% | 0.06173 | 0.06173 | 0.08406 | `▇▇█▅▃▃▁` |
 
 ### Unique — near 7d low (buy candidates)
 
@@ -190,6 +194,6 @@ Where today's price sits inside its own decoded ~7-day window. `pos` = 0% at the
 | Against the Darkness | 100% | 4 | 3.00008 | 4 | `▁▁▁▁███` |
 | Heart of the Well | 100% | 0.6155 | 0.336887 | 0.6155 | `▃▆▁▁█▄█` |
 | Heroic Tragedy | 100% | 3 | 2 | 3 | `▁▁▁▁███` |
-| Guiding Palm of the Eye | 100% | 7.68 | 2.0001 | 7.68 | `▂▁▁▂▂▃█` |
-| Guiding Palm of the Heart | 100% | 4.2 | 1.48729 | 4.2 | `▃▁▁▃▄▆█` |
-| Guiding Palm of the Mind | 100% | 4.14 | 1.396 | 4.14 | `▅▃▁▄▄██` |
+| Double Vision | 100% | 0.1271 | 0.00901954 | 0.1271 | `▁▁▁▆▁██` |
+| Earthbound | 100% | 0.1271 | 0.00710056 | 0.1271 | `▁▁▄▇███` |
+| Frostbreath | 100% | 0.1271 | 0.0122807 | 0.1271 | `▂▁▇▇███` |
