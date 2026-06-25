@@ -9,9 +9,12 @@ never a hardcoded constant. The old "base is Exalted, ~90.9 ex/div" assumption
 """
 from __future__ import annotations
 import json
+import logging
 
 import config
 from .transport import Transport
+
+log = logging.getLogger("poe2.exchange")
 
 # Sanity band for a plausible Exalt-per-Divine rate. Anything outside this is
 # treated as a bad read and rejected in favour of last-known-good.
@@ -46,10 +49,15 @@ def derive_exalt_per_divine(currency_rows, last_known: float | None = None) -> f
     return rate
 
 
-def fetch_currency(transport: Transport, league: str = config.LEAGUE) -> list[dict]:
-    data = transport.get_json(config.url_currency(league))
+def _parse_exchange(data: dict, category: str, league: str, ts: int) -> list[dict]:
+    """Normalize one exchange overview payload into category-tagged snapshot rows.
+
+    Every line carries a unique `id` slug; the `items` array supplies the display
+    name. Keying downstream on (category, id) keeps same-name variants distinct
+    (e.g. Uncut Skill Gem Level 17 vs 19 arrive as separate ids), so nothing is
+    silently deduped.
+    """
     meta = {i["id"]: i for i in data.get("items", [])}
-    ts = config.now_ts()
     rows: list[dict] = []
     for ln in data.get("lines", []):
         cid = ln.get("id")
@@ -61,6 +69,7 @@ def fetch_currency(transport: Transport, league: str = config.LEAGUE) -> list[di
             "ts": ts,
             "league": league,
             "league_day": config.league_day(ts),
+            "category": category,
             "currency_id": cid,
             "name": m.get("name") or cid,
             "primary_value": ln.get("primaryValue"),
@@ -71,3 +80,37 @@ def fetch_currency(transport: Transport, league: str = config.LEAGUE) -> list[di
             "sparkline_json": json.dumps(spark.get("data") or []),
         })
     return rows
+
+
+def fetch_exchange(transport: Transport, league: str = config.LEAGUE,
+                   categories=config.EXCHANGE_CATEGORIES) -> list[dict]:
+    """Generic Bucket A loader: one overview call per category, rows tagged by
+    category. Fail-soft per category so one bad/empty category never sinks the run
+    (mirrors fetch_uniques). The Divine Orb line lands under category='currency',
+    where derive_exalt_per_divine still finds it.
+    """
+    ts = config.now_ts()
+    rows: list[dict] = []
+    for key, exch_type, _label in categories:
+        try:
+            data = transport.get_json(config.url_exchange(exch_type, league))
+        except Exception as e:  # fail soft: one category must not sink the run
+            log.warning("exchange category %r (type=%r) fetch failed: %s: %s",
+                        key, exch_type, type(e).__name__, e)
+            continue
+        if not isinstance(data, dict) or "lines" not in data:
+            log.warning("exchange category %r (type=%r) returned no lines payload",
+                        key, exch_type)
+            continue
+        cat_rows = _parse_exchange(data, key, league, ts)
+        if not cat_rows:
+            log.info("exchange category %r (type=%r) returned 0 lines (league=%r)",
+                     key, exch_type, league)
+        rows.extend(cat_rows)
+    return rows
+
+
+def fetch_currency(transport: Transport, league: str = config.LEAGUE) -> list[dict]:
+    """Back-compat name — now fetches ALL Bucket A exchange categories, not just
+    Currency. Kept so existing callers (cli) keep working."""
+    return fetch_exchange(transport, league)

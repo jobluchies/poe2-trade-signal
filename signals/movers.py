@@ -10,12 +10,16 @@ from store import db
 
 
 def currency_movers(con, league: str = config.LEAGUE, window_sec: int = 86400,
-                    top: int = 15) -> list[dict]:
+                    top: int = 15, category: str | None = None) -> list[dict]:
+    """Absolute %-change of primary_value over a window, from snapshot history.
+
+    `category=None` pools all Bucket A categories; pass a key to scope to one.
+    """
     now = config.now_ts()
     target = now - window_sec
     max_baseline_age = 2 * window_sec  # reject stale baselines reported as fresh
     out: list[dict] = []
-    for cid, series in db.currency_series(con, league).items():
+    for _key, series in db.currency_series(con, league, category).items():
         latest = series[-1]
         baseline = None
         for r in series:
@@ -30,7 +34,8 @@ def currency_movers(con, league: str = config.LEAGUE, window_sec: int = 86400,
             continue
         pct = (l - b) / b * 100.0
         out.append({
-            "currency_id": cid,
+            "category": latest["category"],
+            "currency_id": latest["currency_id"],
             "name": latest["name"],
             "pct": round(pct, 2),
             "from": b,

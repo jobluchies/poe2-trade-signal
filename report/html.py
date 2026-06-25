@@ -365,21 +365,23 @@ def _trace_row(t: dict) -> str:
 def render_html(d: dict) -> str:
     p = d["params"]
     win_h = p["window_sec"] // 3600
-    live = len(d["currency_momentum"]) + len(d["unique_momentum"])
+    live = d["live_signals"]
     live_cls = "on" if live > 0 else "off"
 
     # Live Exalt:Divine rate — a pinned chip (position:fixed) that rides the scroll.
     rate = d.get("exalt_per_divine")
     warn = d.get("rate_warning")
     floor_ex = d.get("floor_exalt")
+    riser_ex = d.get("riser_floor_exalt")
     if rate:
         rate_chip = (
             '<div class="rate" title="Live Exalt:Divine — Exalted Orbs per 1 Divine Orb">'
             '<span class="rk"></span><span class="rl">1 div</span>'
             f'<span class="rv">{rate:,.0f} ex</span></div>')
         foot_rate = (f"Base currency: Divine. Values shown in Divine Orbs; live rate "
-                     f"1 div = {rate:,.0f} ex. Value floor {floor_ex:g} ex "
-                     f"(= {floor_ex / rate:.3g} div at the current rate).")
+                     f"1 div = {rate:,.0f} ex. Buy-candidate floor {floor_ex:g} ex "
+                     f"(= {floor_ex / rate:.3g} div); risers floor {riser_ex:g} ex "
+                     f"(= {riser_ex / rate:.3g} div) at the current rate.")
     else:
         rate_chip = (
             f'<div class="rate warn" title="{_esc(warn or "rate unavailable")}">'
@@ -388,46 +390,48 @@ def render_html(d: dict) -> str:
         foot_rate = (f"Base currency: Divine. Values shown in Divine Orbs. {warn or ''} "
                      "Value floor skipped — no live Exalt:Divine rate.").strip()
 
-    cur_mom = [_cur_mom_row(h, p["currency_z"]) for h in d["currency_momentum"]]
-    uniq_mom = [_uniq_mom_row(h, p["unique_z"]) for h in d["unique_momentum"]]
-    cur_mov = [_mover_row(m) for m in d["currency_movers"]]
-    uniq_mov = [_mover_row(m) for m in d["unique_movers"]]
-    cur_lo = [_trace_row(t) for t in d.get("currency_near_low", [])]
-    cur_hi = [_trace_row(t) for t in d.get("currency_near_high", [])]
-    uniq_lo = [_trace_row(t) for t in d.get("unique_near_low", [])]
-    uniq_hi = [_trace_row(t) for t in d.get("unique_near_high", [])]
-
     spread = p.get("min_spread_pct", 5.0)
+    riser_ex = d.get("riser_floor_exalt")
     trace_cols = ["Pos", "Now (div)", "Low", "High", "Trace"]
 
-    sections = [
-        # TIER 1 — live signals, the headline
-        _section("Currency momentum",
-                 f"|z| ≥ {p['currency_z']:g} · vol ≥ {p['currency_min_volume']:g}",
-                 ["Currency", "z", "7d %", "Value (div)", "Volume"], cur_mom,
-                 tier="tier1", accent="accent-cur"),
+    sections: list[str] = []
+    # Bucket A — one block (momentum / movers / near-low / near-high) per fungible
+    # category, generated generically from the per-category groups. Empty sections
+    # recede to a single quiet tier-3 line, so categories with no signal stay quiet.
+    for g in d["fungible"]:
+        label = g["label"]
+        mom = [_cur_mom_row(h, p["currency_z"]) for h in g["momentum"]]
+        mov = [_mover_row(m) for m in g["movers"]]
+        lo = [_trace_row(t) for t in g["near_low"]]
+        hi = [_trace_row(t) for t in g["near_high"]]
+        sections += [
+            _section(f"{label} · momentum",
+                     f"|z| ≥ {p['currency_z']:g} · vol ≥ {p['currency_min_volume']:g}",
+                     [label, "z", "7d %", "Value (div)", "Volume"], mom,
+                     tier="tier1", accent="accent-cur"),
+            _section(f"{label} · movers",
+                     f"{win_h}h window · risers ≥ {riser_ex:g} ex",
+                     [label, "%", "From", "To"], mov,
+                     tier="tier2", accent="accent-cur"),
+            _section(f"{label} · near 7d low · buy candidates",
+                     f"spread ≥ {spread:g}%", [label, *trace_cols], lo,
+                     tier="tier2", accent="accent-cur"),
+            _section(f"{label} · near 7d high · running hot",
+                     "overheated", [label, *trace_cols], hi,
+                     tier="tier2", accent="accent-cur"),
+        ]
+
+    # Uniques — Momentum + Movers only. 7d low/high sections deliberately removed
+    # (estimate-only prices make their range position unreliable).
+    uniq_mom = [_uniq_mom_row(h, p["unique_z"]) for h in d["unique_momentum"]]
+    uniq_mov = [_mover_row(m) for m in d["unique_movers"]]
+    sections += [
         _section("Unique momentum",
                  f"|z| ≥ {p['unique_z']:g} · listings ≥ {p['unique_min_listings']}",
                  ["Item", "Type", "z", "7d %", "Value (div)", "Listings"], uniq_mom,
                  tier="tier1", accent="accent-uniq"),
-        # TIER 2 — populated flow
-        _section("Currency movers", f"{win_h}h window",
-                 ["Currency", "%", "From", "To"], cur_mov,
-                 tier="tier2", accent="accent-cur"),
-        _section("Unique movers", f"{win_h}h window",
+        _section("Unique movers", f"{win_h}h window · risers ≥ {riser_ex:g} ex",
                  ["Item", "%", "From", "To"], uniq_mov,
-                 tier="tier2", accent="accent-uniq"),
-        _section("Currency near 7d low · buy candidates",
-                 f"spread ≥ {spread:g}%", ["Currency", *trace_cols], cur_lo,
-                 tier="tier2", accent="accent-cur"),
-        _section("Currency near 7d high · running hot",
-                 "overheated", ["Currency", *trace_cols], cur_hi,
-                 tier="tier2", accent="accent-cur"),
-        _section("Unique near 7d low · buy candidates",
-                 f"spread ≥ {spread:g}%", ["Item", *trace_cols], uniq_lo,
-                 tier="tier2", accent="accent-uniq"),
-        _section("Unique near 7d high · running hot",
-                 "overheated", ["Item", *trace_cols], uniq_hi,
                  tier="tier2", accent="accent-uniq"),
     ]
 
@@ -444,7 +448,7 @@ def render_html(d: dict) -> str:
 
     <div class="kpi">
       <div class="stat"><div class="sv">{d['snapshot_count']}</div><div class="sl">Snapshots</div></div>
-      <div class="stat"><div class="sv">{d['currency_entities']}</div><div class="sl">Currencies</div></div>
+      <div class="stat"><div class="sv">{d['currency_entities']}</div><div class="sl">Fungibles</div></div>
       <div class="stat"><div class="sv">{d['unique_entities']}</div><div class="sl">Uniques</div></div>
       <div class="stat hero {live_cls}"><div class="sv">{live}</div><div class="sl">Live signals</div></div>
     </div>

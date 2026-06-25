@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS league_meta (
 
 CREATE TABLE IF NOT EXISTS currency_snapshot (
   league              TEXT NOT NULL,
+  category            TEXT NOT NULL DEFAULT 'currency',  -- Bucket A category key
   currency_id         TEXT NOT NULL,
   bucket              INTEGER NOT NULL,   -- ts floored to the hour: idempotency key
   ts                  INTEGER NOT NULL,   -- actual poll time (UTC unix seconds)
@@ -25,10 +26,10 @@ CREATE TABLE IF NOT EXISTS currency_snapshot (
   max_volume_rate     REAL,
   spark_total_change  REAL,
   sparkline_json      TEXT,
-  PRIMARY KEY (league, currency_id, bucket)
+  PRIMARY KEY (league, category, currency_id, bucket)
 );
 CREATE INDEX IF NOT EXISTS idx_curr_league_ts
-  ON currency_snapshot(league, currency_id, ts);
+  ON currency_snapshot(league, category, currency_id, ts);
 
 CREATE TABLE IF NOT EXISTS unique_snapshot (
   league             TEXT NOT NULL,
@@ -66,7 +67,44 @@ def connect(path=config.DB_PATH) -> sqlite3.Connection:
     return con
 
 
+def _migrate_currency_category(con: sqlite3.Connection) -> None:
+    """Add the `category` column to a pre-Bucket-A currency_snapshot in place.
+
+    Old DBs have PK (league, currency_id, bucket) and no category column. SQLite
+    can't ALTER a primary key, so rebuild the table: rename → recreate (new PK) →
+    copy old rows tagged category='currency' → drop. Idempotent and a no-op once
+    the column exists (or the table doesn't yet).
+    """
+    cols = [r["name"] for r in con.execute("PRAGMA table_info(currency_snapshot)")]
+    if not cols or "category" in cols:
+        return  # fresh DB (SCHEMA builds it correctly) or already migrated
+    con.executescript(
+        """
+        ALTER TABLE currency_snapshot RENAME TO currency_snapshot_old;
+        CREATE TABLE currency_snapshot (
+          league TEXT NOT NULL, category TEXT NOT NULL DEFAULT 'currency',
+          currency_id TEXT NOT NULL, bucket INTEGER NOT NULL, ts INTEGER NOT NULL,
+          league_day INTEGER, name TEXT, primary_value REAL, volume REAL,
+          max_volume_currency TEXT, max_volume_rate REAL, spark_total_change REAL,
+          sparkline_json TEXT,
+          PRIMARY KEY (league, category, currency_id, bucket)
+        );
+        INSERT INTO currency_snapshot
+          (league, category, currency_id, bucket, ts, league_day, name,
+           primary_value, volume, max_volume_currency, max_volume_rate,
+           spark_total_change, sparkline_json)
+          SELECT league, 'currency', currency_id, bucket, ts, league_day, name,
+                 primary_value, volume, max_volume_currency, max_volume_rate,
+                 spark_total_change, sparkline_json
+          FROM currency_snapshot_old;
+        DROP TABLE currency_snapshot_old;
+        """
+    )
+    con.commit()
+
+
 def init_db(con: sqlite3.Connection) -> None:
+    _migrate_currency_category(con)
     con.executescript(SCHEMA)
     con.commit()
 
@@ -102,40 +140,57 @@ def upsert_currency(con, rows: list[dict]) -> int:
         bucket = r["ts"] - (r["ts"] % 3600)
         con.execute(
             """INSERT OR REPLACE INTO currency_snapshot
-               (league, currency_id, bucket, ts, league_day, name, primary_value,
-                volume, max_volume_currency, max_volume_rate, spark_total_change,
-                sparkline_json)
-               VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
-            (r["league"], r["currency_id"], bucket, r["ts"], r["league_day"],
-             r["name"], r["primary_value"], r["volume"], r["max_volume_currency"],
-             r["max_volume_rate"], r.get("spark_total_change"), r["sparkline_json"]),
+               (league, category, currency_id, bucket, ts, league_day, name,
+                primary_value, volume, max_volume_currency, max_volume_rate,
+                spark_total_change, sparkline_json)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+            (r["league"], r.get("category") or "currency", r["currency_id"], bucket,
+             r["ts"], r["league_day"], r["name"], r["primary_value"], r["volume"],
+             r["max_volume_currency"], r["max_volume_rate"],
+             r.get("spark_total_change"), r["sparkline_json"]),
         )
     con.commit()
     return len(rows)
 
 
-def latest_currency(con, league: str = config.LEAGUE) -> list[sqlite3.Row]:
-    """Most recent snapshot row per currency."""
-    return con.execute(
-        """SELECT * FROM currency_snapshot
-           WHERE league = ? AND ts = (
-             SELECT MAX(ts) FROM currency_snapshot c2
-             WHERE c2.league = currency_snapshot.league
-               AND c2.currency_id = currency_snapshot.currency_id)
-           ORDER BY currency_id""",
-        (league,),
-    ).fetchall()
+def latest_currency(con, league: str = config.LEAGUE,
+                    category: str | None = None) -> list[sqlite3.Row]:
+    """Most recent snapshot row per (category, currency_id).
+
+    `category=None` returns every category pooled; pass a category key to scope to
+    one. Entity identity now spans category so same id across categories never
+    collides (though exchange ids are globally unique slugs in practice).
+    """
+    sql = """SELECT * FROM currency_snapshot
+             WHERE league = ?{cat} AND ts = (
+               SELECT MAX(ts) FROM currency_snapshot c2
+               WHERE c2.league = currency_snapshot.league
+                 AND c2.category = currency_snapshot.category
+                 AND c2.currency_id = currency_snapshot.currency_id)
+             ORDER BY category, currency_id"""
+    if category is None:
+        return con.execute(sql.format(cat=""), (league,)).fetchall()
+    return con.execute(sql.format(cat=" AND category = ?"), (league, category)).fetchall()
 
 
-def currency_series(con, league: str = config.LEAGUE) -> dict[str, list[sqlite3.Row]]:
-    """All snapshots per currency_id, oldest-first."""
-    rows = con.execute(
-        "SELECT * FROM currency_snapshot WHERE league = ? ORDER BY currency_id, ts",
-        (league,),
-    ).fetchall()
+def currency_series(con, league: str = config.LEAGUE,
+                    category: str | None = None) -> dict[str, list[sqlite3.Row]]:
+    """All snapshots per (category, currency_id), oldest-first.
+
+    Keyed on 'category:currency_id' so each category keeps its own accumulated
+    history. `category=None` pools all categories; pass a key to scope to one.
+    """
+    if category is None:
+        rows = con.execute(
+            "SELECT * FROM currency_snapshot WHERE league = ? "
+            "ORDER BY category, currency_id, ts", (league,)).fetchall()
+    else:
+        rows = con.execute(
+            "SELECT * FROM currency_snapshot WHERE league = ? AND category = ? "
+            "ORDER BY currency_id, ts", (league, category)).fetchall()
     series: dict[str, list] = defaultdict(list)
     for r in rows:
-        series[r["currency_id"]].append(r)
+        series[f"{r['category']}:{r['currency_id']}"].append(r)
     return series
 
 

@@ -14,7 +14,7 @@ import sys
 
 import config
 from fetchers import Transport, resolve_league
-from fetchers.currency import fetch_currency
+from fetchers.currency import fetch_exchange
 from fetchers.items import fetch_uniques
 from signals.momentum import currency_momentum
 from signals.movers import currency_movers
@@ -52,12 +52,13 @@ def cmd_fetch(args) -> int:
                             config.LEAGUE, canonical)
             league = canonical
         db.set_league_meta(con, league, config.LEAGUE_START_TS)
-        rows = fetch_currency(t, league)
+        rows = fetch_exchange(t, league)
         urows = [] if args.no_uniques else fetch_uniques(t, league)
     n = db.upsert_currency(con, rows)
     un = db.upsert_uniques(con, urows) if urows else 0
-    log.info("Stored %d currency + %d unique snapshot rows for %r (league_day=%s).",
-             n, un, league, config.league_day(config.now_ts()))
+    cats = len({r["category"] for r in rows})
+    log.info("Stored %d exchange rows across %d categor(ies) + %d unique rows for %r "
+             "(league_day=%s).", n, cats, un, league, config.league_day(config.now_ts()))
     return 0
 
 
@@ -135,9 +136,11 @@ def cmd_report(args) -> int:
     data = paths["data"]
     log.info("Wrote brief -> %s", paths["markdown"])
     log.info("Wrote dashboard -> %s", paths["html"])
+    cur_sig = sum(len(g["momentum"]) for g in data["fungible"])
     print(f"Signal report ({config.LEAGUE}, day {data['league_day']}): "
-          f"{len(data['currency_momentum'])} currency + {len(data['unique_momentum'])} "
-          f"unique momentum signals from {data['snapshot_count']} snapshot(s).")
+          f"{cur_sig} fungible + {len(data['unique_momentum'])} unique momentum "
+          f"signals across {len(data['fungible'])} categories from "
+          f"{data['snapshot_count']} snapshot(s).")
     return 0
 
 

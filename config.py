@@ -49,6 +49,39 @@ RATE_MAX_CALLS = 12
 RATE_PERIOD_SEC = 300
 CACHE_TTL_SEC = 3600  # currency updates ~hourly
 
+# Layer A — Bucket A fungible-by-name exchange categories. Every line in these
+# carries a unique `id` slug, so variants (e.g. Uncut Skill Gem Level 17/19) never
+# collide on name — keying on (category, id) keeps them distinct for free.
+# (category_key, exchange_type, label). The `type` strings are NOT naive PascalCase
+# of the slug — verified live 2026-06-25 against HC Runes of Aldur by capturing the
+# requests poe.ninja itself makes (the endpoint returns empty `lines` for any
+# unknown type, so a 0-line read does NOT confirm a valid slug). Surprises:
+# omens->Ritual, abyssal-bones->Abyss, liquid-emotions->Delirium,
+# lineage-support-gems->LineageSupportGems. "catalysts" is NOT a category (only the
+# individual `breach-catalyst` currency item exists) and is deliberately omitted.
+EXCHANGE_CATEGORIES = (
+    ("currency",             "Currency",           "Currency"),
+    ("fragments",            "Fragments",          "Fragments"),
+    ("runes",                "Runes",              "Runes"),
+    ("essences",             "Essences",           "Essences"),
+    ("soul-cores",           "SoulCores",          "Soul Cores"),
+    ("omens",                "Ritual",             "Omens"),
+    ("liquid-emotions",      "Delirium",           "Liquid Emotions"),
+    ("abyssal-bones",        "Abyss",              "Abyssal Bones"),
+    ("uncut-gems",           "UncutGems",          "Uncut Gems"),
+    ("lineage-support-gems", "LineageSupportGems", "Lineage Support Gems"),
+    ("verisium",             "Verisium",           "Verisium"),
+)
+
+# Bucket B — carry rolled mods / per-item structure (price clouds, fake z-scores).
+# Verified present in the poe.ninja nav but deliberately NOT wired: revisit per-item
+# later. Drop a (key, type, label) tuple into EXCHANGE_CATEGORIES to enable one.
+BUCKET_B_CATEGORIES = (
+    # ("idols",            "Idols",            "Idols"),
+    # ("expedition",       "Expedition",       "Expedition"),
+    # ("precursor-tablets","PrecursorTablets", "Precursor Tablets"),
+)
+
 # Layer C — unique item overview types that return data for the target league.
 # Verified live 2026-06-17 against HC Runes of Aldur (others return 0 lines:
 # UniqueArmour, UniqueAccessory, UniqueJewel, UniqueWaystones).
@@ -66,9 +99,14 @@ def url_index_state() -> str:
     return f"{BASE}/data/index-state"
 
 
-def url_currency(league: str = LEAGUE) -> str:
-    q = urllib.parse.urlencode({"league": league, "type": "Currency"})
+def url_exchange(exchange_type: str = "Currency", league: str = LEAGUE) -> str:
+    q = urllib.parse.urlencode({"league": league, "type": exchange_type})
     return f"{BASE}/economy/exchange/current/overview?{q}"
+
+
+def url_currency(league: str = LEAGUE) -> str:
+    """Back-compat alias — the Currency exchange overview."""
+    return url_exchange("Currency", league)
 
 
 def url_item_overview(item_type: str, league: str = LEAGUE) -> str:

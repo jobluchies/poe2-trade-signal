@@ -2,6 +2,10 @@
 
 Renderers (markdown, html) stay dumb: they format this dict and nothing else.
 All thresholds live here so the brief and the dashboard always agree.
+
+Bucket A is per-category: the same signal set (momentum, movers, near-7d-low,
+near-7d-high) is computed for every fungible exchange category and returned under
+`fungible`, so the renderers can iterate categories generically — no copy-paste.
 """
 from __future__ import annotations
 from datetime import datetime, timezone
@@ -14,9 +18,21 @@ from signals.movers import currency_movers
 from signals.items import unique_momentum, unique_movers
 from signals.sparkline import trace_stats
 
-# Value floor authored in EXALT. Converted to a Divine threshold at compare time
+# Value floor authored in EXALT, converted to a Divine threshold at compare time
 # via the live Exalt:Divine rate — never compared against Divine values directly.
+# Governs buy-candidate / position-in-range / momentum surfacing.
 EXALT_FLOOR = 5.0
+
+# Independent, higher floor authored in EXALT, applied ONLY to risers / movers-up.
+# A mover worth flagging should clear a meaningfully higher bar than a buy
+# candidate; also converted to Divine at filter time. No hardcoded Divine values.
+RISER_FLOOR = 10.0
+
+# Confidence gate for uniques. poe.ninja has no River API for PoE2, so unique
+# prices are estimates — there is no lowConfidenceSparkline flag in the payload,
+# so listing-count is the only available proxy. Suppress thin-listing items
+# (price-fixer traps). Named + tunable.
+UNIQUE_MIN_LISTINGS = 5
 
 
 def _snapshot_count(con, league: str) -> int:
@@ -28,7 +44,8 @@ def _snapshot_count(con, league: str) -> int:
 
 
 def _entity_count(con, table: str, league: str) -> int:
-    group = "currency_id" if table == "currency_snapshot" else "item_type, details_id, corrupted"
+    group = ("category, currency_id" if table == "currency_snapshot"
+             else "item_type, details_id, corrupted")
     row = con.execute(
         f"SELECT COUNT(*) FROM (SELECT 1 FROM {table} WHERE league = ? GROUP BY {group})",
         (league,),
@@ -43,26 +60,14 @@ def _spread_pct(t: dict) -> float:
 
 
 def _currency_traces(rows) -> list[dict]:
-    """Decoded 7-bucket price trace + range stats for every currency's latest snapshot."""
+    """Decoded 7-bucket price trace + range stats for every line's latest snapshot."""
     out: list[dict] = []
     for r in rows:
         st = trace_stats(r)
         if st is None:
             continue
-        out.append({"currency_id": r["currency_id"], "name": r["name"],
-                    "volume": r["volume"], **st})
-    return out
-
-
-def _unique_traces(con, league: str) -> list[dict]:
-    """Decoded 7-bucket price trace + range stats for every unique's latest snapshot."""
-    out: list[dict] = []
-    for r in db.latest_uniques(con, league):
-        st = trace_stats(r)
-        if st is None:
-            continue
-        out.append({"item_type": r["item_type"], "name": r["name"],
-                    "listing_count": r["listing_count"], **st})
+        out.append({"category": r["category"], "currency_id": r["currency_id"],
+                    "name": r["name"], "volume": r["volume"], **st})
     return out
 
 
@@ -75,6 +80,20 @@ def _above_value(rows: list[dict], value_key: str, min_value: float | None) -> l
     if min_value is None:
         return rows
     return [r for r in rows if (r.get(value_key) or 0) >= min_value]
+
+
+def _risers(rows: list[dict], riser_min_divine: float | None) -> list[dict]:
+    """Movers filter: keep only risers (positive %), above the riser floor.
+
+    Decliners are dropped entirely (movers show up-moves only). The floor here is
+    RISER_FLOOR-in-Divine, independent of the buy-candidate EXALT_FLOOR. With no
+    usable rate (riser_min_divine is None) the floor is skipped but decliners are
+    still dropped. Never touches buy-candidate / near-7d-low logic.
+    """
+    up = [r for r in rows if (r.get("pct") or 0) > 0]
+    if riser_min_divine is None:
+        return up
+    return [r for r in up if (r.get("to") or 0) >= riser_min_divine]
 
 
 def _by_direction(rows: list[dict], pct_key: str) -> list[dict]:
@@ -104,44 +123,64 @@ def _extremes(traces: list[dict], gate_key: str, gate_min: float,
 
 def collect(con, league: str = config.LEAGUE, *,
             cur_z: float = 2.0, cur_min_volume: float = 1.0,
-            uniq_z: float = 2.0, uniq_min_listings: int = 5,
+            uniq_z: float = 2.0, uniq_min_listings: int = UNIQUE_MIN_LISTINGS,
             window_sec: int = 86400, top: int = 25,
-            min_spread_pct: float = 5.0, min_value: float = EXALT_FLOOR) -> dict:
+            min_spread_pct: float = 5.0, min_value: float = EXALT_FLOOR,
+            riser_floor: float = RISER_FLOOR) -> dict:
     now = config.now_ts()
 
     # Live Exalt:Divine rate from the Divine Orb line. Fallback chain: live line ->
-    # DB last-known-good -> skip the floor (+ warn). Never a hardcoded constant.
+    # DB last-known-good -> skip the floor (+ warn). Never a hardcoded constant. The
+    # Divine Orb line lands under category='currency'; latest_currency(None) pools
+    # all categories so it's still found.
     cur_rows = db.latest_currency(con, league)
     last_rate = db.get_last_rate(con, league)
     exalt_per_divine = derive_exalt_per_divine(cur_rows, last_known=last_rate)
     if exalt_per_divine is not None:
         db.set_last_rate(con, league, exalt_per_divine, now)
 
-    # The floor is authored in EXALT (`min_value`); convert to a Divine threshold so
-    # it can be compared against our Divine-denominated values. With no usable rate
-    # we keep everything (min_value_divine=None) and surface a warning rather than
-    # filter on a garbage cut. Per-signal value field: `current` for traces,
-    # `primary_value` for momentum, `to` (latest price) for movers.
+    # Both floors are authored in EXALT; convert to Divine thresholds. With no usable
+    # rate we keep everything (None) and surface a warning rather than filter on a
+    # garbage cut. min_value -> momentum/buy-candidate floor; riser_floor -> movers.
     rate_warning = None
     if exalt_per_divine:
         min_value_divine = min_value / exalt_per_divine
+        riser_divine = riser_floor / exalt_per_divine
     else:
-        min_value_divine = None
+        min_value_divine = riser_divine = None
         rate_warning = ("No Exalt:Divine rate available (Divine Orb line missing/out "
-                        "of band and no last-known-good) — value floor skipped this run.")
+                        "of band and no last-known-good) — value floors skipped this run.")
 
-    cur_traces = _above_value(_currency_traces(cur_rows), "current", min_value_divine)
-    uniq_traces = _above_value(_unique_traces(con, league), "current", min_value_divine)
-    cur_low, cur_high = _extremes(cur_traces, "volume", cur_min_volume, min_spread_pct, top)
-    uniq_low, uniq_high = _extremes(uniq_traces, "listing_count", uniq_min_listings, min_spread_pct, top)
-    cur_momentum = _above_value(currency_momentum(
-        con, league, z_threshold=cur_z, min_volume=cur_min_volume), "primary_value", min_value_divine)
+    # Per-category fungible groups — same signal set for every Bucket A category.
+    # near-low/high use EXALT_FLOOR; movers use RISER_FLOOR and drop decliners.
+    fungible: list[dict] = []
+    for key, _exch_type, label in config.EXCHANGE_CATEGORIES:
+        rows = db.latest_currency(con, league, key)
+        traces = _above_value(_currency_traces(rows), "current", min_value_divine)
+        near_low, near_high = _extremes(traces, "volume", cur_min_volume, min_spread_pct, top)
+        mom = _above_value(currency_momentum(
+            con, league, z_threshold=cur_z, min_volume=cur_min_volume, category=key),
+            "primary_value", min_value_divine)
+        mov = currency_movers(con, league, window_sec=window_sec, top=top, category=key)
+        fungible.append({
+            "key": key,
+            "label": label,
+            "momentum": _by_direction(mom[:top], "total_change_pct"),
+            "movers": _by_direction(_risers(mov, riser_divine), "pct"),
+            "near_low": near_low,
+            "near_high": near_high,
+        })
+
+    # Uniques — Momentum (z-score) + Movers (risers only). No 7d low/high sections.
     uniq_momentum = _above_value(unique_momentum(
-        con, league, z_threshold=uniq_z, min_listings=uniq_min_listings), "primary_value", min_value_divine)
-    cur_movers = _above_value(currency_movers(
-        con, league, window_sec=window_sec, top=top), "to", min_value_divine)
-    uniq_movers = _above_value(unique_movers(
-        con, league, window_sec=window_sec, top=top, min_listings=uniq_min_listings), "to", min_value_divine)
+        con, league, z_threshold=uniq_z, min_listings=uniq_min_listings),
+        "primary_value", min_value_divine)
+    uniq_movers = _risers(unique_movers(
+        con, league, window_sec=window_sec, top=top, min_listings=uniq_min_listings),
+        riser_divine)
+
+    live = sum(len(g["momentum"]) for g in fungible) + len(uniq_momentum)
+
     return {
         "league": league,
         "league_day": config.league_day(now),
@@ -151,28 +190,25 @@ def collect(con, league: str = config.LEAGUE, *,
         "snapshot_count": _snapshot_count(con, league),
         "currency_entities": _entity_count(con, "currency_snapshot", league),
         "unique_entities": _entity_count(con, "unique_snapshot", league),
+        "live_signals": live,
         # Live display/floor context: Exalt per 1 Divine (None if unavailable), the
-        # Exalt-authored floor, and a warning when the floor had to be skipped.
+        # two Exalt-authored floors, and a warning when they had to be skipped.
         "exalt_per_divine": exalt_per_divine,
         "floor_exalt": min_value,
+        "riser_floor_exalt": riser_floor,
         "rate_warning": rate_warning,
         "params": {
             "currency_z": cur_z, "currency_min_volume": cur_min_volume,
             "unique_z": uniq_z, "unique_min_listings": uniq_min_listings,
             "window_sec": window_sec, "top": top,
             "min_spread_pct": min_spread_pct,
-            "min_value": min_value,  # authored in Exalt; see floor_exalt / exalt_per_divine
+            "min_value": min_value,       # buy-candidate floor, authored in Exalt
+            "riser_floor": riser_floor,   # movers-up floor, authored in Exalt
         },
-        "currency_momentum": _by_direction(cur_momentum[:top], "total_change_pct"),
-        "currency_movers": _by_direction(cur_movers, "pct"),
+        # Bucket A: one group per fungible category, each with momentum / movers /
+        # near_low / near_high. Renderers iterate this generically.
+        "fungible": fungible,
+        # Uniques: momentum + movers only (7d low/high deliberately removed).
         "unique_momentum": _by_direction(uniq_momentum[:top], "total_change_pct"),
         "unique_movers": _by_direction(uniq_movers, "pct"),
-        # Sparkline-decoded absolute price traces — full set for every entity, plus
-        # range-position extremes (where today sits in its own 7-bucket window).
-        "currency_traces": cur_traces,
-        "unique_traces": uniq_traces,
-        "currency_near_low": cur_low,
-        "currency_near_high": cur_high,
-        "unique_near_low": uniq_low,
-        "unique_near_high": uniq_high,
     }

@@ -28,13 +28,14 @@ def sparkline_zscore(data: list[float]) -> Optional[float]:
 
 
 def currency_momentum(con, league: str = config.LEAGUE, z_threshold: float = 2.0,
-                      min_volume: float = 0.0) -> list[dict]:
-    """Flag currencies whose latest move is >z_threshold std vs their own range.
+                      min_volume: float = 0.0, category: str | None = None) -> list[dict]:
+    """Flag exchange items whose latest move is >z_threshold std vs their own range.
 
     Confidence gate: drop lines below `min_volume` (thin volume = likely price-fixer).
+    `category=None` pools all Bucket A categories; pass a key to scope to one.
     """
     out: list[dict] = []
-    for r in db.latest_currency(con, league):
+    for r in db.latest_currency(con, league, category):
         vol = r["volume"] or 0.0
         if vol < min_volume:
             continue
@@ -46,6 +47,7 @@ def currency_momentum(con, league: str = config.LEAGUE, z_threshold: float = 2.0
         if z is None or abs(z) < z_threshold:
             continue
         out.append({
+            "category": r["category"],
             "currency_id": r["currency_id"],
             "name": r["name"],
             "z": round(z, 2),
