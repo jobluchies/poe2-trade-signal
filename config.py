@@ -84,7 +84,8 @@ BUCKET_B_CATEGORIES = (
 
 # Layer C — unique item overview types that return data for the target league.
 # Verified live 2026-06-17 against HC Runes of Aldur (others return 0 lines:
-# UniqueArmour, UniqueAccessory, UniqueJewel, UniqueWaystones).
+# UniqueArmour, UniqueAccessory, UniqueJewel, UniqueWaystones). UniqueTablets added
+# 2026-06-25 (9 lines, healthy listing counts); UniqueRelics still 404s — omitted.
 UNIQUE_TYPES = (
     "UniqueWeapons",
     "UniqueArmours",
@@ -92,6 +93,7 @@ UNIQUE_TYPES = (
     "UniqueFlasks",
     "UniqueJewels",
     "UniqueCharms",
+    "UniqueTablets",
 )
 
 
