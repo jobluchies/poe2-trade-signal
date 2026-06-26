@@ -2,7 +2,7 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 27
-generated: 2026-06-26T12:17:44Z
+generated: 2026-06-26T12:23:48Z
 snapshots: 60
 currency_signals: 24
 unique_signals: 14
@@ -11,17 +11,21 @@ tags: [poe2, market-signal]
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 27 · generated 2026-06-26T12:17:44Z · 60 snapshot(s) · 506 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
+> Day 27 · generated 2026-06-26T12:23:48Z · 60 snapshot(s) · 506 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history (risers only).
 
 ## Currency
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 | Currency | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
+| Glassblower's Bauble | 🟢 +74.42 | 0.007631 | 0.01331 | `▁▄▇▆▇▆█▇▇` | `▅▃▂▁▃▃█` |
+| Scroll of Wisdom | 🟢 +60.92 | 2.093e-05 | 3.368e-05 | `▁██▇▇▇▆▆▆` | `▁▃▄█▂▁▁` |
+| Armourer's Scrap | 🟢 +48.03 | 0.00671 | 0.009933 | `▁▃▅▄▄█▄▅▄` | `▁▁▁▂▂▂█` |
 | Perfect Orb of Augmentation | 🟢 +40.73 | 0.1225 | 0.1724 | `▂▄▇▁▁▃█▇▇` | `▃▄▁▁▂▄█` |
+| Artificer's Orb | 🟢 +35.99 | 0.003482 | 0.004735 | `▁▁▁▂▅█▃▂▃` | `▆█▅▁▆▁▄` |
 | Mirror of Kalandra | 🟢 +30.60 | 1340 | 1750 | `▁▂▄▄▄█▇▇▇` | ` ▁ ▂▃▅█` |
 | Perfect Regal Orb | 🟢 +28.51 | 0.3115 | 0.4003 | `▂▁▁▁▁▃▅▇█` | `▂▁▁▂▁▂█` |
 
@@ -34,7 +38,7 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 ## Fragments
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -47,7 +51,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 ## Runes
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -59,7 +63,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 ## Essences
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -69,7 +73,7 @@ _No signals above threshold._
 
 ## Soul Cores
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -84,7 +88,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 ## Omens
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -99,7 +103,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 ## Liquid Emotions
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -113,7 +117,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 ## Abyssal Bones
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -126,7 +130,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 ## Uncut Gems
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -136,7 +140,7 @@ _No signals above threshold._
 
 ## Lineage Support Gems
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -152,7 +156,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 ## Verisium
 
-### Movers (24h · risers ≥ 10 ex)
+### Movers (24h · all risers)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
