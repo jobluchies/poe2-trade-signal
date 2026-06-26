@@ -348,8 +348,8 @@ def render_html(d: dict) -> str:
             f'<span class="rv">{rate:,.0f} ex</span></div>')
         foot_rate = (f"Base currency: Divine. Values shown in Divine Orbs; live rate "
                      f"1 div = {rate:,.0f} ex. Momentum floor {floor_ex:g} ex "
-                     f"(= {floor_ex / rate:.3g} div); risers floor {riser_ex:g} ex "
-                     f"(= {riser_ex / rate:.3g} div) at the current rate.")
+                     f"(= {floor_ex / rate:.3g} div); unique-mover floor {riser_ex:g} ex "
+                     f"(= {riser_ex / rate:.3g} div). Bucket A movers have no value floor.")
     else:
         rate_chip = (
             f'<div class="rate warn" title="{_esc(warn or "rate unavailable")}">'
@@ -370,7 +370,7 @@ def render_html(d: dict) -> str:
         mom = [_cur_mom_row(h, p["currency_z"]) for h in g["momentum"]]
         sections += [
             _section(f"{label} · movers",
-                     f"{win_h}h window · risers ≥ {riser_ex:g} ex",
+                     f"{win_h}h window · all risers",
                      [label, "%", "From", "To", "24h", "Trace"], mov,
                      tier="tier1", accent="accent-cur"),
             _section(f"{label} · momentum",

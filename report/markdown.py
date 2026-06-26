@@ -121,7 +121,7 @@ def render_markdown(d: dict) -> str:
     for g in d["fungible"]:
         label = g["label"]
         lines += [f"## {label}", ""]
-        lines += [f"### Movers ({win_h}h · risers ≥ {riser_ex:g} ex)", ""]
+        lines += [f"### Movers ({win_h}h · all risers)", ""]
         lines += _movers_table(g["movers"], label)
         lines += [f"### Momentum (|z| ≥ {p['currency_z']}, vol ≥ {p['currency_min_volume']})", ""]
         lines += _momentum_table(g["momentum"], label)

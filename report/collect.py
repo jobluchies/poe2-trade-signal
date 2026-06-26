@@ -161,7 +161,9 @@ def collect(con, league: str = config.LEAGUE, *,
                         "of band and no last-known-good) — value floors skipped this run.")
 
     # Per-category fungible groups — movers (primary) + momentum for every Bucket A
-    # category. Movers use RISER_FLOOR and drop decliners; momentum uses EXALT_FLOOR.
+    # category. Bucket A movers drop decliners but apply NO value floor — cheap
+    # currency is still interesting in bulk. Momentum keeps EXALT_FLOOR; the riser
+    # floor (RISER_FLOOR) now gates unique (gear) movers only.
     fungible: list[dict] = []
     for key, _exch_type, label in config.EXCHANGE_CATEGORIES:
         rows = db.latest_currency(con, league, key)
@@ -176,7 +178,7 @@ def collect(con, league: str = config.LEAGUE, *,
             "primary_value", min_value_divine)
         mov = _risers(
             currency_movers(con, league, window_sec=window_sec, top=top, category=key),
-            riser_divine)
+            None)  # Bucket A: no value floor — cheap bulk currency still counts
         mov = _attach_spark(mov, spark, lambda m: m["currency_id"], "prices")
         mov = _attach_spark(mov, snap, lambda m: m["currency_id"], "snap_prices")
         fungible.append({
