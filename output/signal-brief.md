@@ -2,16 +2,16 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 27
-generated: 2026-06-26T09:18:37Z
+generated: 2026-06-26T09:52:58Z
 snapshots: 58
-currency_signals: 22
+currency_signals: 24
 unique_signals: 12
 tags: [poe2, market-signal]
 ---
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 27 · generated 2026-06-26T09:18:37Z · 58 snapshot(s) · 501 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
+> Day 27 · generated 2026-06-26T09:52:58Z · 58 snapshot(s) · 503 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history (risers only).
 
@@ -21,16 +21,17 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 | Currency | % | from | to | trace |
 |---|--:|--:|--:|---|
-| Vaal Cultivation Orb | 🟢 +120.98 | 1.43 | 3.16 | `▂▁▃▃▃▃█` |
-| Perfect Orb of Augmentation | 🟢 +72.42 | 0.1008 | 0.1738 | `▃▄▁▁▂▃█` |
+| Perfect Orb of Augmentation | 🟢 +83.93 | 0.1008 | 0.1854 | `▃▃▁▁▂▃█` |
+| Vaal Cultivation Orb | 🟢 +81.82 | 1.43 | 2.6 | `▂▁▃▃▃▄█` |
+| Perfect Regal Orb | 🟢 +42.10 | 0.2461 | 0.3497 | `▂▂▁▂▂▃█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
 | Currency | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Vaal Cultivation Orb | +2.34 | 🟢 185.2 | 3.16 | 13.17 |
-| Perfect Orb of Augmentation | +2.18 | 🟢 147.2 | 0.1738 | 8.86 |
-| Perfect Regal Orb | +2.31 | 🟢 106.2 | 0.3129 | 3.49 |
+| Perfect Orb of Augmentation | +2.21 | 🟢 170.4 | 0.1854 | 6.8 |
+| Vaal Cultivation Orb | +2.23 | 🟢 148.4 | 2.6 | 6.5 |
+| Perfect Regal Orb | +2.36 | 🟢 119.3 | 0.3497 | 4.31 |
 
 ## Fragments
 
@@ -42,8 +43,8 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Fragments | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Breachlord Sac | +2.14 | 🟢 63.34 | 8.61 | 33 |
-| Origin Spark | +2.19 | 🟢 56.86 | 2.94 | 8.33 |
+| Breachlord Sac | +2.22 | 🟢 67.84 | 9.42 | 29.83 |
+| Origin Spark | +2.11 | 🟢 52.31 | 2.94 | 7.83 |
 
 ## Runes
 
@@ -55,7 +56,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Runes | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Masterwork Rune | +2.15 | 🟢 76.58 | 0.4115 | 6.52 |
+| Masterwork Rune | +2.17 | 🟢 72.14 | 0.3997 | 7.2 |
 
 ## Essences
 
@@ -77,9 +78,10 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Soul Cores | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Carved Tenacity | +2.22 | 🟢 253.8 | 11.5 | 3.83 |
-| Emergent Possibility | +2.31 | 🟢 241.9 | 53 | 8.83 |
+| Soul Core of Azcapa | +2.24 | 🟢 205.6 | 7.33 | 3.67 |
+| Carved Tenacity | +2.21 | 🟢 155.6 | 11.5 | 3.83 |
 | Emergent Vigour | +2.32 | 🟢 130.8 | 20 | 3.33 |
+| Soul Core of Tacati | +2.20 | 🟢 12.26 | 0.3381 | 1.86 |
 
 ## Omens
 
@@ -91,11 +93,10 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Omens | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Omen of Sinistral Exaltation | +2.15 | 🟢 352.1 | 0.08554 | 1.3 |
-| Omen of Chaotic Quantity | +2.31 | 🟢 228.3 | 0.3903 | 15.03 |
-| Omen of Chance | +2.27 | 🟢 144.2 | 10.5 | 3.5 |
-| Omen of Abyssal Echoes | +2.34 | 🟢 95.95 | 1.46 | 84 |
-| Omen of Whittling | +2.06 | 🟢 45.8 | 7.77 | 241 |
+| Omen of Sinistral Exaltation | +2.10 | 🟢 351 | 0.08837 | 1.97 |
+| Omen of Chaotic Quantity | +2.27 | 🟢 209 | 0.363 | 14.7 |
+| Omen of Chance | +2.38 | 🟢 200 | 13 | 2.17 |
+| Omen of Abyssal Echoes | +2.27 | 🟢 69.26 | 1.45 | 92.83 |
 
 ## Liquid Emotions
 
@@ -107,7 +108,9 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Liquid Emotions | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Ancient Potent Liquid Contempt | +2.07 | 🟢 140.6 | 6.38 | 17 |
+| Ancient Potent Liquid Contempt | +2.02 | 🟢 101.3 | 6.38 | 17 |
+| Concentrated Liquid Fear | +2.09 | 🟢 80.27 | 0.6677 | 2.23 |
+| Liquid Despair | +2.20 | 🟢 37.89 | 0.1646 | 1.21 |
 
 ## Abyssal Bones
 
@@ -119,8 +122,8 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Abyssal Bones | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Ancient Collarbone | +2.18 | 🟢 67.6 | 3.25 | 41.17 |
-| Preserved Collarbone | +2.19 | 🔴 -1.03 | 0.2606 | 8.47 |
+| Ancient Collarbone | +2.23 | 🟢 72.7 | 3.4 | 43.67 |
+| Preserved Collarbone | +2.31 | 🔴 -0.2 | 0.2868 | 8.84 |
 
 ## Uncut Gems
 
@@ -142,9 +145,9 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Lineage Support Gems | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Atalui's Bloodletting | +2.24 | 🟢 350 | 9 | 4.5 |
+| Atalui's Bloodletting | +2.38 | 🟢 550 | 13 | 8.67 |
 | Paquate's Pact | +2.00 | 🟢 266.7 | 3.67 | 1.83 |
-| Olroth's Conviction | +2.37 | 🟢 255.9 | 35 | 17.5 |
+| Olroth's Conviction | +2.38 | 🟢 238.7 | 35 | 17.5 |
 | Xoph's Pyre | +2.38 | 🟢 134.8 | 155 | 25.83 |
 
 ## Verisium
@@ -157,7 +160,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Verisium | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Celestial Alloy | -2.15 | 🔴 -48.19 | 0.5068 | 1.01 |
+| Celestial Alloy | -2.18 | 🔴 -59.3 | 0.5069 | 1.1 |
 
 ## Unique movers (24h · risers ≥ 10 ex)
 
