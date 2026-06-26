@@ -2,33 +2,29 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 27
-generated: 2026-06-26T12:49:55Z
-snapshots: 60
-currency_signals: 23
+generated: 2026-06-26T13:48:30Z
+snapshots: 61
+currency_signals: 25
 unique_signals: 14
 tags: [poe2, market-signal]
 ---
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 27 · generated 2026-06-26T12:49:55Z · 60 snapshot(s) · 507 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
+> Day 27 · generated 2026-06-26T13:48:30Z · 61 snapshot(s) · 508 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history (risers only).
 
 ## Currency
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 | Currency | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Artificer's Orb | 🟢 +126.13 | 0.003482 | 0.007874 | `▁▁▁▂▅█▃▂▆` | `▆█▅▁▆▁█` |
-| Cryptic Key | 🟢 +70.75 | 0.2961 | 0.5056 | `▄▃▆██▅▁▁▂` | `▃▂▁▁▂▅█` |
-| Glassblower's Bauble | 🟢 +67.21 | 0.007631 | 0.01276 | `▁▄▇▆▇▆█▇▆` | `▅▃▃▁▄▄█` |
-| Scroll of Wisdom | 🟢 +61.06 | 2.093e-05 | 3.371e-05 | `▁██▇▇▇▆▆▆` | `▁▃▄█▄▁▁` |
-| Armourer's Scrap | 🟢 +46.75 | 0.00671 | 0.009847 | `▁▃▅▄▄█▄▅▄` | `▁▁▁▂▂▃█` |
-| Perfect Regal Orb | 🟢 +34.06 | 0.3115 | 0.4176 | `▂▁▁▁▁▂▅▆█` | `▂▁▁▂▁▂█` |
-| Perfect Orb of Augmentation | 🟢 +31.18 | 0.1225 | 0.1607 | `▂▄▇▁▁▃█▇▆` | `▄▄▁▁▂▄█` |
-| Mirror of Kalandra | 🟢 +30.60 | 1340 | 1750 | `▁▂▄▄▄█▇▇▇` | `  ▁ ▂▄█` |
+| Cryptic Key | 🟢 +70.75 | 0.2961 | 0.5056 | `▄▃▆██▅▁▁▂▂` | `▃▂▁▁▂▅█` |
+| Perfect Regal Orb | 🟢 +34.06 | 0.3115 | 0.4176 | `▂▁▁▁▁▂▅▆██` | `▂▁▁▂▁▂█` |
+| Perfect Orb of Augmentation | 🟢 +31.18 | 0.1225 | 0.1607 | `▂▄▇▁▁▃█▇▆▆` | `▄▄▁▁▂▄█` |
+| Mirror of Kalandra | 🟢 +30.60 | 1340 | 1750 | `▁▂▄▄▄█▇▇▇▇` | `  ▁ ▂▄█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
@@ -39,7 +35,7 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 ## Fragments
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -47,12 +43,13 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Fragments | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Breachlord Sac | +2.27 | 🟢 94.18 | 9.6 | 32 |
-| Origin Spark | +2.33 | 🟢 88.89 | 3.67 | 12.83 |
+| Origin Spark | +2.29 | 🟢 111.3 | 3.83 | 11.5 |
+| Breachlord Sac | +2.25 | 🟢 85.46 | 9.48 | 33.17 |
+| Origin Core | +2.07 | 🟢 28.33 | 9.62 | 12.83 |
 
 ## Runes
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -60,11 +57,12 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Runes | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Masterwork Rune | +2.23 | 🟢 72.74 | 0.3887 | 7.32 |
+| Masterwork Rune | +2.21 | 🟢 82.2 | 0.3831 | 7.09 |
+| Perfect Iron Rune | +2.40 | 🟢 50.89 | 1.01 | 1.01 |
 
 ## Essences
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -74,7 +72,7 @@ _No signals above threshold._
 
 ## Soul Cores
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -82,14 +80,14 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Soul Cores | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Soul Core of Azcapa | +2.23 | 🟢 236.8 | 8 | 1.33 |
-| Carved Tenacity | +2.21 | 🟢 220 | 12 | 2 |
+| Carved Tenacity | +2.21 | 🟢 323.5 | 12 | 2 |
+| Soul Core of Azcapa | +2.19 | 🟢 233.3 | 8 | 1.33 |
 | Emergent Vigour | +2.32 | 🟢 130.8 | 20 | 3.33 |
-| Soul Core of Tacati | +2.12 | 🟢 8.49 | 0.3247 | 2.38 |
+| Soul Core of Tacati | +2.11 | 🟢 6.24 | 0.3154 | 2.42 |
 
 ## Omens
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -97,14 +95,14 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Omens | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Omen of Sinistral Exaltation | +2.22 | 🟢 371 | 0.08678 | 2.44 |
-| Omen of Chance | +2.38 | 🟢 225 | 13 | 2.17 |
-| Omen of Chaotic Quantity | +2.19 | 🟢 199.7 | 0.3347 | 16.07 |
-| Omen of Abyssal Echoes | +2.22 | 🟢 77.95 | 1.45 | 106.8 |
+| Omen of Sinistral Exaltation | +2.25 | 🟢 355.6 | 0.08612 | 2.47 |
+| Omen of Chance | +2.33 | 🟢 277.8 | 11.33 | 5.67 |
+| Omen of Chaotic Quantity | +2.16 | 🟢 173.5 | 0.326 | 15.32 |
+| Omen of Abyssal Echoes | +2.24 | 🟢 84.59 | 1.45 | 111.8 |
 
 ## Liquid Emotions
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -112,13 +110,13 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Liquid Emotions | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Ancient Potent Liquid Contempt | +2.14 | 🟢 135.3 | 7.06 | 20 |
-| Concentrated Liquid Fear | +2.22 | 🟢 112.5 | 0.7027 | 3.05 |
-| Liquid Despair | +2.17 | 🟢 64.11 | 0.1865 | 1.49 |
+| Ancient Potent Liquid Contempt | +2.07 | 🟢 173.3 | 6.83 | 6.83 |
+| Concentrated Liquid Fear | +2.22 | 🟢 102.6 | 0.6794 | 3.4 |
+| Liquid Despair | +2.22 | 🟢 67.93 | 0.1874 | 1.41 |
 
 ## Abyssal Bones
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -126,12 +124,12 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Abyssal Bones | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Ancient Collarbone | +2.25 | 🟢 105.4 | 3.49 | 48.83 |
-| Preserved Collarbone | +2.38 | 🟢 19.13 | 0.3192 | 9.36 |
+| Ancient Collarbone | +2.30 | 🟢 87.02 | 3.51 | 48.5 |
+| Preserved Collarbone | +2.38 | 🟢 28.68 | 0.3207 | 10 |
 
 ## Uncut Gems
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -141,7 +139,7 @@ _No signals above threshold._
 
 ## Lineage Support Gems
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -156,7 +154,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 ## Verisium
 
-### Movers (24h · all risers)
+### Movers (24h · risers ≥ 2 ex)
 
 _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
@@ -164,33 +162,33 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Verisium | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Celestial Alloy | -2.12 | 🔴 -47.52 | 0.5148 | 1.46 |
+| Celestial Alloy | -2.08 | 🔴 -34.79 | 0.5723 | 1.62 |
 
 ## Unique movers (24h · risers ≥ 10 ex)
 
 | Item | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| The Barrow Dweller | 🟢 +1305.78 | 0.00865 | 0.1216 | `▁▁▁▁▁▇▇██` | `█▇▁▁▁▁█` |
-| The Sunken Vessel | 🟢 +724.55 | 0.01556 | 0.1283 | `▁▁▁▁▁▁▁██` | `▃▁▁▂▂▂█` |
-| Spiteful Floret | 🟢 +561.87 | 0.01739 | 0.1151 | `▁▅▅▅▅▅███` | `▁▁▂▁▂▅█` |
-| Chober Chaber | 🟢 +292.56 | 0.1331 | 0.5225 | `▁████▄▄▄▄` | `▁▁▁▁▁█▄` |
-| Reverie | 🟢 +273.00 | 0.2648 | 0.9877 | `▁▁▇▇▇████` | `▁▁▂▁▁██` |
-| The Black Insignia | 🟢 +267.54 | 0.03839 | 0.1411 | `▁▁▁▁▁████` | `▆▂▅▃▁▁█` |
-| Bijouborne | 🟢 +252.22 | 0.04006 | 0.1411 | `▁▁▁▁▁████` | `▂▂▂▂▁▁█` |
-| Sadist's Mercy | 🟢 +249.81 | 0.1331 | 0.4656 | `▁▇▇▇▇█▇▇▇` | `▂▁▁▃▁█▇` |
-| Vigilant View | 🟢 +238.13 | 0.04173 | 0.1411 | `▁▁▁▁▁▁▁██` | `▂▂▂▂▁▁█` |
-| Windscream | 🟢 +238.13 | 0.04173 | 0.1411 | `▁▁▆▆▆████` | `▆▆▇▆▁▆█` |
-| Brain Rattler | 🟢 +225.87 | 0.0433 | 0.1411 | `▁▇▇▇▇████` | `▁▂▃▃▂▇█` |
-| Scold's Bridle | 🟢 +203.05 | 0.04006 | 0.1214 | `▁▁▁▁▁████` | `▄▂▂▂▁▂█` |
-| Effigy of Cruelty | 🟢 +177.50 | 0.04173 | 0.1158 | `▁▁▁▁▁████` | `▃▃▂▁▁▁█` |
-| Quill Rain | 🟢 +175.62 | 0.2662 | 0.7337 | `▁▁▁▁▁▁███` | `▁▁▁▁▅▃█` |
-| Doedre's Damning | 🟢 +166.43 | 0.2648 | 0.7055 | `▁▁▁▁▁██▅▅` | `▁▁▁▂▃▃█` |
-| Cloak of Defiance | 🟢 +113.14 | 0.2648 | 0.5644 | `▁▁▁▁▁▁▁██` | `▁▁▁▂▂▂█` |
-| Morior Invictus | 🟢 +110.53 | 1.9 | 4 | `▁▁███████` | `▁▁▁▁▁██` |
-| Splinterheart | 🟢 +105.44 | 0.2425 | 0.4982 | `▁▁▁▁▁████` | `▅▇▄▄▁▁█` |
-| Hrimnor's Hymn | 🟢 +101.50 | 0.1331 | 0.2682 | `▁▇▇▇▇▆███` | `▆▆▇▁▁▇█` |
-| Tidebreaker | 🟢 +98.68 | 0.07102 | 0.1411 | `▁▆▆▆▆████` | `▂▁▁▂▃▆█` |
-| Svalinn | 🟢 +97.17 | 0.2648 | 0.5221 | `▂▂███▁▁▁▁` | `▁▃▂▁▂█▆` |
+| The Barrow Dweller | 🟢 +1305.78 | 0.00865 | 0.1216 | `▁▁▁▁▁▇▇███` | `█▇▁▁▁▁█` |
+| The Sunken Vessel | 🟢 +724.55 | 0.01556 | 0.1283 | `▁▁▁▁▁▁▁███` | `▃▁▁▂▂▂█` |
+| Spiteful Floret | 🟢 +561.87 | 0.01739 | 0.1151 | `▁▅▅▅▅▅████` | `▁▁▂▁▂▅█` |
+| Chober Chaber | 🟢 +292.56 | 0.1331 | 0.5225 | `▁████▄▄▄▄▄` | `▁▁▁▁▁█▄` |
+| Reverie | 🟢 +273.00 | 0.2648 | 0.9877 | `▁▁▇▇▇█████` | `▁▁▂▁▁██` |
+| The Black Insignia | 🟢 +267.54 | 0.03839 | 0.1411 | `▁▁▁▁▁█████` | `▆▂▅▃▁▁█` |
+| Bijouborne | 🟢 +252.22 | 0.04006 | 0.1411 | `▁▁▁▁▁█████` | `▂▂▂▂▁▁█` |
+| Sadist's Mercy | 🟢 +249.81 | 0.1331 | 0.4656 | `▁▇▇▇▇█▇▇▇▇` | `▂▁▁▃▁█▇` |
+| Vigilant View | 🟢 +238.13 | 0.04173 | 0.1411 | `▁▁▁▁▁▁▁███` | `▂▂▂▂▁▁█` |
+| Windscream | 🟢 +238.13 | 0.04173 | 0.1411 | `▁▁▆▆▆█████` | `▆▆▇▆▁▆█` |
+| Brain Rattler | 🟢 +225.87 | 0.0433 | 0.1411 | `▁▇▇▇▇█████` | `▁▂▃▃▂▇█` |
+| Scold's Bridle | 🟢 +203.05 | 0.04006 | 0.1214 | `▁▁▁▁▁█████` | `▄▂▂▂▁▂█` |
+| Effigy of Cruelty | 🟢 +177.50 | 0.04173 | 0.1158 | `▁▁▁▁▁█████` | `▃▃▂▁▁▁█` |
+| Quill Rain | 🟢 +175.62 | 0.2662 | 0.7337 | `▁▁▁▁▁▁████` | `▁▁▁▁▅▃█` |
+| Doedre's Damning | 🟢 +166.43 | 0.2648 | 0.7055 | `▁▁▁▁▁██▅▅▅` | `▁▁▁▂▃▃█` |
+| Cloak of Defiance | 🟢 +113.14 | 0.2648 | 0.5644 | `▁▁▁▁▁▁▁███` | `▁▁▁▂▂▂█` |
+| Morior Invictus | 🟢 +110.53 | 1.9 | 4 | `▁▁████████` | `▁▁▁▁▁██` |
+| Splinterheart | 🟢 +105.44 | 0.2425 | 0.4982 | `▁▁▁▁▁█████` | `▅▇▄▄▁▁█` |
+| Hrimnor's Hymn | 🟢 +101.50 | 0.1331 | 0.2682 | `▁▇▇▇▇▆████` | `▆▆▇▁▁▇█` |
+| Tidebreaker | 🟢 +98.68 | 0.07102 | 0.1411 | `▁▆▆▆▆█████` | `▂▁▁▂▃▆█` |
+| Svalinn | 🟢 +97.17 | 0.2648 | 0.5221 | `▂▂███▁▁▁▁▁` | `▁▃▂▁▂█▆` |
 
 ## Unique momentum (|z| ≥ 2.0, listings ≥ 5)
 
