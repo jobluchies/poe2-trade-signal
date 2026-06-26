@@ -2,16 +2,16 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 27
-generated: 2026-06-26T11:33:11Z
-snapshots: 59
-currency_signals: 23
+generated: 2026-06-26T12:17:44Z
+snapshots: 60
+currency_signals: 24
 unique_signals: 14
 tags: [poe2, market-signal]
 ---
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 27 · generated 2026-06-26T11:33:11Z · 59 snapshot(s) · 505 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
+> Day 27 · generated 2026-06-26T12:17:44Z · 60 snapshot(s) · 506 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history (risers only).
 
@@ -21,16 +21,16 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 | Currency | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Perfect Orb of Augmentation | 🟢 +78.08 | 0.1008 | 0.1795 | `▂▂▄▇▁▁▃█▇` | `▃▃▁▁▂▄█` |
-| Vaal Cultivation Orb | 🟢 +53.85 | 1.43 | 2.2 | `▁▁▁▁▄▄█▅▃` | `▁▂▄▃▅▅█` |
-| Perfect Regal Orb | 🟢 +53.76 | 0.2461 | 0.3784 | `▃▂▁▁▁▁▃▆█` | `▂▁▁▂▁▃█` |
+| Perfect Orb of Augmentation | 🟢 +40.73 | 0.1225 | 0.1724 | `▂▄▇▁▁▃█▇▇` | `▃▄▁▁▂▄█` |
+| Mirror of Kalandra | 🟢 +30.60 | 1340 | 1750 | `▁▂▄▄▄█▇▇▇` | ` ▁ ▂▃▅█` |
+| Perfect Regal Orb | 🟢 +28.51 | 0.3115 | 0.4003 | `▂▁▁▁▁▃▅▇█` | `▂▁▁▂▁▂█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
 | Currency | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Perfect Regal Orb | +2.39 | 🟢 168.3 | 0.3784 | 3.78 |
-| Perfect Orb of Augmentation | +2.20 | 🟢 124 | 0.1795 | 6.85 |
+| Perfect Regal Orb | +2.40 | 🟢 181.7 | 0.4003 | 3.8 |
+| Perfect Orb of Augmentation | +2.15 | 🟢 76.58 | 0.1724 | 6.61 |
 
 ## Fragments
 
@@ -42,8 +42,8 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Fragments | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Origin Spark | +2.25 | 🟢 85.2 | 3.36 | 12.33 |
-| Breachlord Sac | +2.23 | 🟢 82.48 | 9.63 | 30.5 |
+| Breachlord Sac | +2.27 | 🟢 94.18 | 9.6 | 32 |
+| Origin Spark | +2.33 | 🟢 88.89 | 3.67 | 12.83 |
 
 ## Runes
 
@@ -55,7 +55,7 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Runes | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Masterwork Rune | +2.24 | 🟢 71.42 | 0.3889 | 7.07 |
+| Masterwork Rune | +2.23 | 🟢 72.74 | 0.3887 | 7.32 |
 
 ## Essences
 
@@ -77,10 +77,10 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Soul Cores | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Soul Core of Azcapa | +2.13 | 🟢 218.8 | 7.33 | 3.67 |
-| Carved Tenacity | +2.21 | 🟢 155.6 | 11.5 | 3.83 |
+| Soul Core of Azcapa | +2.23 | 🟢 236.8 | 8 | 1.33 |
+| Carved Tenacity | +2.21 | 🟢 220 | 12 | 2 |
 | Emergent Vigour | +2.32 | 🟢 130.8 | 20 | 3.33 |
-| Soul Core of Tacati | +2.15 | 🟢 19.39 | 0.329 | 2.19 |
+| Soul Core of Tacati | +2.12 | 🟢 8.49 | 0.3247 | 2.38 |
 
 ## Omens
 
@@ -92,10 +92,10 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Omens | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Omen of Sinistral Exaltation | +2.12 | 🟢 353.9 | 0.087 | 1.96 |
-| Omen of Chaotic Quantity | +2.24 | 🟢 204.9 | 0.3472 | 16.78 |
-| Omen of Chance | +2.40 | 🟢 188.9 | 13 | 2.17 |
-| Omen of Abyssal Echoes | +2.26 | 🟢 75.18 | 1.44 | 94.83 |
+| Omen of Sinistral Exaltation | +2.22 | 🟢 371 | 0.08678 | 2.44 |
+| Omen of Chance | +2.38 | 🟢 225 | 13 | 2.17 |
+| Omen of Chaotic Quantity | +2.19 | 🟢 199.7 | 0.3347 | 16.07 |
+| Omen of Abyssal Echoes | +2.22 | 🟢 77.95 | 1.45 | 106.8 |
 
 ## Liquid Emotions
 
@@ -107,9 +107,9 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Liquid Emotions | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Concentrated Liquid Fear | +2.18 | 🟢 121.3 | 0.7053 | 2.82 |
-| Ancient Potent Liquid Contempt | +2.03 | 🟢 96.64 | 6.5 | 19.5 |
-| Liquid Despair | +2.19 | 🟢 40.43 | 0.1707 | 1.31 |
+| Ancient Potent Liquid Contempt | +2.14 | 🟢 135.3 | 7.06 | 20 |
+| Concentrated Liquid Fear | +2.22 | 🟢 112.5 | 0.7027 | 3.05 |
+| Liquid Despair | +2.17 | 🟢 64.11 | 0.1865 | 1.49 |
 
 ## Abyssal Bones
 
@@ -121,8 +121,8 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Abyssal Bones | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Ancient Collarbone | +2.27 | 🟢 100.9 | 3.59 | 41.83 |
-| Preserved Collarbone | +2.34 | 🟢 3.5 | 0.2927 | 8.58 |
+| Ancient Collarbone | +2.25 | 🟢 105.4 | 3.49 | 48.83 |
+| Preserved Collarbone | +2.38 | 🟢 19.13 | 0.3192 | 9.36 |
 
 ## Uncut Gems
 
@@ -144,10 +144,11 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Lineage Support Gems | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Atalui's Bloodletting | +2.40 | 🟢 548.6 | 15 | 7.5 |
-| Paquate's Pact | +2.00 | 🟢 266.7 | 3.67 | 1.83 |
-| Olroth's Conviction | +2.32 | 🟢 173.9 | 28 | 23.33 |
+| Atalui's Bloodletting | +2.37 | 🟢 727.6 | 15 | 7.5 |
+| Paquate's Pact | +2.00 | 🟢 300 | 4 | 1.33 |
+| Olroth's Conviction | +2.30 | 🟢 144.8 | 28 | 23.33 |
 | Xoph's Pyre | +2.38 | 🟢 134.8 | 155 | 25.83 |
+| Tecrod's Revenge | +2.39 | 🟢 69.04 | 0.7673 | 1.15 |
 
 ## Verisium
 
@@ -159,34 +160,33 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Verisium | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Celestial Alloy | -2.10 | 🔴 -23.88 | 0.5081 | 1.27 |
+| Celestial Alloy | -2.12 | 🔴 -47.52 | 0.5148 | 1.46 |
 
 ## Unique movers (24h · risers ≥ 10 ex)
 
 | Item | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| The Barrow Dweller | 🟢 +1305.78 | 0.00865 | 0.1216 | `▁▁▁▁▁▁▇▇█` | `█▇▁▁▁▁█` |
-| The Sunken Vessel | 🟢 +724.55 | 0.01556 | 0.1283 | `▁▁▁▁▁▁▁▁█` | `▃▁▁▂▂▂█` |
-| Spiteful Floret | 🟢 +533.81 | 0.01816 | 0.1151 | `▁▁▅▅▅▅▅██` | `▁▁▂▁▂▅█` |
-| Chober Chaber | 🟢 +294.64 | 0.1324 | 0.5225 | `▁▁████▄▄▄` | `▁▁▁▁▁█▄` |
-| Reverie | 🟢 +273.00 | 0.2648 | 0.9877 | `▁▆▆██████` | `▁▁▂▁▁██` |
-| The Black Insignia | 🟢 +267.54 | 0.03839 | 0.1411 | `▁▁▁▁▁▁███` | `▆▂▅▃▁▁█` |
-| Bijouborne | 🟢 +252.22 | 0.04006 | 0.1411 | `▁▁▁▁▁▁███` | `▂▂▂▂▁▁█` |
-| Sadist's Mercy | 🟢 +251.66 | 0.1324 | 0.4656 | `▁▁▇▇▇▇█▇▇` | `▂▁▁▃▁█▇` |
-| Vigilant View | 🟢 +238.13 | 0.04173 | 0.1411 | `▁▁▁▁▁▁▁▁█` | `▂▂▂▂▁▁█` |
-| Windscream | 🟢 +238.13 | 0.04173 | 0.1411 | `▁▁▁▆▆▆███` | `▆▆▇▆▁▆█` |
-| Brain Rattler | 🟢 +238.13 | 0.04173 | 0.1411 | `▁▁▇▇▇▇███` | `▁▂▃▃▂▇█` |
-| Scold's Bridle | 🟢 +203.05 | 0.04006 | 0.1214 | `▁▂▂▂▂▂███` | `▄▂▂▂▁▂█` |
-| Effigy of Cruelty | 🟢 +177.50 | 0.04173 | 0.1158 | `▁▁▁▁▁▁███` | `▃▃▂▁▁▁█` |
-| Doedre's Damning | 🟢 +166.43 | 0.2648 | 0.7055 | `▁▁▁▁▁▁██▅` | `▁▁▁▂▃▃█` |
-| Splinterheart | 🟢 +113.18 | 0.2337 | 0.4982 | `▁▁▁▁▁▁███` | `▅▇▄▄▁▁█` |
-| Cloak of Defiance | 🟢 +113.14 | 0.2648 | 0.5644 | `▁▁▁▁▁▁▁▁█` | `▁▁▁▂▂▂█` |
-| Morior Invictus | 🟢 +110.53 | 1.9 | 4 | `▁▁▁██████` | `▁▁▁▁▁██` |
-| Tidebreaker | 🟢 +106.17 | 0.06844 | 0.1411 | `▁▁▆▆▆▆███` | `▂▁▁▂▃▆█` |
-| Hrimnor's Hymn | 🟢 +102.57 | 0.1324 | 0.2682 | `▁▁▇▇▇▇▆██` | `▆▆▇▁▁▇█` |
-| Twisted Empyrean | 🟢 +101.49 | 1.34 | 2.7 | `▁▁▃▃▃▃▃██` | `█▁▄▄▃▄▆` |
-| Svalinn | 🟢 +97.17 | 0.2648 | 0.5221 | `▁▆▆███▆▆▆` | `▁▃▂▁▂█▆` |
-| Brutus' Lead Sprinkler | 🟢 +94.17 | 1.03 | 2 | `██▁▁▁▁███` | `█▄▁▁▁▃█` |
+| The Barrow Dweller | 🟢 +1305.78 | 0.00865 | 0.1216 | `▁▁▁▁▁▇▇██` | `█▇▁▁▁▁█` |
+| The Sunken Vessel | 🟢 +724.55 | 0.01556 | 0.1283 | `▁▁▁▁▁▁▁██` | `▃▁▁▂▂▂█` |
+| Spiteful Floret | 🟢 +561.87 | 0.01739 | 0.1151 | `▁▅▅▅▅▅███` | `▁▁▂▁▂▅█` |
+| Chober Chaber | 🟢 +292.56 | 0.1331 | 0.5225 | `▁████▄▄▄▄` | `▁▁▁▁▁█▄` |
+| Reverie | 🟢 +273.00 | 0.2648 | 0.9877 | `▁▁▇▇▇████` | `▁▁▂▁▁██` |
+| The Black Insignia | 🟢 +267.54 | 0.03839 | 0.1411 | `▁▁▁▁▁████` | `▆▂▅▃▁▁█` |
+| Bijouborne | 🟢 +252.22 | 0.04006 | 0.1411 | `▁▁▁▁▁████` | `▂▂▂▂▁▁█` |
+| Sadist's Mercy | 🟢 +249.81 | 0.1331 | 0.4656 | `▁▇▇▇▇█▇▇▇` | `▂▁▁▃▁█▇` |
+| Vigilant View | 🟢 +238.13 | 0.04173 | 0.1411 | `▁▁▁▁▁▁▁██` | `▂▂▂▂▁▁█` |
+| Windscream | 🟢 +238.13 | 0.04173 | 0.1411 | `▁▁▆▆▆████` | `▆▆▇▆▁▆█` |
+| Brain Rattler | 🟢 +225.87 | 0.0433 | 0.1411 | `▁▇▇▇▇████` | `▁▂▃▃▂▇█` |
+| Scold's Bridle | 🟢 +203.05 | 0.04006 | 0.1214 | `▁▁▁▁▁████` | `▄▂▂▂▁▂█` |
+| Effigy of Cruelty | 🟢 +177.50 | 0.04173 | 0.1158 | `▁▁▁▁▁████` | `▃▃▂▁▁▁█` |
+| Quill Rain | 🟢 +175.62 | 0.2662 | 0.7337 | `▁▁▁▁▁▁███` | `▁▁▁▁▅▃█` |
+| Doedre's Damning | 🟢 +166.43 | 0.2648 | 0.7055 | `▁▁▁▁▁██▅▅` | `▁▁▁▂▃▃█` |
+| Cloak of Defiance | 🟢 +113.14 | 0.2648 | 0.5644 | `▁▁▁▁▁▁▁██` | `▁▁▁▂▂▂█` |
+| Morior Invictus | 🟢 +110.53 | 1.9 | 4 | `▁▁███████` | `▁▁▁▁▁██` |
+| Splinterheart | 🟢 +105.44 | 0.2425 | 0.4982 | `▁▁▁▁▁████` | `▅▇▄▄▁▁█` |
+| Hrimnor's Hymn | 🟢 +101.50 | 0.1331 | 0.2682 | `▁▇▇▇▇▆███` | `▆▆▇▁▁▇█` |
+| Tidebreaker | 🟢 +98.68 | 0.07102 | 0.1411 | `▁▆▆▆▆████` | `▂▁▁▂▃▆█` |
+| Svalinn | 🟢 +97.17 | 0.2648 | 0.5221 | `▂▂███▁▁▁▁` | `▁▃▂▁▂█▆` |
 
 ## Unique momentum (|z| ≥ 2.0, listings ≥ 5)
 
