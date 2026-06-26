@@ -2,16 +2,16 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 27
-generated: 2026-06-26T12:23:48Z
+generated: 2026-06-26T12:49:55Z
 snapshots: 60
-currency_signals: 24
+currency_signals: 23
 unique_signals: 14
 tags: [poe2, market-signal]
 ---
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 27 · generated 2026-06-26T12:23:48Z · 60 snapshot(s) · 506 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
+> Day 27 · generated 2026-06-26T12:49:55Z · 60 snapshot(s) · 507 fungibles / 632 uniques tracked · values in Divine · 1 div = 124 ex (live)
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history (risers only).
 
@@ -21,20 +21,21 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 | Currency | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Glassblower's Bauble | 🟢 +74.42 | 0.007631 | 0.01331 | `▁▄▇▆▇▆█▇▇` | `▅▃▂▁▃▃█` |
-| Scroll of Wisdom | 🟢 +60.92 | 2.093e-05 | 3.368e-05 | `▁██▇▇▇▆▆▆` | `▁▃▄█▂▁▁` |
-| Armourer's Scrap | 🟢 +48.03 | 0.00671 | 0.009933 | `▁▃▅▄▄█▄▅▄` | `▁▁▁▂▂▂█` |
-| Perfect Orb of Augmentation | 🟢 +40.73 | 0.1225 | 0.1724 | `▂▄▇▁▁▃█▇▇` | `▃▄▁▁▂▄█` |
-| Artificer's Orb | 🟢 +35.99 | 0.003482 | 0.004735 | `▁▁▁▂▅█▃▂▃` | `▆█▅▁▆▁▄` |
-| Mirror of Kalandra | 🟢 +30.60 | 1340 | 1750 | `▁▂▄▄▄█▇▇▇` | ` ▁ ▂▃▅█` |
-| Perfect Regal Orb | 🟢 +28.51 | 0.3115 | 0.4003 | `▂▁▁▁▁▃▅▇█` | `▂▁▁▂▁▂█` |
+| Artificer's Orb | 🟢 +126.13 | 0.003482 | 0.007874 | `▁▁▁▂▅█▃▂▆` | `▆█▅▁▆▁█` |
+| Cryptic Key | 🟢 +70.75 | 0.2961 | 0.5056 | `▄▃▆██▅▁▁▂` | `▃▂▁▁▂▅█` |
+| Glassblower's Bauble | 🟢 +67.21 | 0.007631 | 0.01276 | `▁▄▇▆▇▆█▇▆` | `▅▃▃▁▄▄█` |
+| Scroll of Wisdom | 🟢 +61.06 | 2.093e-05 | 3.371e-05 | `▁██▇▇▇▆▆▆` | `▁▃▄█▄▁▁` |
+| Armourer's Scrap | 🟢 +46.75 | 0.00671 | 0.009847 | `▁▃▅▄▄█▄▅▄` | `▁▁▁▂▂▃█` |
+| Perfect Regal Orb | 🟢 +34.06 | 0.3115 | 0.4176 | `▂▁▁▁▁▂▅▆█` | `▂▁▁▂▁▂█` |
+| Perfect Orb of Augmentation | 🟢 +31.18 | 0.1225 | 0.1607 | `▂▄▇▁▁▃█▇▆` | `▄▄▁▁▂▄█` |
+| Mirror of Kalandra | 🟢 +30.60 | 1340 | 1750 | `▁▂▄▄▄█▇▇▇` | `  ▁ ▂▄█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
 | Currency | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Perfect Regal Orb | +2.40 | 🟢 181.7 | 0.4003 | 3.8 |
-| Perfect Orb of Augmentation | +2.15 | 🟢 76.58 | 0.1724 | 6.61 |
+| Perfect Regal Orb | +2.42 | 🟢 188.4 | 0.4176 | 3.9 |
+| Perfect Orb of Augmentation | +2.04 | 🟢 46.81 | 0.1607 | 8.92 |
 
 ## Fragments
 
@@ -148,11 +149,10 @@ _Needs ≥2 snapshots spanning the window, or no risers above the floor._
 
 | Lineage Support Gems | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Atalui's Bloodletting | +2.37 | 🟢 727.6 | 15 | 7.5 |
-| Paquate's Pact | +2.00 | 🟢 300 | 4 | 1.33 |
-| Olroth's Conviction | +2.30 | 🟢 144.8 | 28 | 23.33 |
+| Atalui's Bloodletting | +2.38 | 🟢 1025 | 15 | 7.5 |
+| Paquate's Pact | +2.24 | 🟢 233.3 | 3.33 | 1.67 |
+| Olroth's Conviction | +2.25 | 🟢 163.7 | 26.67 | 13.33 |
 | Xoph's Pyre | +2.38 | 🟢 134.8 | 155 | 25.83 |
-| Tecrod's Revenge | +2.39 | 🟢 69.04 | 0.7673 | 1.15 |
 
 ## Verisium
 
