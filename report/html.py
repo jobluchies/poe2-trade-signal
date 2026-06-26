@@ -129,15 +129,6 @@ tbody.flash{animation:flash .18s ease-out}
 .ty{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
 .spark{font-family:var(--mono);letter-spacing:1px;color:var(--faint)}
 
-/* position-in-range micro-track: floor (cold blue) -> ceiling (hot red) */
-td.pos{text-align:left}
-.trk{position:relative;display:inline-block;width:72px;height:7px;background:var(--inset);
-  border:1px solid var(--border);border-radius:3px;vertical-align:middle;margin-right:8px}
-.trk .d{position:absolute;top:50%;width:7px;height:7px;border-radius:50%;
-  transform:translate(-50%,-50%);box-shadow:0 0 0 1px var(--void)}
-.trk-na{color:var(--faint)}
-.pos-n{color:var(--muted);font-size:11px}
-
 .foot{color:var(--faint);font-size:11.5px;line-height:1.6;margin-top:42px;
   border-top:1px solid var(--border);padding-top:14px;max-width:760px}
 
@@ -279,17 +270,6 @@ def _conviction_fill(z: float, thr: float) -> str:
     return f"background:linear-gradient(90deg,rgba({rgb},{a:.2f}) {w:.0f}%,transparent {w:.0f}%)"
 
 
-def _track(pos) -> str:
-    """Position-in-range track: marker at range_pos, cold (floor) -> hot (ceiling)."""
-    if pos is None:
-        return '<span class="trk-na">–</span>'
-    p = max(0.0, min(1.0, pos))
-    pc = p * 100
-    col = "var(--blue)" if p <= 0.34 else ("var(--red)" if p >= 0.66 else "var(--muted)")
-    return (f'<span class="trk" title="{pc:.0f}% of 7d range">'
-            f'<span class="d" style="left:{pc:.0f}%;background:{col}"></span></span>')
-
-
 def _table(headers: list[str], rows: list[str]) -> str:
     head = "".join(f"<th>{_esc(h)}</th>" for h in headers)
     return (f'<table class="srt"><thead><tr>{head}</tr></thead>'
@@ -344,21 +324,8 @@ def _mover_row(m: dict) -> str:
         f"<tr>{_nm(m['name'])}"
         f'<td class="{pcls}" data-sort="{_ds(m["pct"])}">{pct}</td>'
         f'<td data-sort="{_ds(m["from"])}">{_fmt_price(m["from"])}</td>'
-        f'<td data-sort="{_ds(m["to"])}">{_fmt_price(m["to"])}</td></tr>'
-    )
-
-
-def _trace_row(t: dict) -> str:
-    pos = t["range_pos"]
-    postxt = "–" if pos is None else f"{pos * 100:.0f}%"
-    return (
-        f"<tr>{_nm(t['name'])}"
-        f'<td class="pos" data-sort="{_ds(pos)}">{_track(pos)}'
-        f'<span class="pos-n">{postxt}</span></td>'
-        f'<td data-sort="{_ds(t["current"])}">{_fmt_price(t["current"])}</td>'
-        f'<td data-sort="{_ds(t["low"])}">{_fmt_price(t["low"])}</td>'
-        f'<td data-sort="{_ds(t["high"])}">{_fmt_price(t["high"])}</td>'
-        f'<td class="spark">{_esc(_spark(t["prices"]))}</td></tr>'
+        f'<td data-sort="{_ds(m["to"])}">{_fmt_price(m["to"])}</td>'
+        f'<td class="spark">{_esc(_spark(m.get("prices")))}</td></tr>'
     )
 
 
@@ -379,7 +346,7 @@ def render_html(d: dict) -> str:
             '<span class="rk"></span><span class="rl">1 div</span>'
             f'<span class="rv">{rate:,.0f} ex</span></div>')
         foot_rate = (f"Base currency: Divine. Values shown in Divine Orbs; live rate "
-                     f"1 div = {rate:,.0f} ex. Buy-candidate floor {floor_ex:g} ex "
+                     f"1 div = {rate:,.0f} ex. Momentum floor {floor_ex:g} ex "
                      f"(= {floor_ex / rate:.3g} div); risers floor {riser_ex:g} ex "
                      f"(= {riser_ex / rate:.3g} div) at the current rate.")
     else:
@@ -390,48 +357,38 @@ def render_html(d: dict) -> str:
         foot_rate = (f"Base currency: Divine. Values shown in Divine Orbs. {warn or ''} "
                      "Value floor skipped — no live Exalt:Divine rate.").strip()
 
-    spread = p.get("min_spread_pct", 5.0)
     riser_ex = d.get("riser_floor_exalt")
-    trace_cols = ["Pos", "Now (div)", "Low", "High", "Trace"]
 
     sections: list[str] = []
-    # Bucket A — one block (momentum / movers / near-low / near-high) per fungible
-    # category, generated generically from the per-category groups. Empty sections
-    # recede to a single quiet tier-3 line, so categories with no signal stay quiet.
+    # Bucket A — two blocks per fungible category: Movers (primary, on top, carries
+    # the price-trace sparkline) then Momentum. Generated generically from the
+    # per-category groups. Empty sections recede to a single quiet tier-3 line.
     for g in d["fungible"]:
         label = g["label"]
-        mom = [_cur_mom_row(h, p["currency_z"]) for h in g["momentum"]]
         mov = [_mover_row(m) for m in g["movers"]]
-        lo = [_trace_row(t) for t in g["near_low"]]
-        hi = [_trace_row(t) for t in g["near_high"]]
+        mom = [_cur_mom_row(h, p["currency_z"]) for h in g["momentum"]]
         sections += [
+            _section(f"{label} · movers",
+                     f"{win_h}h window · risers ≥ {riser_ex:g} ex",
+                     [label, "%", "From", "To", "Trace"], mov,
+                     tier="tier1", accent="accent-cur"),
             _section(f"{label} · momentum",
                      f"|z| ≥ {p['currency_z']:g} · vol ≥ {p['currency_min_volume']:g}",
                      [label, "z", "7d %", "Value (div)", "Volume"], mom,
-                     tier="tier1", accent="accent-cur"),
-            _section(f"{label} · movers",
-                     f"{win_h}h window · risers ≥ {riser_ex:g} ex",
-                     [label, "%", "From", "To"], mov,
-                     tier="tier2", accent="accent-cur"),
-            _section(f"{label} · near 7d low · buy candidates",
-                     f"spread ≥ {spread:g}%", [label, *trace_cols], lo,
-                     tier="tier2", accent="accent-cur"),
-            _section(f"{label} · near 7d high · running hot",
-                     "overheated", [label, *trace_cols], hi,
                      tier="tier2", accent="accent-cur"),
         ]
 
-    # Uniques — Momentum + Movers only. 7d low/high sections deliberately removed
-    # (estimate-only prices make their range position unreliable).
-    uniq_mom = [_uniq_mom_row(h, p["unique_z"]) for h in d["unique_momentum"]]
+    # Uniques — Movers (primary, with sparkline) then Momentum. 7d low/high sections
+    # deliberately removed (estimate-only prices make range position unreliable).
     uniq_mov = [_mover_row(m) for m in d["unique_movers"]]
+    uniq_mom = [_uniq_mom_row(h, p["unique_z"]) for h in d["unique_momentum"]]
     sections += [
+        _section("Unique movers", f"{win_h}h window · risers ≥ {riser_ex:g} ex",
+                 ["Item", "%", "From", "To", "Trace"], uniq_mov,
+                 tier="tier1", accent="accent-uniq"),
         _section("Unique momentum",
                  f"|z| ≥ {p['unique_z']:g} · listings ≥ {p['unique_min_listings']}",
                  ["Item", "Type", "z", "7d %", "Value (div)", "Listings"], uniq_mom,
-                 tier="tier1", accent="accent-uniq"),
-        _section("Unique movers", f"{win_h}h window · risers ≥ {riser_ex:g} ex",
-                 ["Item", "%", "From", "To"], uniq_mov,
                  tier="tier2", accent="accent-uniq"),
     ]
 
@@ -455,11 +412,10 @@ def render_html(d: dict) -> str:
 
     {''.join(sections)}
 
-    <div class="foot">Decision-support only — no auto-trading. Momentum = run-#1
-    sparkline z-score; movers = absolute %-change from accumulated snapshot history
-    (cold until ≥2 snapshots span the window). Range tracks show where the latest
-    price sits in its own 7-bucket window: cold blue near the floor, hot red near the
-    ceiling. {foot_rate}</div>
+    <div class="foot">Decision-support only — no auto-trading. Movers = absolute
+    %-change from accumulated snapshot history (risers only; cold until ≥2 snapshots
+    span the window), each with a 7-bucket price-trace sparkline. Momentum = run-#1
+    sparkline z-score. {foot_rate}</div>
     """
 
     return (

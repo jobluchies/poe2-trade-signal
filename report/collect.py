@@ -3,9 +3,10 @@
 Renderers (markdown, html) stay dumb: they format this dict and nothing else.
 All thresholds live here so the brief and the dashboard always agree.
 
-Bucket A is per-category: the same signal set (momentum, movers, near-7d-low,
-near-7d-high) is computed for every fungible exchange category and returned under
-`fungible`, so the renderers can iterate categories generically — no copy-paste.
+Bucket A is per-category: the same signal set (movers, momentum) is computed for
+every fungible exchange category and returned under `fungible`, so the renderers
+can iterate categories generically — no copy-paste. Movers carry a decoded
+sparkline trace (latest snapshot) for an at-a-glance price shape.
 """
 from __future__ import annotations
 from datetime import datetime, timezone
@@ -53,12 +54,6 @@ def _entity_count(con, table: str, league: str) -> int:
     return row[0] if row else 0
 
 
-def _spread_pct(t: dict) -> float:
-    """High/low spread of a trace as a % of its low (0 if undefined)."""
-    lo, hi = t["low"], t["high"]
-    return (hi - lo) / lo * 100.0 if lo else 0.0
-
-
 def _currency_traces(rows) -> list[dict]:
     """Decoded 7-bucket price trace + range stats for every line's latest snapshot."""
     out: list[dict] = []
@@ -69,6 +64,18 @@ def _currency_traces(rows) -> list[dict]:
         out.append({"category": r["category"], "currency_id": r["currency_id"],
                     "name": r["name"], "volume": r["volume"], **st})
     return out
+
+
+def _spark_by_id(traces: list[dict], key: str) -> dict:
+    """Map entity id -> decoded price trace, for hanging a sparkline on mover rows."""
+    return {t[key]: t.get("prices") for t in traces}
+
+
+def _attach_spark(movers: list[dict], spark: dict, keyfn) -> list[dict]:
+    """Hang each mover's decoded price trace on its row (None when unavailable)."""
+    for m in movers:
+        m["prices"] = spark.get(keyfn(m))
+    return movers
 
 
 def _above_value(rows: list[dict], value_key: str, min_value: float | None) -> list[dict]:
@@ -105,27 +112,11 @@ def _by_direction(rows: list[dict], pct_key: str) -> list[dict]:
     return sorted(rows, key=lambda r: (r.get(pct_key) or 0), reverse=True)
 
 
-def _extremes(traces: list[dict], gate_key: str, gate_min: float,
-              min_spread_pct: float, top: int) -> tuple[list[dict], list[dict]]:
-    """Split traces into near-7d-low (buy candidates) and near-7d-high (running hot).
-
-    Only entities that pass the confidence gate AND actually moved (>= min_spread_pct
-    high/low spread) qualify — a flat line has no meaningful range position.
-    """
-    elig = [t for t in traces
-            if (t.get(gate_key) or 0) >= gate_min
-            and t["range_pos"] is not None
-            and _spread_pct(t) >= min_spread_pct]
-    near_low = sorted(elig, key=lambda t: t["range_pos"])[:top]
-    near_high = sorted(elig, key=lambda t: t["range_pos"], reverse=True)[:top]
-    return near_low, near_high
-
-
 def collect(con, league: str = config.LEAGUE, *,
             cur_z: float = 2.0, cur_min_volume: float = 1.0,
             uniq_z: float = 2.0, uniq_min_listings: int = UNIQUE_MIN_LISTINGS,
             window_sec: int = 86400, top: int = 25,
-            min_spread_pct: float = 5.0, min_value: float = EXALT_FLOOR,
+            min_value: float = EXALT_FLOOR,
             riser_floor: float = RISER_FLOOR) -> dict:
     now = config.now_ts()
 
@@ -151,33 +142,40 @@ def collect(con, league: str = config.LEAGUE, *,
         rate_warning = ("No Exalt:Divine rate available (Divine Orb line missing/out "
                         "of band and no last-known-good) — value floors skipped this run.")
 
-    # Per-category fungible groups — same signal set for every Bucket A category.
-    # near-low/high use EXALT_FLOOR; movers use RISER_FLOOR and drop decliners.
+    # Per-category fungible groups — movers (primary) + momentum for every Bucket A
+    # category. Movers use RISER_FLOOR and drop decliners; momentum uses EXALT_FLOOR.
     fungible: list[dict] = []
     for key, _exch_type, label in config.EXCHANGE_CATEGORIES:
         rows = db.latest_currency(con, league, key)
-        traces = _above_value(_currency_traces(rows), "current", min_value_divine)
-        near_low, near_high = _extremes(traces, "volume", cur_min_volume, min_spread_pct, top)
+        # Decoded latest-snapshot price traces, only to hang a sparkline on each
+        # mover row — no value filter (movers gate themselves on the riser floor).
+        spark = _spark_by_id(_currency_traces(rows), "currency_id")
         mom = _above_value(currency_momentum(
             con, league, z_threshold=cur_z, min_volume=cur_min_volume, category=key),
             "primary_value", min_value_divine)
-        mov = currency_movers(con, league, window_sec=window_sec, top=top, category=key)
+        mov = _attach_spark(_risers(
+            currency_movers(con, league, window_sec=window_sec, top=top, category=key),
+            riser_divine), spark, lambda m: m["currency_id"])
         fungible.append({
             "key": key,
             "label": label,
+            "movers": _by_direction(mov, "pct"),
             "momentum": _by_direction(mom[:top], "total_change_pct"),
-            "movers": _by_direction(_risers(mov, riser_divine), "pct"),
-            "near_low": near_low,
-            "near_high": near_high,
         })
 
-    # Uniques — Momentum (z-score) + Movers (risers only). No 7d low/high sections.
+    # Uniques — Movers (primary) + Momentum (z-score), risers only. No 7d low/high.
+    # Sparkline trace decoded from each unique's latest snapshot, keyed by entity id.
+    uniq_spark: dict = {}
+    for r in db.latest_uniques(con, league):
+        st = trace_stats(r)
+        if st is not None:
+            uniq_spark[(r["item_type"], r["details_id"])] = st["prices"]
     uniq_momentum = _above_value(unique_momentum(
         con, league, z_threshold=uniq_z, min_listings=uniq_min_listings),
         "primary_value", min_value_divine)
-    uniq_movers = _risers(unique_movers(
+    uniq_movers = _attach_spark(_risers(unique_movers(
         con, league, window_sec=window_sec, top=top, min_listings=uniq_min_listings),
-        riser_divine)
+        riser_divine), uniq_spark, lambda m: (m["item_type"], m["details_id"]))
 
     live = sum(len(g["momentum"]) for g in fungible) + len(uniq_momentum)
 
@@ -201,14 +199,13 @@ def collect(con, league: str = config.LEAGUE, *,
             "currency_z": cur_z, "currency_min_volume": cur_min_volume,
             "unique_z": uniq_z, "unique_min_listings": uniq_min_listings,
             "window_sec": window_sec, "top": top,
-            "min_spread_pct": min_spread_pct,
-            "min_value": min_value,       # buy-candidate floor, authored in Exalt
+            "min_value": min_value,       # momentum floor, authored in Exalt
             "riser_floor": riser_floor,   # movers-up floor, authored in Exalt
         },
-        # Bucket A: one group per fungible category, each with momentum / movers /
-        # near_low / near_high. Renderers iterate this generically.
+        # Bucket A: one group per fungible category, each with movers (primary) +
+        # momentum. Renderers iterate this generically.
         "fungible": fungible,
-        # Uniques: momentum + movers only (7d low/high deliberately removed).
+        # Uniques: movers + momentum only (7d low/high deliberately removed).
         "unique_momentum": _by_direction(uniq_momentum[:top], "total_change_pct"),
         "unique_movers": _by_direction(uniq_movers, "pct"),
     }
