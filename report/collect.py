@@ -27,7 +27,13 @@ EXALT_FLOOR = 5.0
 # Independent, higher floor authored in EXALT, applied ONLY to risers / movers-up.
 # A mover worth flagging should clear a meaningfully higher bar than a buy
 # candidate; also converted to Divine at filter time. No hardcoded Divine values.
+# Now gates UNIQUE (gear) movers only.
 RISER_FLOOR = 10.0
+
+# Lower riser floor for Bucket A (non-gear fungible) movers: cheap currency is
+# still interesting in bulk, so a small bar keeps dust out without hiding low-
+# unit-price bulk goods. Authored in EXALT, converted to Divine at filter time.
+BUCKET_A_RISER_FLOOR = 2.0
 
 # Confidence gate for uniques. poe.ninja has no River API for PoE2, so unique
 # prices are estimates — there is no lowConfidenceSparkline flag in the payload,
@@ -135,7 +141,8 @@ def collect(con, league: str = config.LEAGUE, *,
             uniq_z: float = 2.0, uniq_min_listings: int = UNIQUE_MIN_LISTINGS,
             window_sec: int = 86400, top: int = 25,
             min_value: float = EXALT_FLOOR,
-            riser_floor: float = RISER_FLOOR) -> dict:
+            riser_floor: float = RISER_FLOOR,
+            bucket_a_floor: float = BUCKET_A_RISER_FLOOR) -> dict:
     now = config.now_ts()
 
     # Live Exalt:Divine rate from the Divine Orb line. Fallback chain: live line ->
@@ -155,15 +162,16 @@ def collect(con, league: str = config.LEAGUE, *,
     if exalt_per_divine:
         min_value_divine = min_value / exalt_per_divine
         riser_divine = riser_floor / exalt_per_divine
+        bucket_a_divine = bucket_a_floor / exalt_per_divine
     else:
-        min_value_divine = riser_divine = None
+        min_value_divine = riser_divine = bucket_a_divine = None
         rate_warning = ("No Exalt:Divine rate available (Divine Orb line missing/out "
                         "of band and no last-known-good) — value floors skipped this run.")
 
     # Per-category fungible groups — movers (primary) + momentum for every Bucket A
-    # category. Bucket A movers drop decliners but apply NO value floor — cheap
-    # currency is still interesting in bulk. Momentum keeps EXALT_FLOOR; the riser
-    # floor (RISER_FLOOR) now gates unique (gear) movers only.
+    # category. Bucket A movers drop decliners and apply the low BUCKET_A_RISER_FLOOR
+    # (cheap bulk currency still counts). Momentum keeps EXALT_FLOOR; the higher
+    # RISER_FLOOR now gates unique (gear) movers only.
     fungible: list[dict] = []
     for key, _exch_type, label in config.EXCHANGE_CATEGORIES:
         rows = db.latest_currency(con, league, key)
@@ -173,12 +181,13 @@ def collect(con, league: str = config.LEAGUE, *,
         spark = _spark_by_id(_currency_traces(rows), "currency_id")
         snap = _snap_traces(db.currency_series(con, league, key),
                             lambda r: r["currency_id"], now, window_sec)
+        # Bucket A movers gate on the low BUCKET_A_RISER_FLOOR, not the unique floor.
         mom = _above_value(currency_momentum(
             con, league, z_threshold=cur_z, min_volume=cur_min_volume, category=key),
             "primary_value", min_value_divine)
         mov = _risers(
             currency_movers(con, league, window_sec=window_sec, top=top, category=key),
-            None)  # Bucket A: no value floor — cheap bulk currency still counts
+            bucket_a_divine)  # low Bucket A floor, not the unique floor
         mov = _attach_spark(mov, spark, lambda m: m["currency_id"], "prices")
         mov = _attach_spark(mov, snap, lambda m: m["currency_id"], "snap_prices")
         fungible.append({
@@ -224,13 +233,15 @@ def collect(con, league: str = config.LEAGUE, *,
         "exalt_per_divine": exalt_per_divine,
         "floor_exalt": min_value,
         "riser_floor_exalt": riser_floor,
+        "bucket_a_floor_exalt": bucket_a_floor,
         "rate_warning": rate_warning,
         "params": {
             "currency_z": cur_z, "currency_min_volume": cur_min_volume,
             "unique_z": uniq_z, "unique_min_listings": uniq_min_listings,
             "window_sec": window_sec, "top": top,
             "min_value": min_value,       # momentum floor, authored in Exalt
-            "riser_floor": riser_floor,   # movers-up floor, authored in Exalt
+            "riser_floor": riser_floor,   # unique movers-up floor, authored in Exalt
+            "bucket_a_floor": bucket_a_floor,  # Bucket A movers-up floor, in Exalt
         },
         # Bucket A: one group per fungible category, each with movers (primary) +
         # momentum. Renderers iterate this generically.

@@ -341,6 +341,7 @@ def render_html(d: dict) -> str:
     warn = d.get("rate_warning")
     floor_ex = d.get("floor_exalt")
     riser_ex = d.get("riser_floor_exalt")
+    bucket_a_ex = d.get("bucket_a_floor_exalt")
     if rate:
         rate_chip = (
             '<div class="rate" title="Live Exalt:Divine — Exalted Orbs per 1 Divine Orb">'
@@ -349,7 +350,8 @@ def render_html(d: dict) -> str:
         foot_rate = (f"Base currency: Divine. Values shown in Divine Orbs; live rate "
                      f"1 div = {rate:,.0f} ex. Momentum floor {floor_ex:g} ex "
                      f"(= {floor_ex / rate:.3g} div); unique-mover floor {riser_ex:g} ex "
-                     f"(= {riser_ex / rate:.3g} div). Bucket A movers have no value floor.")
+                     f"(= {riser_ex / rate:.3g} div); Bucket A movers floor {bucket_a_ex:g} ex "
+                     f"(= {bucket_a_ex / rate:.3g} div) at the current rate.")
     else:
         rate_chip = (
             f'<div class="rate warn" title="{_esc(warn or "rate unavailable")}">'
@@ -357,8 +359,6 @@ def render_html(d: dict) -> str:
             '<span class="rv">unavailable</span></div>')
         foot_rate = (f"Base currency: Divine. Values shown in Divine Orbs. {warn or ''} "
                      "Value floor skipped — no live Exalt:Divine rate.").strip()
-
-    riser_ex = d.get("riser_floor_exalt")
 
     sections: list[str] = []
     # Bucket A — two blocks per fungible category: Movers (primary, on top, carries
@@ -370,7 +370,7 @@ def render_html(d: dict) -> str:
         mom = [_cur_mom_row(h, p["currency_z"]) for h in g["momentum"]]
         sections += [
             _section(f"{label} · movers",
-                     f"{win_h}h window · all risers",
+                     f"{win_h}h window · risers ≥ {bucket_a_ex:g} ex",
                      [label, "%", "From", "To", "24h", "Trace"], mov,
                      tier="tier1", accent="accent-cur"),
             _section(f"{label} · momentum",
