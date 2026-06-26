@@ -85,8 +85,7 @@ def _movers_table(rows: list[dict], label: str) -> list[str]:
 def render_markdown(d: dict) -> str:
     p = d["params"]
     win_h = p["window_sec"] // 3600
-    riser_ex = d.get("riser_floor_exalt")
-    bucket_a_ex = d.get("bucket_a_floor_exalt")
+    movers_ex = d.get("movers_floor_exalt")
     cur_sig = sum(len(g["momentum"]) for g in d["fungible"])
     lines: list[str] = []
     rate = d.get("exalt_per_divine")
@@ -122,13 +121,13 @@ def render_markdown(d: dict) -> str:
     for g in d["fungible"]:
         label = g["label"]
         lines += [f"## {label}", ""]
-        lines += [f"### Movers ({win_h}h · risers ≥ {bucket_a_ex:g} ex)", ""]
+        lines += [f"### Movers ({win_h}h · risers ≥ {movers_ex:g} ex)", ""]
         lines += _movers_table(g["movers"], label)
         lines += [f"### Momentum (|z| ≥ {p['currency_z']}, vol ≥ {p['currency_min_volume']})", ""]
         lines += _momentum_table(g["momentum"], label)
 
     # --- Uniques: movers + momentum only (7d low/high removed) -------------------
-    lines += [f"## Unique movers ({win_h}h · risers ≥ {riser_ex:g} ex)", ""]
+    lines += [f"## Unique movers ({win_h}h · risers ≥ {movers_ex:g} ex)", ""]
     lines += _movers_table(d["unique_movers"], "Item")
     lines += [f"## Unique momentum (|z| ≥ {p['unique_z']}, listings ≥ {p['unique_min_listings']})", ""]
     lines += _unique_momentum_table(d["unique_momentum"])

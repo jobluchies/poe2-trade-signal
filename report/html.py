@@ -104,8 +104,19 @@ h2{font-family:var(--serif);font-weight:600;font-size:15px;margin:0;
 .sec-empty .se-m{font:10px/1 var(--mono)}
 .sec-empty .se-n{margin-left:auto;font-style:italic}
 
+/* --- value-floor slider (Movers only; log scale, filters client-side) ------ */
+.vfilter{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:16px 0 2px;
+  background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:11px 16px}
+.vfilter .vf-l{color:var(--muted);font:600 11px/1 var(--sans);text-transform:uppercase;
+  letter-spacing:.06em}
+.vfilter .vf-s{flex:1 1 220px;min-width:150px;height:4px;cursor:pointer;accent-color:var(--amber)}
+.vfilter .vf-v{font:600 13px/1 var(--mono);color:var(--muted);white-space:nowrap;
+  min-width:72px;text-align:right}
+.vfilter .vf-v .vf-n{color:var(--amber-lit);font-size:15px}
+
 /* --- tables ---------------------------------------------------------------- */
 .tscroll{overflow-x:auto}
+tr[hidden]{display:none}
 table{width:100%;border-collapse:collapse;background:var(--panel);
   border:1px solid var(--border);border-radius:6px;overflow:hidden;font-family:var(--mono)}
 th,td{padding:7px 12px;text-align:right;border-bottom:1px solid var(--border);
@@ -188,6 +199,52 @@ _SORT_JS = """
         if(e.key==='Enter'||e.key===' '){e.preventDefault();sort();}
       });
     });
+  });
+})();
+"""
+
+# Client-side value slider: a single global, log-scaled Exalt floor that filters
+# every Movers table at once. The page bakes movers down to 5 ex; this hides rows
+# below the live threshold by converting Exalt -> Divine with the embedded rate and
+# comparing against each row's data-div (canonical Divine value). Scoped to
+# `section.mv` only — Momentum sections carry no data-div and are never touched.
+# Position persists in localStorage. Self-guards: no-op without a .vfilter (no rate).
+_SLIDER_JS = """
+(function(){
+  var box=document.querySelector('.vfilter');
+  if(!box)return;
+  var slider=box.querySelector('.vf-s'), out=box.querySelector('.vf-n');
+  var rate=parseFloat(box.getAttribute('data-rate'));
+  var MIN=parseFloat(box.getAttribute('data-min'));
+  var MAX=parseFloat(box.getAttribute('data-max'));
+  if(!slider||!out||!(rate>0)||!(MAX>MIN))return;
+  var KEY='poe2signal.moversFloorEx', lr=Math.log(MAX/MIN);
+  function posToEx(pos){return MIN*Math.exp(lr*pos/1000);}
+  function exToPos(ex){return Math.round(1000*Math.log(ex/MIN)/lr);}
+  function fmtEx(ex){return ex>=10?String(Math.round(ex)):String(Math.round(ex*10)/10);}
+  var secs=Array.prototype.slice.call(document.querySelectorAll('section.mv'));
+  function apply(ex){
+    out.textContent=fmtEx(ex);
+    secs.forEach(function(sec){
+      var tb=sec.querySelector('tbody'); if(!tb)return;
+      var none=sec.querySelector('.mv-none'), scroll=sec.querySelector('.tscroll'), vis=0;
+      Array.prototype.forEach.call(tb.rows,function(tr){
+        var d=parseFloat(tr.getAttribute('data-div'));
+        var hide=!isNaN(d)&&(d*rate+1e-3<ex);   /* tiny epsilon: keep rows at the floor */
+        tr.hidden=hide; if(!hide)vis++;
+      });
+      if(none){var t=none.querySelector('.mv-thr');if(t)t.textContent=fmtEx(ex);none.hidden=vis>0;}
+      if(scroll)scroll.style.display=vis>0?'':'none';
+    });
+  }
+  var stored=NaN; try{stored=parseFloat(localStorage.getItem(KEY));}catch(e){}
+  var ex0=(!isNaN(stored))?Math.min(MAX,Math.max(MIN,stored)):MIN;
+  slider.value=String(exToPos(ex0));
+  apply(posToEx(parseFloat(slider.value)));
+  slider.addEventListener('input',function(){
+    var ex=posToEx(parseFloat(slider.value));
+    apply(ex);
+    try{localStorage.setItem(KEY,ex);}catch(e){}
   });
 })();
 """
@@ -277,17 +334,27 @@ def _table(headers: list[str], rows: list[str]) -> str:
 
 
 def _section(title: str, meta: str, headers: list[str], rows: list[str], *,
-             tier: str, accent: str) -> str:
-    """Populated -> full section; empty -> one receded tier-3 line."""
+             tier: str, accent: str, movers: bool = False) -> str:
+    """Populated -> full section; empty -> one receded tier-3 line.
+
+    `movers=True` tags the section for the client value slider (class `mv`) and
+    appends a hidden "nothing above N ex" line the slider reveals when it filters
+    every row in this table away. A server-side-empty Movers section still falls
+    through to the static quiet line below (nothing to filter).
+    """
     if not rows:
         return (f'<div class="sec-empty {accent}"><span class="se-t">{_esc(title)}</span>'
                 f'<span class="se-m">{_esc(meta)}</span>'
                 f'<span class="se-n">no signals above threshold</span></div>')
     badge = '<span class="badge">LIVE</span>' if tier == "tier1" else ""
-    return (f'<section class="sec {tier} {accent}">'
+    cls = f"sec {tier} {accent}" + (" mv" if movers else "")
+    none = (f'<div class="sec-empty mv-none" hidden><span class="se-t">{_esc(title)}</span>'
+            '<span class="se-n">nothing above <span class="mv-thr"></span> ex</span></div>'
+            if movers else "")
+    return (f'<section class="{cls}">'
             f'<div class="sec-h"><h2>{_esc(title)}</h2>{badge}'
             f'<span class="sec-m">{_esc(meta)}</span></div>'
-            f'<div class="tscroll">{_table(headers, rows)}</div></section>')
+            f'<div class="tscroll">{_table(headers, rows)}</div>{none}</section>')
 
 
 def _cur_mom_row(h: dict, thr: float) -> str:
@@ -320,8 +387,13 @@ def _uniq_mom_row(h: dict, thr: float) -> str:
 
 def _mover_row(m: dict) -> str:
     pct, pcls = _fmt_pct(m["pct"])
+    # data-div carries the canonical Divine value the slider filters on (client
+    # converts its Exalt threshold to Divine via the embedded rate). Absent value =>
+    # no attribute, so the row is never hidden by the slider.
+    to = m.get("to")
+    dv = f' data-div="{to}"' if to is not None else ""
     return (
-        f"<tr>{_nm(m['name'])}"
+        f"<tr{dv}>{_nm(m['name'])}"
         f'<td class="{pcls}" data-sort="{_ds(m["pct"])}">{pct}</td>'
         f'<td data-sort="{_ds(m["from"])}">{_fmt_price(m["from"])}</td>'
         f'<td data-sort="{_ds(m["to"])}">{_fmt_price(m["to"])}</td>'
@@ -340,8 +412,8 @@ def render_html(d: dict) -> str:
     rate = d.get("exalt_per_divine")
     warn = d.get("rate_warning")
     floor_ex = d.get("floor_exalt")
-    riser_ex = d.get("riser_floor_exalt")
-    bucket_a_ex = d.get("bucket_a_floor_exalt")
+    movers_ex = d.get("movers_floor_exalt")
+    movers_max_ex = d.get("movers_max_exalt")
     if rate:
         rate_chip = (
             '<div class="rate" title="Live Exalt:Divine — Exalted Orbs per 1 Divine Orb">'
@@ -349,9 +421,9 @@ def render_html(d: dict) -> str:
             f'<span class="rv">{rate:,.0f} ex</span></div>')
         foot_rate = (f"Base currency: Divine. Values shown in Divine Orbs; live rate "
                      f"1 div = {rate:,.0f} ex. Momentum floor {floor_ex:g} ex "
-                     f"(= {floor_ex / rate:.3g} div); unique-mover floor {riser_ex:g} ex "
-                     f"(= {riser_ex / rate:.3g} div); Bucket A movers floor {bucket_a_ex:g} ex "
-                     f"(= {bucket_a_ex / rate:.3g} div) at the current rate.")
+                     f"(= {floor_ex / rate:.3g} div). Movers are baked in down to "
+                     f"{movers_ex:g} ex; the value slider sets the live display floor "
+                     f"client-side.")
     else:
         rate_chip = (
             f'<div class="rate warn" title="{_esc(warn or "rate unavailable")}">'
@@ -359,6 +431,21 @@ def render_html(d: dict) -> str:
             '<span class="rv">unavailable</span></div>')
         foot_rate = (f"Base currency: Divine. Values shown in Divine Orbs. {warn or ''} "
                      "Value floor skipped — no live Exalt:Divine rate.").strip()
+
+    # Global value slider — log-scaled Exalt floor, Movers only. Rendered only with a
+    # live rate (client converts its Exalt threshold to Divine via data-rate) and a
+    # computed top end. value=0 == the min, so everything is visible on first load;
+    # the slider JS overrides this from localStorage when a saved position exists.
+    if rate and movers_max_ex:
+        vfilter = (
+            f'<div class="vfilter" data-rate="{rate}" data-min="{movers_ex:g}" '
+            f'data-max="{movers_max_ex:g}">'
+            '<span class="vf-l">Movers floor</span>'
+            '<input class="vf-s" type="range" min="0" max="1000" step="1" value="0" '
+            'aria-label="Minimum mover value in Exalt">'
+            f'<span class="vf-v">&#8805; <span class="vf-n">{movers_ex:g}</span> ex</span></div>')
+    else:
+        vfilter = ""
 
     sections: list[str] = []
     # Bucket A — two blocks per fungible category: Movers (primary, on top, carries
@@ -370,9 +457,9 @@ def render_html(d: dict) -> str:
         mom = [_cur_mom_row(h, p["currency_z"]) for h in g["momentum"]]
         sections += [
             _section(f"{label} · movers",
-                     f"{win_h}h window · risers ≥ {bucket_a_ex:g} ex",
+                     f"{win_h}h window · risers",
                      [label, "%", "From", "To", "24h", "Trace"], mov,
-                     tier="tier1", accent="accent-cur"),
+                     tier="tier1", accent="accent-cur", movers=True),
             _section(f"{label} · momentum",
                      f"|z| ≥ {p['currency_z']:g} · vol ≥ {p['currency_min_volume']:g}",
                      [label, "z", "7d %", "Value (div)", "Volume"], mom,
@@ -384,9 +471,9 @@ def render_html(d: dict) -> str:
     uniq_mov = [_mover_row(m) for m in d["unique_movers"]]
     uniq_mom = [_uniq_mom_row(h, p["unique_z"]) for h in d["unique_momentum"]]
     sections += [
-        _section("Unique movers", f"{win_h}h window · risers ≥ {riser_ex:g} ex",
+        _section("Unique movers", f"{win_h}h window · risers",
                  ["Item", "%", "From", "To", "24h", "Trace"], uniq_mov,
-                 tier="tier1", accent="accent-uniq"),
+                 tier="tier1", accent="accent-uniq", movers=True),
         _section("Unique momentum",
                  f"|z| ≥ {p['unique_z']:g} · listings ≥ {p['unique_min_listings']}",
                  ["Item", "Type", "z", "7d %", "Value (div)", "Listings"], uniq_mom,
@@ -411,6 +498,8 @@ def render_html(d: dict) -> str:
       <div class="stat hero {live_cls}"><div class="sv">{live}</div><div class="sl">Live signals</div></div>
     </div>
 
+    {vfilter}
+
     {''.join(sections)}
 
     <div class="foot">Decision-support only — no auto-trading. Movers = absolute
@@ -427,5 +516,5 @@ def render_html(d: dict) -> str:
         f"<title>PoE2 Signal — {_esc(d['league'])}</title>"
         f"<style>{_FONT_FACE}{_CSS}</style></head>"
         f"<body><div class=\"wrap\">{body}</div>{rate_chip}"
-        f"<script>{_SORT_JS}</script></body></html>"
+        f"<script>{_SORT_JS}</script><script>{_SLIDER_JS}</script></body></html>"
     )

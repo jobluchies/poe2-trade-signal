@@ -9,6 +9,7 @@ can iterate categories generically — no copy-paste. Movers carry a decoded
 sparkline trace (latest snapshot) for an at-a-glance price shape.
 """
 from __future__ import annotations
+import math
 from datetime import datetime, timezone
 
 import config
@@ -24,16 +25,13 @@ from signals.sparkline import trace_stats
 # Governs buy-candidate / position-in-range / momentum surfacing.
 EXALT_FLOOR = 5.0
 
-# Independent, higher floor authored in EXALT, applied ONLY to risers / movers-up.
-# A mover worth flagging should clear a meaningfully higher bar than a buy
-# candidate; also converted to Divine at filter time. No hardcoded Divine values.
-# Now gates UNIQUE (gear) movers only.
-RISER_FLOOR = 10.0
-
-# Lower riser floor for Bucket A (non-gear fungible) movers: cheap currency is
-# still interesting in bulk, so a small bar keeps dust out without hiding low-
-# unit-price bulk goods. Authored in EXALT, converted to Divine at filter time.
-BUCKET_A_RISER_FLOOR = 2.0
+# Movers embed floor, authored in EXALT, applied to risers / movers-up for BOTH
+# Bucket A and uniques. This is now only a JSON-inclusion junk-cutoff: rows below
+# it never reach the page, but rows above it are baked in and the *display* floor
+# is the client-side slider (min == this value). Converted to Divine at filter
+# time via the live rate; no hardcoded Divine values. Replaces the old split
+# RISER_FLOOR (10, uniques) / BUCKET_A_RISER_FLOOR (2, Bucket A) — unified at 5.
+MOVERS_EMBED_FLOOR = 5.0
 
 # Confidence gate for uniques. poe.ninja has no River API for PoE2, so unique
 # prices are estimates — there is no lowConfidenceSparkline flag in the payload,
@@ -114,12 +112,13 @@ def _above_value(rows: list[dict], value_key: str, min_value: float | None) -> l
 
 
 def _risers(rows: list[dict], riser_min_divine: float | None) -> list[dict]:
-    """Movers filter: keep only risers (positive %), above the riser floor.
+    """Movers filter: keep only risers (positive %), above the embed floor.
 
     Decliners are dropped entirely (movers show up-moves only). The floor here is
-    RISER_FLOOR-in-Divine, independent of the buy-candidate EXALT_FLOOR. With no
-    usable rate (riser_min_divine is None) the floor is skipped but decliners are
-    still dropped. Never touches buy-candidate / near-7d-low logic.
+    MOVERS_EMBED_FLOOR-in-Divine, independent of the buy-candidate EXALT_FLOOR, and
+    is now just a junk-cutoff for the embedded payload — the live display floor is
+    the client slider. With no usable rate (riser_min_divine is None) the floor is
+    skipped but decliners are still dropped. Never touches buy-candidate logic.
     """
     up = [r for r in rows if (r.get("pct") or 0) > 0]
     if riser_min_divine is None:
@@ -136,13 +135,40 @@ def _by_direction(rows: list[dict], pct_key: str) -> list[dict]:
     return sorted(rows, key=lambda r: (r.get(pct_key) or 0), reverse=True)
 
 
+def _nice_ceiling(x: float) -> float:
+    """Round x up to the next 1/2/5 × 10ⁿ — a clean top end for the value slider."""
+    if x <= 0:
+        return 10.0
+    exp = math.floor(math.log10(x))
+    base = 10.0 ** exp
+    for m in (1, 2, 5, 10):
+        if x <= m * base:
+            return m * base
+    return 10 * base
+
+
+def _movers_max_exalt(fungible: list[dict], uniques: list[dict],
+                      rate: float | None) -> float | None:
+    """Highest embedded mover value in EXALT, rounded up to a clean slider ceiling.
+
+    None when there's no rate (no slider). Movers carry `to` in Divine; convert via
+    the live rate. Ceiling is kept strictly above the slider min (5 ex) so the top
+    of the range is always reachable even when every mover is cheap.
+    """
+    if not rate:
+        return None
+    tos = [m.get("to") for g in fungible for m in g["movers"]]
+    tos += [m.get("to") for m in uniques]
+    top_div = max((t for t in tos if t is not None), default=0.0)
+    return max(_nice_ceiling(top_div * rate), 2 * MOVERS_EMBED_FLOOR)
+
+
 def collect(con, league: str = config.LEAGUE, *,
             cur_z: float = 2.0, cur_min_volume: float = 1.0,
             uniq_z: float = 2.0, uniq_min_listings: int = UNIQUE_MIN_LISTINGS,
             window_sec: int = 86400, top: int = 25,
             min_value: float = EXALT_FLOOR,
-            riser_floor: float = RISER_FLOOR,
-            bucket_a_floor: float = BUCKET_A_RISER_FLOOR) -> dict:
+            movers_floor: float = MOVERS_EMBED_FLOOR) -> dict:
     now = config.now_ts()
 
     # Live Exalt:Divine rate from the Divine Orb line. Fallback chain: live line ->
@@ -157,21 +183,20 @@ def collect(con, league: str = config.LEAGUE, *,
 
     # Both floors are authored in EXALT; convert to Divine thresholds. With no usable
     # rate we keep everything (None) and surface a warning rather than filter on a
-    # garbage cut. min_value -> momentum/buy-candidate floor; riser_floor -> movers.
+    # garbage cut. min_value -> momentum/buy-candidate floor; movers_floor -> the
+    # single movers embed cut (Bucket A + uniques), then the client slider re-filters.
     rate_warning = None
     if exalt_per_divine:
         min_value_divine = min_value / exalt_per_divine
-        riser_divine = riser_floor / exalt_per_divine
-        bucket_a_divine = bucket_a_floor / exalt_per_divine
+        movers_divine = movers_floor / exalt_per_divine
     else:
-        min_value_divine = riser_divine = bucket_a_divine = None
+        min_value_divine = movers_divine = None
         rate_warning = ("No Exalt:Divine rate available (Divine Orb line missing/out "
                         "of band and no last-known-good) — value floors skipped this run.")
 
     # Per-category fungible groups — movers (primary) + momentum for every Bucket A
-    # category. Bucket A movers drop decliners and apply the low BUCKET_A_RISER_FLOOR
-    # (cheap bulk currency still counts). Momentum keeps EXALT_FLOOR; the higher
-    # RISER_FLOOR now gates unique (gear) movers only.
+    # category. Bucket A movers drop decliners and apply the unified MOVERS_EMBED_FLOOR
+    # (junk-cutoff only; the slider is the real display floor). Momentum keeps EXALT_FLOOR.
     fungible: list[dict] = []
     for key, _exch_type, label in config.EXCHANGE_CATEGORIES:
         rows = db.latest_currency(con, league, key)
@@ -181,13 +206,13 @@ def collect(con, league: str = config.LEAGUE, *,
         spark = _spark_by_id(_currency_traces(rows), "currency_id")
         snap = _snap_traces(db.currency_series(con, league, key),
                             lambda r: r["currency_id"], now, window_sec)
-        # Bucket A movers gate on the low BUCKET_A_RISER_FLOOR, not the unique floor.
+        # Bucket A movers gate on the unified MOVERS_EMBED_FLOOR (same as uniques).
         mom = _above_value(currency_momentum(
             con, league, z_threshold=cur_z, min_volume=cur_min_volume, category=key),
             "primary_value", min_value_divine)
         mov = _risers(
             currency_movers(con, league, window_sec=window_sec, top=top, category=key),
-            bucket_a_divine)  # low Bucket A floor, not the unique floor
+            movers_divine)  # unified movers embed floor
         mov = _attach_spark(mov, spark, lambda m: m["currency_id"], "prices")
         mov = _attach_spark(mov, snap, lambda m: m["currency_id"], "snap_prices")
         fungible.append({
@@ -212,11 +237,14 @@ def collect(con, league: str = config.LEAGUE, *,
     uniq_key = lambda m: (m["item_type"], m["details_id"])
     uniq_movers = _risers(unique_movers(
         con, league, window_sec=window_sec, top=top, min_listings=uniq_min_listings),
-        riser_divine)
+        movers_divine)  # unified movers embed floor
     uniq_movers = _attach_spark(uniq_movers, uniq_spark, uniq_key, "prices")
     uniq_movers = _attach_spark(uniq_movers, uniq_snap, uniq_key, "snap_prices")
 
     live = sum(len(g["momentum"]) for g in fungible) + len(uniq_momentum)
+
+    # Top of the client value slider: highest embedded mover (Exalt), rounded up.
+    movers_max_exalt = _movers_max_exalt(fungible, uniq_movers, exalt_per_divine)
 
     return {
         "league": league,
@@ -229,19 +257,19 @@ def collect(con, league: str = config.LEAGUE, *,
         "unique_entities": _entity_count(con, "unique_snapshot", league),
         "live_signals": live,
         # Live display/floor context: Exalt per 1 Divine (None if unavailable), the
-        # two Exalt-authored floors, and a warning when they had to be skipped.
+        # momentum floor, the single movers embed floor, the slider's top end, and a
+        # warning when the floors had to be skipped.
         "exalt_per_divine": exalt_per_divine,
         "floor_exalt": min_value,
-        "riser_floor_exalt": riser_floor,
-        "bucket_a_floor_exalt": bucket_a_floor,
+        "movers_floor_exalt": movers_floor,
+        "movers_max_exalt": movers_max_exalt,
         "rate_warning": rate_warning,
         "params": {
             "currency_z": cur_z, "currency_min_volume": cur_min_volume,
             "unique_z": uniq_z, "unique_min_listings": uniq_min_listings,
             "window_sec": window_sec, "top": top,
-            "min_value": min_value,       # momentum floor, authored in Exalt
-            "riser_floor": riser_floor,   # unique movers-up floor, authored in Exalt
-            "bucket_a_floor": bucket_a_floor,  # Bucket A movers-up floor, in Exalt
+            "min_value": min_value,         # momentum floor, authored in Exalt
+            "movers_floor": movers_floor,   # unified movers embed floor, in Exalt
         },
         # Bucket A: one group per fungible category, each with movers (primary) +
         # momentum. Renderers iterate this generically.
