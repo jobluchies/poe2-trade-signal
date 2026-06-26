@@ -325,6 +325,7 @@ def _mover_row(m: dict) -> str:
         f'<td class="{pcls}" data-sort="{_ds(m["pct"])}">{pct}</td>'
         f'<td data-sort="{_ds(m["from"])}">{_fmt_price(m["from"])}</td>'
         f'<td data-sort="{_ds(m["to"])}">{_fmt_price(m["to"])}</td>'
+        f'<td class="spark">{_esc(_spark(m.get("snap_prices")))}</td>'
         f'<td class="spark">{_esc(_spark(m.get("prices")))}</td></tr>'
     )
 
@@ -370,7 +371,7 @@ def render_html(d: dict) -> str:
         sections += [
             _section(f"{label} · movers",
                      f"{win_h}h window · risers ≥ {riser_ex:g} ex",
-                     [label, "%", "From", "To", "Trace"], mov,
+                     [label, "%", "From", "To", "24h", "Trace"], mov,
                      tier="tier1", accent="accent-cur"),
             _section(f"{label} · momentum",
                      f"|z| ≥ {p['currency_z']:g} · vol ≥ {p['currency_min_volume']:g}",
@@ -384,7 +385,7 @@ def render_html(d: dict) -> str:
     uniq_mom = [_uniq_mom_row(h, p["unique_z"]) for h in d["unique_momentum"]]
     sections += [
         _section("Unique movers", f"{win_h}h window · risers ≥ {riser_ex:g} ex",
-                 ["Item", "%", "From", "To", "Trace"], uniq_mov,
+                 ["Item", "%", "From", "To", "24h", "Trace"], uniq_mov,
                  tier="tier1", accent="accent-uniq"),
         _section("Unique momentum",
                  f"|z| ≥ {p['unique_z']:g} · listings ≥ {p['unique_min_listings']}",
@@ -414,8 +415,10 @@ def render_html(d: dict) -> str:
 
     <div class="foot">Decision-support only — no auto-trading. Movers = absolute
     %-change from accumulated snapshot history (risers only; cold until ≥2 snapshots
-    span the window), each with a 7-bucket price-trace sparkline. Momentum = run-#1
-    sparkline z-score. {foot_rate}</div>
+    span the window). Each mover carries two traces: <b>24h</b> = our own snapshot
+    path over the window (sparse until hourly history fills in); <b>Trace</b> =
+    poe.ninja's ~7-day daily sparkline. Momentum = run-#1 sparkline z-score.
+    {foot_rate}</div>
     """
 
     return (

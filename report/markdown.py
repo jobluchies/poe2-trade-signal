@@ -72,11 +72,12 @@ def _unique_momentum_table(rows: list[dict]) -> list[str]:
 def _movers_table(rows: list[dict], label: str) -> list[str]:
     if not rows:
         return ["_Needs ≥2 snapshots spanning the window, or no risers above the floor._", ""]
-    out = [f"| {label} | % | from | to | trace |", "|---|--:|--:|--:|---|"]
+    out = [f"| {label} | % | from | to | 24h | trace |", "|---|--:|--:|--:|---|---|"]
     for m in rows:
         out.append(
             f"| {m['name']} | {_arrow(m['pct'])} {m['pct']:+.2f} | "
-            f"{_fmt(m['from'])} | {_fmt(m['to'])} | `{_sparkbar(m.get('prices'))}` |")
+            f"{_fmt(m['from'])} | {_fmt(m['to'])} | `{_sparkbar(m.get('snap_prices'))}` | "
+            f"`{_sparkbar(m.get('prices'))}` |")
     out.append("")
     return out
 
