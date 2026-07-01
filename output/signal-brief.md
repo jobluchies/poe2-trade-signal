@@ -2,16 +2,16 @@
 type: poe2-signal-brief
 league: "HC Runes of Aldur"
 league_day: 32
-generated: 2026-07-01T10:13:03Z
-snapshots: 102
-currency_signals: 14
-unique_signals: 9
+generated: 2026-07-01T13:44:16Z
+snapshots: 103
+currency_signals: 12
+unique_signals: 16
 tags: [poe2, market-signal]
 ---
 
 # PoE2 Signal Brief — HC Runes of Aldur
 
-> Day 32 · generated 2026-07-01T10:13:03Z · 102 snapshot(s) · 543 fungibles / 647 uniques tracked · values in Divine · 1 div = 124 ex (live)
+> Day 32 · generated 2026-07-01T13:44:16Z · 103 snapshot(s) · 543 fungibles / 647 uniques tracked · values in Divine · 1 div = 124 ex (live)
 
 Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute %-change from our own snapshot history (risers only).
 
@@ -21,20 +21,21 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 | Currency | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Vaal Blacksmith's Infuser | 🟢 +804.98 | 0.05525 | 0.5 | `▁▁▁▁▁▁▄█` | ` ██▂ ▁▂` |
-| Perfect Orb of Augmentation | 🟢 +177.97 | 0.1271 | 0.3533 | `▁▁▁▁▁▂▃█` | `▁▆▁▂▄█▄` |
-| Ancient Infuser | 🟢 +150.89 | 0.09586 | 0.2405 | `▃▄▄▃▂▁▅█` | `▂▁▂▂▃▃█` |
-| Vaal Catalysing Infuser | 🟢 +37.47 | 0.7929 | 1.09 | `▁▂▂▄▄█▃▄` | `▄▃▁▃▄▅█` |
-| Perfect Orb of Transmutation | 🟢 +36.83 | 0.07027 | 0.09615 | `▂▃▃▃▂▁▃█` | `▁▄█▇▂▃▆` |
-| Orb of Annulment | 🟢 +35.87 | 0.7022 | 0.9541 | `▁▂▂▂▂▂█▅` | `▃▂▁▁▁▅█` |
-| Perfect Exalted Orb | 🟢 +23.94 | 2.84 | 3.52 | `▁▂▂▂▂▂▅█` | `█▇▆▁▁▂▆` |
-| Perfect Chaos Orb | 🟢 +19.89 | 3.62 | 4.34 | `▂▂▂▁▂▂▃█` | `▃▂▁▄▄▅█` |
+| Vaal Blacksmith's Infuser | 🟢 +182.88 | 0.03931 | 0.1112 | `▁▁▁▁▁▄█▂` | `█▅▁▃▄▁▄` |
+| Perfect Orb of Augmentation | 🟢 +150.48 | 0.1147 | 0.2873 | `▁▁▁▁▂▃█▆` | `▁▂▃▃▂▂█` |
+| Perfect Orb of Transmutation | 🟢 +45.74 | 0.0658 | 0.0959 | `▃▃▃▂▁▃██` | `▁▄█▅▂▂▆` |
+| Vaal Cultivation Orb | 🟢 +41.24 | 1.77 | 2.5 | `▁▁▂▂▂▅█▇` | `▁▇█▅▇▁▅` |
+| Cryptic Key | 🟢 +39.51 | 0.2754 | 0.3842 | `▂▁▃▄▇█▃█` | `█▄▄▁▄▄▇` |
+| Perfect Exalted Orb | 🟢 +28.78 | 2.78 | 3.58 | `▁▁▁▁▁▄▇█` | `█▇▅▁▁▂▇` |
+| Perfect Chaos Orb | 🟢 +27.25 | 3.78 | 4.81 | `▂▂▁▁▁▂▅█` | `▂▁▁▃▄▄█` |
+| Orb of Annulment | 🟢 +25.83 | 0.7843 | 0.9869 | `▂▁▁▁▁█▄▅` | `▃▂▁▁▂▅█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
 | Currency | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Orb of Annulment | +2.02 | 🟢 76.42 | 0.9541 | 138.7 |
+| Perfect Orb of Augmentation | +2.32 | 🟢 303.8 | 0.2873 | 12.88 |
+| Perfect Chaos Orb | +2.10 | 🟢 36.87 | 4.81 | 137.8 |
 
 ## Fragments
 
@@ -42,11 +43,9 @@ Decision-support only. Momentum is run-#1 sparkline z-score; movers are absolute
 
 | Fragments | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Cowardly Fate | 🟢 +71.12 | 0.5844 | 1 | `▁▇▇▇█▇▇▇` | `█▅▁▃▃▆▁` |
-| Kulemak's Invitation | 🟢 +24.50 | 3.02 | 3.76 | `▁▁▂▂▃▅▅█` | `▁▁▄▅▄▅█` |
-| Breachlord Sac | 🟢 +2.23 | 8.52 | 8.71 | `▃▅▇██▆▁▃` | `▁▄█▆▄▅▄` |
-| Ancient Crisis Fragment | 🟢 +1.96 | 1.02 | 1.04 | `▆▄▁▇█▃▅▃` | `▄▁▅████` |
-| Faded Crisis Fragment | 🟢 +0.33 | 6.06 | 6.08 | `█▇▁▃▅▂▂▃` | `▁▃▇████` |
+| Cowardly Fate | 🟢 +95.91 | 0.5666 | 1.11 | `▃▃▃▆▁▃▃█` | `▃▁▂▃▃▆█` |
+| Kulemak's Invitation | 🟢 +21.05 | 3.04 | 3.68 | `▁▁▂▃▅▅█▇` | `▁▂▅▅▄▅█` |
+| Victorious Fate | 🟢 +11.00 | 1 | 1.11 | `▇▁▁▇▇▇█` | `▃▁▁▅▁▄█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
@@ -58,30 +57,26 @@ _No signals above threshold._
 
 | Runes | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Warding Rune of Reinforcement | 🟢 +1276.61 | 0.008441 | 0.1162 | `▁▅▅▄▅▅▇█` | `▁▂▅▅▃▂█` |
-| Lesser Body Rune | 🟢 +883.09 | 0.005912 | 0.05812 | `▁▄▂▂▆▆▆█` | `▁▂▁▅▇▆█` |
+| Warding Rune of Reinforcement | 🟢 +4462.30 | 0.005666 | 0.2585 | `▂▁▁▁▁▃▃█` | `▁▁▃▂▂▂█` |
 | Warding Rune of Disintegration | 🟢 +877.67 | 0.005912 | 0.0578 | `▁▃▆█` | `▃▃ ▁ ▁█` |
-| Warding Rune of Nourishment | 🟢 +372.37 | 0.01169 | 0.05522 | `▁▇▇▇▇█▇` | `▂▁▁▃█▃▄` |
-| Iron Rune | 🟢 +343.97 | 0.01169 | 0.0519 | `██▁▂▃▇▇▃` | `▄▃▁▂▂▄█` |
-| Thane Leld's Rune of Spring | 🟢 +283.42 | 0.03547 | 0.136 | `▁▄██▅▅` | `▃▂▁▁▂▃█` |
-| Lesser Iron Rune | 🟢 +188.92 | 0.01534 | 0.04432 | `▃▅▂▁▁▄██` | `▁▃▄█▅▄▇` |
-| Katla's Gloom | 🟢 +156.88 | 0.224 | 0.5754 | `▁▁▂▃▆█▇▇` | `▂▁▁▄▂▂█` |
-| Thane Girt's Rune of Wildness | 🟢 +127.33 | 0.04091 | 0.093 | `▁▁▂▂▄▅██` | `▂▂▃▂▁▃█` |
-| Storm Rune | 🟢 +113.57 | 0.02004 | 0.0428 | `▃▆▆▂▆█▁▂` | `▁▂▁▆▂█▇` |
-| Saqawal's Rune of the Sky | 🟢 +100.06 | 0.1595 | 0.3191 | `▁▂▅▇██▃▃` | `▃▂▂▅▁▄█` |
+| Betrayal of Aldur | 🟢 +782.61 | 0.1133 | 1 | `▁▁▁▁▁█` | `▁  ▁  ▁` |
+| Vorana's Carnage | 🟢 +404.29 | 0.1983 | 1 | `▁▁▁█▂▂▂█` | `` |
+| Greater Rune of Tithing | 🟢 +211.00 | 3 | 9.33 | `▃▄▄▄▁███` | `▃▁▁▂▂▄█` |
+| Thane Girt's Rune of Wildness | 🟢 +163.21 | 0.034 | 0.08949 | `▁▁▂▄▅███` | `▂▁▃▂▁▃█` |
+| Greater Rune of Alacrity | 🟢 +125.00 | 2 | 4.5 | `▂▂▂▁▁▃▅█` | `▃▁█▄▃▃▇` |
+| Ancient Rune of Retaliation | 🟢 +118.01 | 0.02266 | 0.0494 | `▁▂██` | ` ██▁▁▂▂` |
+| Thane Leld's Rune of Spring | 🟢 +117.08 | 0.05666 | 0.123 | `▁▇█▃▃▂` | `▂▁▁▁▁██` |
+| Storm Rune | 🟢 +111.46 | 0.04695 | 0.09928 | `▆▆▂▆█▁▂█` | `▂▁▂▂▂▇█` |
 | Ancient Rune of Witchcraft | 🟢 +97.81 | 0.02922 | 0.0578 | `▁▁▁▃▅█` | `▃▁▁▁▂▄█` |
-| Countess Seske's Rune of Archery | 🟢 +86.51 | 0.1142 | 0.213 | `▁▁▂▃▄▅▇█` | `▃▂▅▆▃▁█` |
-| Greater Rune of Alacrity | 🟢 +83.50 | 2 | 3.67 | `▃▃▃▁▁▄█` | `▅▁██▅▃█` |
-| Greater Rune of Tithing | 🟢 +80.00 | 5 | 9 | `▃▃▄▄▄▁██` | `▃▂▁▃▃▃█` |
-| Rune of the Hunt | 🟢 +79.49 | 0.03701 | 0.06643 | `▂▇▇▇▄▅█▁` | `▂▁▂▁▄█▆` |
+| Lesser Iron Rune | 🟢 +91.29 | 0.02595 | 0.04964 | `▄▂▁▁▃▇▇█` | `▁▃▂█▅▄▇` |
+| Countess Seske's Rune of Archery | 🟢 +81.69 | 0.1016 | 0.1846 | `▁▂▃▄▅▇█▆` | `▂▃▅█▃▁▆` |
+| Rune of Consistency | 🟢 +72.28 | 0.1461 | 0.2517 | `` | `▁▁▁ ▁▄█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
 | Runes | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Saqawal's Rune of the Sky | +2.10 | 🟢 250.1 | 0.3191 | 1.12 |
-| Masterwork Rune | +2.23 | 🟢 205.3 | 0.6672 | 7.45 |
-| Greater Rune of Tithing | +2.29 | 🟢 58.82 | 9 | 1.5 |
+| Greater Rune of Tithing | +2.23 | 🟢 62.32 | 9.33 | 9.33 |
 
 ## Essences
 
@@ -89,27 +84,27 @@ _No signals above threshold._
 
 | Essences | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Lesser Essence of Sorcery | 🟢 +3856.19 | 0.005844 | 0.2312 | `▆▄▁█` | `▁▂▁▁▁▅█` |
-| Lesser Essence of Grounding | 🟢 +2884.26 | 0.005844 | 0.1744 | `▁▁▂▂██` | `▂▁▃▃▂▁█` |
-| Lesser Essence of Command | 🟢 +1773.72 | 0.005844 | 0.1095 | `▅▁█` | `█▂▁   █` |
-| Essence of Electricity | 🟢 +894.01 | 0.01169 | 0.1162 | `▂▁▁██` | `▄▁▅▆▆▄█` |
+| Lesser Essence of Grounding | 🟢 +2771.32 | 0.005844 | 0.1678 | `▁▁▂▂███` | `▃▂▂▄▂▁█` |
+| Essence of Electricity | 🟢 +857.23 | 0.01169 | 0.1119 | `▂▁▁██▅` | `▄▁▅▆▆▄█` |
 | Essence of Ice | 🟢 +742.61 | 0.006036 | 0.05086 | `▁▆█` | `▄▁▃▆█▁█` |
-| Essence of Ruin | 🟢 +469.13 | 0.02922 | 0.1663 | `▁▁▁▇█` | `   █  ▁` |
-| Perfect Essence of Haste | 🟢 +342.95 | 0.03506 | 0.1553 | `▃▆▅▁▂▄█▆` | `▃▂█▂▁▂▆` |
-| Greater Essence of Thawing | 🟢 +152.22 | 0.02093 | 0.05279 | `▂▂▁▁▃▅▆█` | `▁▃▂▂█▃▅` |
-| Perfect Essence of Ice | 🟢 +139.05 | 0.02922 | 0.06985 | `█▅▄▂▁▁` | `▁▁▁▂█▄▄` |
-| Perfect Essence of Opulence | 🟢 +138.71 | 0.02922 | 0.06975 | `▁▁▁█` | `▄ ▅▆█▁▄` |
-| Lesser Essence of Abrasion | 🟢 +97.81 | 0.02922 | 0.0578 | `▂▂▁▁██▄` | `▂▃█▂▆▁▃` |
-| Greater Essence of Ruin | 🟢 +93.17 | 0.1522 | 0.294 | `▃▂▂▁▁▂█▇` | `▁▂▃▃▃▄█` |
+| Essence of Ruin | 🟢 +487.01 | 0.02833 | 0.1663 | `▁▁▇█` | `   █  ▁` |
+| Greater Essence of Thawing | 🟢 +277.71 | 0.01925 | 0.07271 | `▁▁▁▂▄▄▆█` | `▁▂▂▂█▁█` |
+| Essence of Abrasion | 🟢 +257.40 | 0.04695 | 0.1678 | `▂▃▃▂▁▁▆█` | `▂▁▃▃▃▃█` |
+| Essence of the Breach | 🟢 +211.35 | 0.0608 | 0.1893 | `▂▄▂▁▁▄▅█` | `▁▇▄▆▆▅█` |
+| Essence of Opulence | 🟢 +146.82 | 0.2266 | 0.5593 | `` | `▂▂▃▃▁▄█` |
+| Essence of Delirium | 🟢 +117.38 | 0.06799 | 0.1478 | `▁▁▁▁▁█` | `▃▃▄▅▁▃█` |
+| Perfect Essence of Opulence | 🟢 +114.68 | 0.02833 | 0.06082 | `▁▁█▇` | `▅ ▆▆█▁▄` |
+| Lesser Essence of Abrasion | 🟢 +104.02 | 0.02833 | 0.0578 | `▂▁▁██▄` | `▂▃█▂▆▁▃` |
+| Greater Essence of Abrasion | 🟢 +82.01 | 0.03029 | 0.05513 | `▁▂▄▆▆▄▆█` | `▄█▂▄▁▁▇` |
 | Lesser Essence of Haste | 🟢 +78.04 | 0.1207 | 0.2149 | `▁█` | `▄█ ▁▇▄▇` |
-| Greater Essence of Opulence | 🟢 +75.81 | 0.07764 | 0.1365 | `▁▄▅▅█▅▅▆` | `▄▃▁▃█▄▅` |
+| Essence of the Abyss | 🟢 +77.83 | 0.04524 | 0.08045 | `▁▁▄▂▁▄▆█` | `▁▂▆▄▃▅█` |
+| Perfect Essence of Haste | 🟢 +77.30 | 0.08432 | 0.1495 | `▆▅▁▂▄█▆▆` | `▃▃█▂▁▂▆` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
 | Essences | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Greater Essence of Ruin | +2.23 | 🟢 589.4 | 0.294 | 1.08 |
-| Perfect Essence of Battle | +2.18 | 🟢 142.3 | 0.2947 | 1.96 |
+| Perfect Essence of Battle | +2.32 | 🟢 150.3 | 0.3079 | 2.36 |
 
 ## Soul Cores
 
@@ -117,26 +112,27 @@ _No signals above threshold._
 
 | Soul Cores | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Zalatl's Soul Core of Insulation | 🟢 +6526.91 | 0.03018 | 2 | `▁▁▁██` | `▂ ▂▁█▅▇` |
+| Zalatl's Soul Core of Insulation | 🟢 +3213.45 | 0.03018 | 1 | `▅▅▅██▁` | `▂ ▂▁█▄▂` |
 | Guatelitzi's Soul Core of Endurance | 🟢 +2605.44 | 0.2957 | 8 | `▁▁██` | `▁▁▂ ▂ █` |
 | Cholotl's Soul Core of War | 🟢 +1789.80 | 0.02922 | 0.5522 | `▁█` | `  ▂  ▁█` |
 | Soul Core of Puhuarte | 🟢 +483.09 | 0.1715 | 1 | `▁▁▁▁█` | `    ▁ ▁` |
-| Soul Core of Xopec | 🟢 +168.69 | 0.08869 | 0.2383 | `▅▅▁▁█` | `▁▁▂▄▃▄█` |
-| Soul Core of Ticaba | 🟢 +138.33 | 0.7007 | 1.67 | `▃███▁▁▃▃` | `▁▅█▅▁▄▆` |
-| Raven-Touched Shard | 🟢 +71.43 | 87.5 | 150 | `▂▂▂▁▂▂█` | `▁▂▃▂▂▃█` |
-| Soul Core of Citaqualotl | 🟢 +50.89 | 0.2472 | 0.373 | `▇▇█▅▄▁▃▆` | `▁▂▂▁▂▇█` |
-| Jiquani's Thesis | 🟢 +45.74 | 129 | 188 | `▁█` | `▃ ▆▅▁ █` |
-| Soul Core of Cholotl | 🟢 +36.79 | 7.8 | 10.67 | `▅▁▆▄▃▆██` | `▁▂▃▇█▅▆` |
-| Soul Core of Topotante | 🟢 +31.59 | 0.1016 | 0.1337 | `▂▃▅█▃▁▇▇` | `▁▂▃▄▇▆█` |
-| Soul Core of Jiquani | 🟢 +25.00 | 2 | 2.5 | `▄▂▅▇▁█▃` | `▄▃▃▃▁▇█` |
-| Soul Core of Opiloti | 🟢 +17.51 | 0.1125 | 0.1322 | `▃██▆▅▁▅▄` | `▁▁▃▃▅██` |
-| Hayoxi's Soul Core of Heatproofing | 🟢 +11.91 | 0.2805 | 0.3139 | `▂▁▁▁▅█` | `▁▁▂▄▃▆█` |
+| Quipolatl's Soul Core of Flow | 🟢 +341.31 | 0.2266 | 1 | `▁█▆▄▄▄` | `█   ▁▁▁` |
+| Soul Core of Xopec | 🟢 +158.54 | 0.08869 | 0.2293 | `▅▅▁▁██` | `▁▁▂▄▃▄█` |
+| Soul Core of Topotante | 🟢 +74.04 | 0.09854 | 0.1715 | `▂▃▅▂▁▄▅█` | `▁▂▂▃▅▅█` |
+| Soul Core of Tzamoto | 🟢 +74.03 | 0.09642 | 0.1678 | `██▁▁▇` | `▁▅ ▅▄▅█` |
+| Soul Core of Cholotl | 🟢 +70.38 | 7.8 | 13.29 | `▁▅▄▃▅▆▆█` | `▁▄▃█▅▃▇` |
+| Soul Core of Zalatl | 🟢 +37.49 | 0.4929 | 0.6777 | `▅▅███▁▁` | `▃▃▃▄▁▆█` |
+| Tzamoto's Soul Core of Ferocity | 🟢 +33.50 | 2 | 2.67 | `▁▁▃██▁▁▆` | `▃▁▅█▅▃▆` |
+| Topotante's Soul Core of Dampening | 🟢 +33.00 | 1 | 1.33 | `▆▁▁▁▁▆█` | ` ▁▁▁▁▁█` |
+| Raven-Touched Shard | 🟢 +25.27 | 87.25 | 109.3 | `▂▂▁▂▂█▄` | `▁▃▃▁▃▅█` |
+| Xopec's Soul Core of Power | 🟢 +25.00 | 8 | 10 | `▁▃▃▃▃█` | ` ▅▁▃▅▇█` |
+| Soul Core of Opiloti | 🟢 +21.81 | 0.1137 | 0.1385 | `██▆▅▁▅▄▅` | `▁▁▃▃▄█▇` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
 | Soul Cores | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Raven-Touched Shard | +2.36 | 🟢 240.9 | 150 | 25 |
+| Raven-Touched Shard | +2.11 | 🟢 207.4 | 109.3 | 109.3 |
 
 ## Omens
 
@@ -144,24 +140,23 @@ _No signals above threshold._
 
 | Omens | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Omen of Reinforcements | 🟢 +253.18 | 0.05728 | 0.2023 | `▂▁▁▅▄▅█` | `▁▅ ▃▁▆█` |
-| Omen of the Blessed | 🟢 +102.28 | 0.2193 | 0.4436 | `▁▁▂▅▅▇▆█` | `▁▁▂▅▄▁█` |
+| Omen of the Blessed | 🟢 +151.75 | 0.1455 | 0.3663 | `▁▂▅▅▇▆█▆` | `▂▁▃█▄▃▇` |
+| Omen of the Sovereign | 🟢 +129.58 | 0.1156 | 0.2654 | `▂▃▁▃▃▁▄█` | `▂▁▃▄▂▄█` |
+| Omen of Sinistral Exaltation | 🟢 +74.69 | 0.03058 | 0.05342 | `▃▃▂▁▁▃▇█` | `▁█▆▂▄▃▆` |
+| Omen of Dextral Annulment | 🟢 +60.04 | 9.06 | 14.5 | `▁▁▁▁▁▃▆█` | `▁▃▃▁▄▂█` |
 | Omen of Secret Compartments | 🟢 +50.00 | 2 | 3 | `▁▁▁██` | `▁ ▁▁▃▃█` |
-| Omen of the Sovereign | 🟢 +37.06 | 0.1206 | 0.1653 | `▃▄▅▁▅▅▁█` | `▃▁▃█▃▆█` |
-| Omen of Dextral Annulment | 🟢 +35.43 | 9.71 | 13.15 | `▁▁▁▁▂▁▄█` | `▁▄▃▁▃▃█` |
-| An Audience with the King | 🟢 +17.34 | 0.8138 | 0.9549 | `██▂▁▇█▅▂` | `▃▁▅▇▅▆█` |
-| Omen of Light | 🟢 +16.58 | 9.11 | 10.62 | `▁▂▂▃▄▄▇█` | `▃▃▃▁▁▁█` |
-| Omen of Sinistral Crystallisation | 🟢 +16.25 | 0.2253 | 0.2619 | `▁▆█▆▃▄█▇` | `▁▄▅▃█▄▅` |
-| Omen of the Blackblooded | 🟢 +15.96 | 0.4073 | 0.4723 | `▃██▃▃▁▁▃` | `▁▇▅▅███` |
+| Omen of Reinforcements | 🟢 +21.07 | 0.1671 | 0.2023 | `▁▁▅▄▅█` | `▁▅ ▃▁▆█` |
+| Omen of Chance | 🟢 +20.00 | 7 | 8.4 | `▂▂▃▃▄█▅▁` | `▁▆█▆▅▄▃` |
+| Omen of the Blackblooded | 🟢 +15.83 | 0.4952 | 0.5736 | `██▃▃▁▁▃▄` | `▁▄▄▄▄▆█` |
+| Omen of Light | 🟢 +15.12 | 9.26 | 10.66 | `▁▁▃▃▄▆██` | `▃▃▃▁▁▁█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
 | Omens | z | 7d % | value (div) | volume |
 |---|--:|--:|--:|--:|
-| Omen of the Blessed | +2.02 | 🟢 637.1 | 0.4436 | 2.59 |
 | Call of the Shadows | +2.24 | 🟢 180 | 0.1374 | 5.36 |
-| Omen of Dextral Annulment | +2.17 | 🟢 65.14 | 13.15 | 223.5 |
-| Omen of Light | +2.26 | 🟢 10.87 | 10.62 | 656.7 |
+| Omen of Dextral Annulment | +2.25 | 🟢 68.6 | 14.5 | 149.8 |
+| Omen of Light | +2.29 | 🟢 11.53 | 10.66 | 670 |
 
 ## Liquid Emotions
 
@@ -169,23 +164,21 @@ _No signals above threshold._
 
 | Liquid Emotions | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Potent Liquid Melancholy | 🟢 +5604.51 | 0.03506 | 2 | `▁▁▁▁▁▁██` | `▁▁▁▁▅██` |
-| Liquid Envy | 🟢 +363.55 | 0.01306 | 0.06054 | `▁▁▁▁▁▁▄█` | `▁▁▁▁█▁▅` |
-| Potent Liquid Ferocity | 🟢 +155.95 | 2.52 | 6.45 | `▁▂▂▂▂▂▃█` | `▁▃▆▃▃▁█` |
-| Liquid Disgust | 🟢 +98.50 | 0.03874 | 0.0769 | `▂▁▂▂▄▄▇█` | `▁▁▅▂▁▁█` |
-| Liquid Despair | 🟢 +80.66 | 0.1339 | 0.2419 | `▁▁▂▅▃▂██` | `▁▄▄▂▁▃█` |
-| Potent Liquid Contempt | 🟢 +78.98 | 3.52 | 6.3 | `▁▁▂▂▂▃▃█` | `▃█▅▃▂▁▇` |
-| Concentrated Liquid Fear | 🟢 +43.73 | 0.3702 | 0.5321 | `▁▂▅▅▃▃█▇` | `▁▆▆▂▅▂█` |
-| Ancient Potent Liquid Melancholy | 🟢 +33.96 | 0.1714 | 0.2296 | `▃▁▁▂▂▃▄█` | `█▆▆▇▃▁▇` |
-| Concentrated Liquid Suffering | 🟢 +28.93 | 1.21 | 1.56 | `▂▁▁▆▇▇██` | `▁█▇▂▆▁▄` |
-| Ancient Concentrated Liquid Fear | 🟢 +13.31 | 0.07694 | 0.08718 | `▅▅▃▃▁▂▇█` | `▁▁▅█▃▂▃` |
-| Ancient Concentrated Liquid Suffering | 🟢 +7.11 | 0.07597 | 0.08137 | `▁▁██▁▁▁▁` | `▁▄█▅▄▇█` |
-| Concentrated Liquid Isolation | 🟢 +6.63 | 4.98 | 5.31 | `▁▃▄▄▅▆█▂` | `▁█▇▄▂▃▃` |
-| Ancient Concentrated Liquid Isolation | 🟢 +6.56 | 0.08181 | 0.08718 | `██▂▁▁▁▁▁` | `▂▅█▂▂▁▁` |
+| Potent Liquid Ferocity | 🟢 +183.11 | 3.02 | 8.55 | `▁▁▁▁▁▂▅█` | `▁▃▄▃▂▁█` |
+| Concentrated Liquid Suffering | 🟢 +101.27 | 0.944 | 1.9 | `▁▁▅▅▅▅▆█` | `▃█▇▃▅▁█` |
+| Potent Liquid Contempt | 🟢 +74.85 | 3.38 | 5.91 | `▁▂▂▂▃▃█▇` | `▅█▆▃▂▁▆` |
+| Ancient Potent Liquid Melancholy | 🟢 +30.24 | 0.1564 | 0.2037 | `▁▁▂▂▃▄█▆` | `█▅▇▅▄▁▅` |
+| Liquid Despair | 🟢 +28.06 | 0.1283 | 0.1643 | `▁▂▅▃▂██▃` | `▂▅▆▂▁▇█` |
+| Concentrated Liquid Fear | 🟢 +22.46 | 0.382 | 0.4678 | `▁▄▄▂▂█▇▄` | `▁▆█▃▄▄▇` |
+| Ancient Concentrated Liquid Fear | 🟢 +9.69 | 0.07649 | 0.0839 | `▅▃▃▁▂▇█▇` | `▁▁▇█▃▃▄` |
+| Ancient Potent Liquid Contempt | 🟢 +7.90 | 3.29 | 3.55 | `▆█▅▂▅█▁▆` | `▃█▅▄▇▂▁` |
+| Ancient Concentrated Liquid Suffering | 🟢 +6.30 | 0.07366 | 0.0783 | `▁██▁▁▁▁▁` | `▁▄█▅▄▇█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
-_No signals above threshold._
+| Liquid Emotions | z | 7d % | value (div) | volume |
+|---|--:|--:|--:|--:|
+| Potent Liquid Ferocity | +2.22 | 🟢 229.2 | 8.55 | 69.83 |
 
 ## Abyssal Bones
 
@@ -193,15 +186,13 @@ _No signals above threshold._
 
 | Abyssal Bones | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Ulaman's Gaze | 🟢 +350.00 | 2 | 9 | `▂▁▂▂▂█` | ` ▁▁ ▁▂█` |
-| Amanamu's Gaze | 🟢 +46.40 | 1.25 | 1.83 | `▁▇▇█▇█▃▃` | `▇█▁▃▁▄▃` |
-| Ancient Rib | 🟢 +44.57 | 5.34 | 7.72 | `▂▁▁▁▃▄▆█` | `▁▂▄▄▄▅█` |
-| Tecrod's Gaze | 🟢 +41.50 | 2 | 2.83 | `▁▄▆▆██▅▄` | `▆█▁▁▂▅▄` |
-| Preserved Collarbone | 🟢 +27.27 | 0.2527 | 0.3216 | `▁▄▆▆▅▆▇█` | `▁▃▄▃▄▅█` |
-| Altered Collarbone | 🟢 +22.32 | 3.27 | 4 | `▁▄█▆▃▃▂▄` | `▁▁▁▅▇▆█` |
-| Ancient Collarbone | 🟢 +20.88 | 3.4 | 4.11 | `▄▅▅▁▃▃█▇` | `▁▄▆▆▅▆█` |
-| Ancient Jawbone | 🟢 +20.26 | 3.8 | 4.57 | `▁▃▅▇▇██▆` | `▆█▄▃▁▃▆` |
-| Preserved Cranium | 🟢 +1.83 | 3.28 | 3.34 | `█▆▂▁▂▃▁▅` | `▄▁▁▂███` |
+| Ulaman's Gaze | 🟢 +375.00 | 2 | 9.5 | `▁▂▂▂██` | ` ▁▁ ▁▂█` |
+| Amanamu's Gaze | 🟢 +80.45 | 1.33 | 2.4 | `▇▇█▇█▁▁▅` | `▇▄▁▂▂▄█` |
+| Tecrod's Gaze | 🟢 +55.56 | 1.8 | 2.8 | `▁▅▅██▂▁▁` | `█▇▁▁▁▆▅` |
+| Ancient Rib | 🟢 +41.86 | 5.59 | 7.93 | `▁▁▁▃▃▅▇█` | `▁▂▄▄▄▅█` |
+| Preserved Collarbone | 🟢 +29.49 | 0.2408 | 0.3118 | `▁▅▅▄▅▇█▇` | `▁▄▃▂▄▆█` |
+| Ancient Collarbone | 🟢 +8.42 | 3.68 | 3.99 | `▅▅▁▃▃█▇▆` | `▁▅▇▇▅▆█` |
+| Ancient Jawbone | 🟢 +7.33 | 3.82 | 4.1 | `▁▄▇▇▇█▆▁` | `▇█▄▂▁▄▄` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
@@ -213,13 +204,15 @@ _No signals above threshold._
 
 | Uncut Gems | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Uncut Spirit Gem (Level 17) | 🟢 +335.02 | 0.05232 | 0.2276 | `▁▁▁▁▁▅█▅` | `▁▁▁▃▂▁█` |
-| Uncut Skill Gem (Level 9) | 🟢 +123.47 | 0.02254 | 0.05037 | `▁▄▄▅▆▆██` | `▁▅▁▅▇▄█` |
-| Uncut Spirit Gem (Level 19) | 🟢 +103.49 | 0.07627 | 0.1552 | `▁▂▂▅▅█▅▂` | `▅▅▅▁▁▄█` |
-| Uncut Skill Gem (Level 11) | 🟢 +93.93 | 0.02338 | 0.04534 | `▁██▇▃▄` | `▃█▆█▁▆▆` |
-| Uncut Spirit Gem (Level 15) | 🟢 +85.68 | 0.1753 | 0.3255 | `▂▁▂█▁▁▁▅` | `▄▃▁▁▅▅█` |
-| Uncut Spirit Gem (Level 5) | 🟢 +78.82 | 0.05844 | 0.1045 | `▁▂▃▇██` | `▃▆▁▃▂▃█` |
-| Uncut Spirit Gem (Level 18) | 🟢 +72.17 | 0.03324 | 0.05723 | `▁▁▁▁▁▂█▄` | `▃▂▂▁▂▄█` |
+| Uncut Spirit Gem (Level 9) | 🟢 +321.33 | 0.03966 | 0.1671 | `▄▅▅▂▂▁█` | `▂▅▄▃▁▂█` |
+| Uncut Skill Gem (Level 11) | 🟢 +309.48 | 0.03966 | 0.1624 | `▂▂▂▁▁█` | `▁▁▂▁▂▁█` |
+| Uncut Spirit Gem (Level 17) | 🟢 +147.79 | 0.06336 | 0.157 | `▁▁▁▁▅█▅▃` | `▁▁▁▂▂▁█` |
+| Uncut Spirit Gem (Level 11) | 🟢 +135.79 | 0.05666 | 0.1336 | `▁▁▆▆▆▆▆█` | `▁▁▂▄█▃▅` |
+| Uncut Skill Gem (Level 9) | 🟢 +126.24 | 0.02024 | 0.04579 | `▁▂▃▅▄██▆` | `▁▃▃▃▇▂█` |
+| Uncut Spirit Gem (Level 18) | 🟢 +64.94 | 0.0332 | 0.05476 | `▁▁▁▁▂█▄▄` | `▃▃▂▁▂▅█` |
+| Uncut Spirit Gem (Level 5) | 🟢 +52.33 | 0.05666 | 0.08631 | `▁▃▆██▅` | `▇▁▂▂▃▆█` |
+| Uncut Spirit Gem (Level 13) | 🟢 +40.86 | 0.05666 | 0.07981 | `▁▂▂▃▃▄██` | `▁▄▃▂▇▄█` |
+| Uncut Spirit Gem (Level 15) | 🟢 +35.30 | 0.1983 | 0.2683 | `▁▂█▁▁▁▅▃` | `▃▂▁▁▇██` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
@@ -231,25 +224,25 @@ _No signals above threshold._
 
 | Lineage Support Gems | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Breachlord's Amalgam | 🟢 +5604.51 | 0.1753 | 10 | `▁▁▂▂▂▂██` | `▄▁▃▅▂▂█` |
-| Tangmazu's Thurible | 🟢 +3322.31 | 0.05844 | 2 | `▁▁▁▁▁▁▁█` | `▁▅█▆▁▆█` |
+| Hayoxi's Fulmination | 🟢 +2038.58 | 0.1169 | 2.5 | `▁▁▁▁█` | `    ▁ █` |
 | Ixchel's Torment | 🟢 +1900.00 | 4 | 80 | `` | `▁▁▁▁▁▁█` |
-| Hayoxi's Fulmination | 🟢 +1610.86 | 0.1169 | 2 | `▁▁▁▁` | `     ▁█` |
-| Uhtred's Rite | 🟢 +503.86 | 0.1656 | 1 | `▂▂▁▁▂▂██` | `▁▁  ▁ ▁` |
-| Arakaali's Lust | 🟢 +478.35 | 0.02661 | 0.1539 | `▁▁▁▁█` | `▁     ▁` |
-| Paquate's Pact | 🟢 +297.93 | 0.2513 | 1 | `▁▁▁▃▃███` | `▁█▃▁▁▁▁` |
-| Einhar's Beastrite | 🟢 +297.84 | 0.05844 | 0.2325 | `▁▂▂▃▄▇██` | `█▁▂▄▂▁▃` |
-| Uruk's Smelting | 🟢 +259.11 | 0.05664 | 0.2034 | `▁▂▃▃▃▃▄█` | `▅█▇▄▅▁█` |
+| Tangmazu's Thurible | 🟢 +1664.91 | 0.05666 | 1 | `▁▁▁▁▁▁█▄` | `▃██▁▃ ▁` |
+| Zarokh's Revolt | 🟢 +1664.91 | 0.05666 | 1 | `▆▆▁█▆` | ` ▁▁▁ ▁▁` |
+| Paquate's Pact | 🟢 +440.25 | 0.1851 | 1 | `▁▁▃▃████` | `▁█▂▁▁▁▁` |
+| Einhar's Beastrite | 🟢 +310.34 | 0.05666 | 0.2325 | `▁▁▂▃▇██` | `█▁▂▄▂▁▃` |
+| Oisín's Oath | 🟢 +291.63 | 0.05666 | 0.2219 | `▁▁▂▃▄▅▆█` | `▂▂▃▂▂▁█` |
+| Uhtred's Rite | 🟢 +287.90 | 0.2578 | 1 | `▂▁▁▂▂███` | `▁▁  ▁ ▁` |
 | Xibaqua's Rending | 🟢 +245.54 | 0.2894 | 1 | `▁▁▁▁▁█` | `` |
-| Oisín's Oath | 🟢 +200.94 | 0.05649 | 0.17 | `▁▁▁▂▄▅▆█` | `▃▂▅▂▂▁█` |
-| Zarokh's Revolt | 🟢 +153.92 | 0.4529 | 1.15 | `▁▇▇▅█` | `▁▂ ▅▄▃█` |
-| Trickster's Shard | 🟢 +142.72 | 0.412 | 1 | `▁▁▁▂▂▂█` | `▁█▆▁▃ ▁` |
-| Uhtred's Constellation | 🟢 +138.13 | 0.7013 | 1.67 | `▂▁▁▂▃▄▁█` | `▁█▃▂▃▃▃` |
-| Bhatair's Vengeance | 🟢 +123.74 | 0.02338 | 0.05231 | `▁▁▂▂▂▃▇█` | `▂▁▂▃▁▁█` |
-| Esh's Prowess | 🟢 +117.76 | 0.1695 | 0.3691 | `▁▃████▂█` | `█ ▆█▂▁▂` |
+| Uruk's Smelting | 🟢 +239.05 | 0.05477 | 0.1857 | `▁▂▁▁▂▃█▇` | `▅█▆▃▄▁▆` |
+| Guatelitzi's Ablation | 🟢 +169.15 | 0.02078 | 0.05593 | `▁▃▃█` | `▂▁▂▃▃▄█` |
+| Uhtred's Constellation | 🟢 +164.55 | 0.6615 | 1.75 | `▁▁▂▃▄▁██` | `▁█▂▂▂▂▃` |
+| Esh's Prowess | 🟢 +151.31 | 0.1417 | 0.3561 | `▃████▁█▇` | `██▂▃▃▁▂` |
+| Bhatair's Vengeance | 🟢 +146.80 | 0.01983 | 0.04894 | `▁▂▂▂▃▇█▇` | `▂▂▃▃▁▁█` |
+| Breachlord's Amalgam | 🟢 +130.95 | 4.33 | 10 | `▁▂▂▂▂███` | `▄▁▃▅▃▃█` |
 | Atziri's Allure | 🟢 +100.00 | 2.5 | 5 | `▅▅▁███` | `▇█▅▁▃▁▂` |
-| Atziri's Impatience | 🟢 +91.08 | 0.111 | 0.2121 | `▁▁▂▂██▆` | `▂ ▇█▄▁▃` |
-| Styrn's Ferocity | 🟢 +70.65 | 0.3193 | 0.5449 | `▁▂▂██▃` | `▁▁▂▄▃▂█` |
+| Breachlord's Rift | 🟢 +100.00 | 1 | 2 | `████▁▁` | `▄▃█▇▄▂▁` |
+| Atziri's Impatience | 🟢 +86.39 | 0.1095 | 0.2041 | `▁▂▂██▆▅` | `▂ ██▂▁▃` |
+| Styrn's Ferocity | 🟢 +64.23 | 0.3193 | 0.5244 | `▁▂▂██▃▃` | `▂▁▂▄▃▅█` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
@@ -257,7 +250,7 @@ _No signals above threshold._
 |---|--:|--:|--:|--:|
 | Ixchel's Torment | +2.44 | 🟢 1900 | 80 | 13.33 |
 | Uhtred's Exodus | +2.11 | 🟢 625 | 145 | 24.17 |
-| Breachlord's Amalgam | +2.13 | 🟢 25 | 10 | 1.67 |
+| Breachlord's Amalgam | +2.11 | 🟢 100 | 10 | 1.67 |
 
 ## Verisium
 
@@ -265,13 +258,14 @@ _No signals above threshold._
 
 | Verisium | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| The Runebinder's Alloy | 🟢 +610.48 | 0.2815 | 2 | `▂▁▁▂▂▂▇█` | `▃▅▁ ▁ █` |
-| Celestial Alloy | 🟢 +295.51 | 0.3565 | 1.41 | `▁▂▂██▆▅▅` | `█▂█▁▂▇▆` |
-| Prismatic Alloy | 🟢 +35.28 | 0.06588 | 0.08912 | `▂▁▁▃▃▆█▆` | `▂▁▂▂█▂▃` |
-| Sovereign Alloy | 🟢 +26.86 | 0.3016 | 0.3826 | `▅▅▇█▅▁▆█` | `▁▃▂▅▆▆█` |
-| Adaptive Alloy | 🟢 +24.51 | 0.06769 | 0.08428 | `▇██▂▁▁▂▄` | `█▂▁▃▂▅▅` |
-| Transcendent Alloy | 🟢 +6.06 | 0.1618 | 0.1716 | `█▅▅▇██▁▇` | `█▆▆▄▅▁▁` |
-| Liquid Verisium | 🟢 +4.96 | 0.1108 | 0.1163 | `▁▁▁▅██▅▅` | `▄▁█▄█▆▆` |
+| The Runebinder's Alloy | 🟢 +394.23 | 0.3379 | 1.67 | `▁▁▂▂▂▇█▇` | `▅▆▁ ▁▁█` |
+| Prismatic Alloy | 🟢 +204.31 | 0.03825 | 0.1164 | `▁▁▃▃▅▇▆█` | `▁▁▃▃█▁▄` |
+| Celestial Alloy | 🟢 +119.30 | 0.4788 | 1.05 | `▁▁█▇▆▅▅▃` | `▇▄▇▁▂█▂` |
+| Transcendent Alloy | 🟢 +51.64 | 0.1824 | 0.2766 | `▃▃▄▄▅▁▄█` | `██▅▆▅▁▇` |
+| Adaptive Alloy | 🟢 +27.40 | 0.09066 | 0.1155 | `▄▄▁▁▁▁▂█` | `▇▂▁▃▂▅█` |
+| Sovereign Alloy | 🟢 +18.34 | 0.3463 | 0.4098 | `▄▆▇▄▁▆▇█` | `▁▂▂▄▆▆█` |
+| Liquid Verisium | 🟢 +14.58 | 0.09827 | 0.1126 | `▁▁▅██▅▅▄` | `▂▁█▄▇▆▆` |
+| The Runefather's Alloy | 🟢 +8.58 | 0.05666 | 0.06152 | `▅█▅▁▁▆` | `▇ ▁▁█▅▅` |
 
 ### Momentum (|z| ≥ 2.0, vol ≥ 1.0)
 
@@ -281,32 +275,44 @@ _No signals above threshold._
 
 | Item | % | from | to | 24h | trace |
 |---|--:|--:|--:|---|---|
-| Bristleboar | 🟢 +2442.96 | 0.00277 | 0.07044 | `██▂▂▂▁▇▇` | `█▆▆▇▁▆▆` |
-| Greed's Embrace | 🟢 +385.85 | 0.02898 | 0.1408 | `▂▂▁▁▁▁██` | `▂▁▁▁▂▃█` |
-| Scold's Bridle | 🟢 +279.31 | 0.02958 | 0.1122 | `▁▁▁▁▁███` | `▃▂▂▁▁██` |
-| Constricting Command | 🟢 +206.81 | 0.1453 | 0.4458 | `▁▁▁▁▁▁██` | `▁▁▁▁▁▂█` |
-| Sadist's Mercy | 🟢 +195.04 | 0.1511 | 0.4458 | `▁▁▁▁▅▅██` | `▇█▅▅▁▄▆` |
-| Cloak of Flame | 🟢 +158.68 | 0.2113 | 0.5466 | `▁▁▆▆▆▆██` | `▄▂▂▁▃▆█` |
-| Crown of the Pale King | 🟢 +140.06 | 0.0619 | 0.1486 | `▁▁████▇▇` | `▄▅▁▁▃██` |
-| The Flesh Poppet | 🟢 +126.21 | 0.1511 | 0.3418 | `▁▆▆▆▂▂██` | `▁▁▂▂▄▄█` |
-| Ventor's Gamble | 🟢 +108.42 | 0.1426 | 0.2972 | `▁▁▁▁▁▁▁█` | `▄▁▂▁▁▂█` |
-| Ghostmarch | 🟢 +108.42 | 0.1426 | 0.2972 | `▁▁▆▆▆▆██` | `▃▇▇▄▁▇█` |
-| Myris Uxor | 🟢 +108.42 | 0.1426 | 0.2972 | `▁▁████▇▇` | `▅▁▅▃▁█▇` |
-| Svalinn | 🟢 +100.38 | 0.3708 | 0.743 | `▂▂███▅▁▁` | `▆▁▂▆▁█▇` |
-| Twisted Empyrean | 🟢 +100.00 | 2 | 4 | `▁▇▇▇████` | `▁▁▅▁▁██` |
-| Cruel Hegemony | 🟢 +77.14 | 0.1426 | 0.2526 | `▁▁▂▂▂▁▁█` | `▁▁▂▁▁▂█` |
-| Bramblejack | 🟢 +75.55 | 0.07576 | 0.133 | `▂▂▁▁▁▁██` | `▇███▂▁▇` |
+| Windscream | 🟢 +467.66 | 0.02956 | 0.1678 | `▁▁▁▁▁▁▁█` | `▅▆▆▁▁▁█` |
+| Scold's Bridle | 🟢 +326.59 | 0.02956 | 0.1261 | `▁▁▁▁▇▇▇█` | `▃▂▁▁▁▇█` |
+| Sadist's Mercy | 🟢 +310.92 | 0.1511 | 0.6209 | `▁▁▁▃▃▅▅█` | `▆▇▅▅▁▄█` |
+| Lightning Coil | 🟢 +285.57 | 0.0402 | 0.155 | `▁▁▁▁▁▁▁█` | `▂▁▂▂▂▁█` |
+| Hrimnor's Hymn | 🟢 +257.02 | 0.1445 | 0.5159 | `▁▁▁▁▁▁▁█` | `▃▁▁▁▁▁█` |
+| Constricting Command | 🟢 +233.16 | 0.1511 | 0.5034 | `▁▁▁▁▁▇▇█` | `▁▁▁▁▁▁█` |
+| Crown of the Pale King | 🟢 +184.17 | 0.05905 | 0.1678 | `▁███▇▇▇█` | `▄▅▁▁▃▇█` |
+| Cloak of Flame | 🟢 +156.38 | 0.2164 | 0.5548 | `▁▆▆▆▅███` | `▄▂▂▁▃▆█` |
+| Greed's Embrace | 🟢 +150.86 | 0.06689 | 0.1678 | `▂▁▁▁▁▆▆█` | `▂▁▁▁▂▃█` |
+| Death Rush | 🟢 +134.06 | 0.07169 | 0.1678 | `▂▁▁▁▁▁▂█` | `▃▁▂▂▂▁█` |
+| Bloodbarrier | 🟢 +122.10 | 0.1511 | 0.3356 | `▁▇▇▇▇▇▇█` | `▂▁▁▆▇▇█` |
+| Myris Uxor | 🟢 +122.10 | 0.1511 | 0.3356 | `▁▇▇▇▇▇▇█` | `▄▁▅▃▁▇█` |
+| Nebuloch | 🟢 +122.10 | 0.1511 | 0.3356 | `▁▁▁▁▁▁▁█` | `▅▁▆▁▁▂█` |
+| The Flesh Poppet | 🟢 +122.10 | 0.1511 | 0.3356 | `▅▅▅▁▁███` | `▁▁▂▂▄▄█` |
+| Ghostmarch | 🟢 +99.87 | 0.1511 | 0.302 | `▁▆▆▆▆███` | `▃▇▇▄▁▆█` |
+| Byrnabas | 🟢 +93.84 | 0.05912 | 0.1146 | `▁▁▁▁▄▄▄█` | `▅▃▃▂▁▄█` |
+| Megalomaniac | 🟢 +77.67 | 0.4533 | 0.8054 | `▁▂▂▂▇▇▆█` | `▅▂▄▃▁▇█` |
+| Twisted Empyrean | 🟢 +75.00 | 2 | 3.5 | `▂▂▂████▁` | `▁▁▅▁▁█▆` |
+| Cruel Hegemony | 🟢 +67.17 | 0.1511 | 0.2526 | `▁▂▂▂▁▁██` | `▁▁▂▁▁▂█` |
+| Shavronne's Satchel | 🟢 +66.58 | 0.3022 | 0.5034 | `▁▂▂▂▁▁▆█` | `▅▁▂▁▁▂█` |
 
 ## Unique momentum (|z| ≥ 2.0, listings ≥ 5)
 
 | Item | Type | z | 7d % | value (div) | listings |
 |---|---|--:|--:|--:|--:|
-| The Flesh Poppet | Weapons | +2.16 | 🟢 726.8 | 0.3418 | 45 |
-| Greed's Embrace | Armours | +2.34 | 🟢 348.2 | 0.1408 | 90 |
-| Constricting Command | Armours | +2.44 | 🟢 240.6 | 0.4458 | 198 |
+| The Flesh Poppet | Weapons | +2.15 | 🟢 711.8 | 0.3356 | 48 |
+| Greed's Embrace | Armours | +2.38 | 🟢 434.2 | 0.1678 | 91 |
+| Constricting Command | Armours | +2.45 | 🟢 284.6 | 0.5034 | 208 |
+| Lightning Coil | Armours | +2.44 | 🟢 275 | 0.155 | 88 |
+| Hrimnor's Hymn | Weapons | +2.36 | 🟢 115.2 | 0.5159 | 29 |
+| Death Rush | Accessories | +2.37 | 🟢 80.31 | 0.1678 | 149 |
 | Cruel Hegemony | Tablets | +2.42 | 🟢 78.66 | 0.2526 | 378 |
-| Ventor's Gamble | Accessories | +2.29 | 🟢 51.36 | 0.2972 | 2364 |
-| Cloak of Flame | Armours | +2.18 | 🟢 51.36 | 0.5944 | 86 |
-| Briskwrap | Armours | -2.41 | 🔴 -46.19 | 0.07044 | 278 |
-| The Sentry | Weapons | -2.41 | 🔴 -46.19 | 0.07044 | 290 |
-| Tyranny's Grip | Weapons | -2.05 | 🔴 -46.19 | 0.07044 | 901 |
+| Cloak of Flame | Armours | +2.30 | 🟢 70.92 | 0.6712 | 88 |
+| From Nothing | Jewels | +2.15 | 🟢 52.79 | 1 | 363 |
+| Byrnabas | Accessories | +2.04 | 🟢 38.67 | 0.1146 | 46 |
+| Snakepit | Accessories | +2.20 | 🟢 28.19 | 0.6712 | 300 |
+| Shavronne's Satchel | Accessories | +2.14 | 🟢 28.19 | 0.5034 | 176 |
+| The Sentry | Weapons | -2.41 | 🔴 -45.64 | 0.07116 | 294 |
+| Briskwrap | Armours | -2.40 | 🔴 -45.64 | 0.07116 | 277 |
+| Demon Stitcher | Armours | -2.36 | 🔴 -45.64 | 0.07116 | 203 |
+| Tyranny's Grip | Weapons | -2.04 | 🔴 -45.64 | 0.07116 | 895 |
