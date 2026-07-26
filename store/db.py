@@ -242,3 +242,25 @@ def unique_series(con, league: str = config.LEAGUE) -> dict[str, list[sqlite3.Ro
     for r in rows:
         series[_uniq_key(r)].append(r)
     return series
+
+
+# Retention -------------------------------------------------------------------
+
+def prune_snapshots(con, keep_days: int = 14) -> dict[str, int]:
+    """Delete snapshot rows older than `keep_days` and reclaim the freed space.
+
+    The DB is append-only (one row per entity per hour, forever), so it grows
+    without bound. Longest lookback anywhere in the signal code is the 1-week
+    `movers` window, so keep_days defaults to 2x that. DELETE alone leaves freed
+    pages inside the file; VACUUM is required to actually shrink it on disk —
+    this matters because the DB is committed as a single binary blob and GitHub
+    hard-rejects any pushed file over 100MB.
+    """
+    cutoff = config.now_ts() - keep_days * 86400
+    cur = con.execute("DELETE FROM currency_snapshot WHERE ts < ?", (cutoff,))
+    n_currency = cur.rowcount
+    cur = con.execute("DELETE FROM unique_snapshot WHERE ts < ?", (cutoff,))
+    n_unique = cur.rowcount
+    con.commit()
+    con.execute("VACUUM")
+    return {"currency_snapshot": n_currency, "unique_snapshot": n_unique}

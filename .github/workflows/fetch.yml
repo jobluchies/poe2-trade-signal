@@ -64,65 +64,43 @@ jobs:
       - name: Fetch snapshot (currency + uniques)
         run: python cli.py fetch
 
+      - name: Prune snapshot history
+        # The DB is append-only (one row per entity per hour, forever) with no
+        # retention until now, so it grew to 100.29MB and every push since has been
+        # hard-rejected by GitHub's 100MB single-file limit (GH001) — the retry loop
+        # below used to mistake that rejection for a non-fast-forward race and burn
+        # 3 attempts re-pushing the same oversized file. keep-days=14 is 2x the
+        # longest lookback any report window uses (movers --window 1w = 7 days).
+        run: python cli.py prune --keep-days 14
+
       - name: Regenerate report + dashboard
         run: |
           python cli.py report
           cp output/dashboard.html output/index.html   # Pages root -> dashboard
 
       - name: Publish DB + report to the data branch
-        # Commit the artifacts to `data` via a dedicated worktree pinned to the live
-        # data-branch tip — main is never touched. On a rejected push (the data
-        # branch advanced, e.g. a queued run) re-sync to the new tip and re-run fetch
-        # so rows append onto the live DB instead of clobbering another snapshot;
-        # the binary DB can't auto-merge, so we rebuild rather than rebase.
+        # `data` holds latest-snapshot-only, not a growing archive: every run commits
+        # a single orphan commit and force-pushes it. Previously each run added a new
+        # commit on top of the last (full binary DB blob every time, no delta
+        # compression), which had ballooned the branch's reachable history to ~14GB
+        # and was the underlying cause of the DB itself crossing the 100MB cap above.
+        # An orphan commit means there's nothing to be non-fast-forward against, so
+        # the old multi-attempt retry (which was retrying an unrelated rejection
+        # reason identically 3 times) is no longer needed.
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          publish() {
-            # (Re)create a worktree at the latest data-branch tip, copy the freshly
-            # built artifacts in, and commit there. Returns 1 if nothing changed.
-            rm -rf ../data-branch
-            git worktree prune
-            git fetch origin "$DATA_BRANCH" || true
-            if git rev-parse --verify "origin/$DATA_BRANCH" >/dev/null 2>&1; then
-              git worktree add -B "$DATA_BRANCH" ../data-branch "origin/$DATA_BRANCH"
-            else
-              git worktree add --orphan -B "$DATA_BRANCH" ../data-branch
-            fi
-            mkdir -p ../data-branch/data ../data-branch/output
-            cp data/poe2_signal.db ../data-branch/data/
-            rm -rf ../data-branch/output/*
-            cp -r output/. ../data-branch/output/
-            git -C ../data-branch add data/ output/
-            if git -C ../data-branch diff --cached --quiet; then
-              echo "No data changes to publish."
-              return 1
-            fi
-            git -C ../data-branch commit -m "data: snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
-            return 0
-          }
-
-          attempts=3
-          for i in $(seq 1 "$attempts"); do
-            if ! publish; then
-              exit 0                # nothing new to push
-            fi
-            if git -C ../data-branch push origin "$DATA_BRANCH"; then
-              echo "Published to $DATA_BRANCH on attempt $i."
-              exit 0
-            fi
-            echo "Push rejected on attempt $i; data branch advanced. Re-syncing + re-fetching."
-            git checkout "origin/$DATA_BRANCH" -- data/poe2_signal.db || true
-            python cli.py fetch
-            python cli.py report
-            cp output/dashboard.html output/index.html
-            sleep $(( i * 3 ))
-          done
-
-          echo "::error::Failed to publish to $DATA_BRANCH after $attempts attempts."
-          exit 1
+          rm -rf ../data-branch
+          git worktree prune
+          git worktree add --orphan -B "$DATA_BRANCH" ../data-branch
+          mkdir -p ../data-branch/data ../data-branch/output
+          cp data/poe2_signal.db ../data-branch/data/
+          cp -r output/. ../data-branch/output/
+          git -C ../data-branch add data/ output/
+          git -C ../data-branch commit -m "data: snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
+          git -C ../data-branch push --force origin "$DATA_BRANCH"
 
       - name: Upload dashboard as Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -123,6 +123,16 @@ def cmd_unique_movers(args) -> int:
     return 0
 
 
+def cmd_prune(args) -> int:
+    con = db.connect()
+    db.init_db(con)
+    deleted = db.prune_snapshots(con, keep_days=args.keep_days)
+    log.info("Pruned snapshots older than %d days: %s", args.keep_days, deleted)
+    print(f"Pruned {deleted['currency_snapshot']} currency + "
+          f"{deleted['unique_snapshot']} unique rows older than {args.keep_days}d.")
+    return 0
+
+
 def cmd_report(args) -> int:
     con = db.connect()
     db.init_db(con)
@@ -176,6 +186,11 @@ def main(argv=None) -> int:
     puv.add_argument("--top", type=int, default=15)
     puv.add_argument("--min-listings", type=int, default=3)
     puv.set_defaults(func=cmd_unique_movers)
+
+    pp = sub.add_parser("prune", help="delete snapshot rows older than --keep-days and VACUUM")
+    pp.add_argument("--keep-days", type=int, default=14,
+                    help="retention window in days (default 14, 2x the longest report window)")
+    pp.set_defaults(func=cmd_prune)
 
     pr = sub.add_parser("report", help="write the Markdown brief + dark HTML dashboard to output/")
     pr.add_argument("--cur-z", type=float, default=2.0)
